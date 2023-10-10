@@ -26,7 +26,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, %DockerEngineAPI.Model.ServiceCreateResponse{}} on success
   {:error, info} on failure
   """
-  @spec service_create(Tesla.Env.client, DockerEngineAPI.Model.object.t, keyword()) :: {:ok, DockerEngineAPI.Model.ServiceCreateResponse.t} | {:error, Tesla.Env.t}
   def service_create(connection, body, opts \\ []) do
     optional_params = %{
       :"X-Registry-Auth" => :headers
@@ -55,7 +54,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec service_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def service_delete(connection, id, _opts \\ []) do
     %{}
     |> method(:delete)
@@ -80,7 +78,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, %DockerEngineAPI.Model.Service{}} on success
   {:error, info} on failure
   """
-  @spec service_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Service.t} | {:error, Tesla.Env.t}
   def service_inspect(connection, id, opts \\ []) do
     optional_params = %{
       :"insertDefaults" => :query
@@ -109,7 +106,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, [%Service{}, ...]} on success
   {:error, info} on failure
   """
-  @spec service_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Service.t)} | {:error, Tesla.Env.t}
   def service_list(connection, opts \\ []) do
     optional_params = %{
       :"filters" => :query,
@@ -146,7 +142,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, %DockerEngineAPI.Model.binary(){}} on success
   {:error, info} on failure
   """
-  @spec service_logs(Tesla.Env.client, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def service_logs(connection, id, opts \\ []) do
     optional_params = %{
       :"details" => :query,
@@ -185,7 +180,6 @@ defmodule DockerEngineAPI.Api.Service do
   {:ok, %DockerEngineAPI.Model.ServiceUpdateResponse{}} on success
   {:error, info} on failure
   """
-  @spec service_update(Tesla.Env.client, String.t, DockerEngineAPI.Model.object.t, integer(), keyword()) :: {:ok, DockerEngineAPI.Model.ServiceUpdateResponse.t} | {:error, Tesla.Env.t}
   def service_update(connection, id, body, version, opts \\ []) do
     optional_params = %{
       :"registryAuthFrom" => :query,

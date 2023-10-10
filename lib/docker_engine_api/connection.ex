@@ -10,9 +10,9 @@ defmodule DockerEngineAPI.Connection do
   use Tesla
 
   # Add any middleware here (authentication)
-  plug Tesla.Middleware.BaseUrl, "http://localhost/v1.43"
-  plug Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"}
-  plug Tesla.Middleware.EncodeJson
+  # plug(Tesla.Middleware.BaseUrl, "http://localhost:2356")
+  # plug(Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"})
+  # plug(Tesla.Middleware.EncodeJson)
 
   @doc """
   Configure an authless client connection
@@ -21,8 +21,13 @@ defmodule DockerEngineAPI.Connection do
 
   Tesla.Env.client
   """
-  @spec new() :: Tesla.Env.client
   def new do
-    Tesla.build_client([])
+    middleware = [
+      {Tesla.Middleware.BaseUrl, "http://localhost:2356"},
+      {Tesla.Middleware.Headers, [{"User-Agent", "Elixir"}]},
+      Tesla.Middleware.JSON
+    ]
+
+    Tesla.client(middleware)
   end
 end

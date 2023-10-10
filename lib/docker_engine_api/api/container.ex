@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Container do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Get an archive of a filesystem resource in a container
   Get a tar archive of a resource in the filesystem of container id.
@@ -27,12 +26,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_archive(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_archive(connection, id, path, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/containers/#{id}/archive")
-    |> add_param(:query, :"path", path)
+    |> add_param(:query, :path, path)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -40,7 +38,7 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Get information about files in a container
-  A response header &#x60;X-Docker-Container-Path-Stat&#x60; is returned, containing a base64 - encoded JSON object with some filesystem header information about the path. 
+  A response header &#x60;X-Docker-Container-Path-Stat&#x60; is returned, containing a base64 - encoded JSON object with some filesystem header information about the path.
 
   ## Parameters
 
@@ -54,12 +52,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_archive_info(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_archive_info(connection, id, path, _opts \\ []) do
     %{}
     |> method(:head)
     |> url("/containers/#{id}/archive")
-    |> add_param(:query, :"path", path)
+    |> add_param(:query, :path, path)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -67,16 +64,16 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Attach to a container
-  Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the &#x60;stream&#x60; or &#x60;logs&#x60; parameter must be &#x60;true&#x60; for this endpoint to do anything.  See the [documentation for the &#x60;docker attach&#x60; command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport &#x60;stdin&#x60;, &#x60;stdout&#x60;, and &#x60;stderr&#x60; on the same socket.  This is the response from the daemon for an attach request:  &#x60;&#x60;&#x60; HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] &#x60;&#x60;&#x60;  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  &#x60;&#x60;&#x60; POST /containers/16253994b7c4/attach?stream&#x3D;1&amp;stdout&#x3D;1 HTTP/1.1 Upgrade: tcp Connection: Upgrade &#x60;&#x60;&#x60;  The Docker daemon will respond with a &#x60;101 UPGRADED&#x60; response, and will similarly follow with the raw stream:  &#x60;&#x60;&#x60; HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] &#x60;&#x60;&#x60;  ### Stream format  When the TTY setting is disabled in [&#x60;POST /containers/create&#x60;](#operation/ContainerCreate), the HTTP Content-Type header is set to application/vnd.docker.multiplexed-stream and the stream over the hijacked connected is multiplexed to separate out &#x60;stdout&#x60; and &#x60;stderr&#x60;. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (&#x60;stdout&#x60; or &#x60;stderr&#x60;). It also contains the size of the associated frame encoded in the last four bytes (&#x60;uint32&#x60;).  It is encoded on the first eight bytes like this:  &#x60;&#x60;&#x60;go header :&#x3D; [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} &#x60;&#x60;&#x60;  &#x60;STREAM_TYPE&#x60; can be:  - 0: &#x60;stdin&#x60; (is written on &#x60;stdout&#x60;) - 1: &#x60;stdout&#x60; - 2: &#x60;stderr&#x60;  &#x60;SIZE1, SIZE2, SIZE3, SIZE4&#x60; are the four bytes of the &#x60;uint32&#x60; size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of &#x60;STREAM_TYPE&#x60;.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose &#x60;stdout&#x60; or &#x60;stderr&#x60; depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [&#x60;POST /containers/create&#x60;](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client&#39;s &#x60;stdin&#x60;. 
+  Attach to a container to read its output or send it input. You can attach to the same container multiple times and you can reattach to containers that have been detached.  Either the &#x60;stream&#x60; or &#x60;logs&#x60; parameter must be &#x60;true&#x60; for this endpoint to do anything.  See the [documentation for the &#x60;docker attach&#x60; command](https://docs.docker.com/engine/reference/commandline/attach/) for more details.  ### Hijacking  This endpoint hijacks the HTTP connection to transport &#x60;stdin&#x60;, &#x60;stdout&#x60;, and &#x60;stderr&#x60; on the same socket.  This is the response from the daemon for an attach request:  &#x60;&#x60;&#x60; HTTP/1.1 200 OK Content-Type: application/vnd.docker.raw-stream  [STREAM] &#x60;&#x60;&#x60;  After the headers and two new lines, the TCP connection can now be used for raw, bidirectional communication between the client and server.  To hint potential proxies about connection hijacking, the Docker client can also optionally send connection upgrade headers.  For example, the client sends this request to upgrade the connection:  &#x60;&#x60;&#x60; POST /containers/16253994b7c4/attach?stream&#x3D;1&amp;stdout&#x3D;1 HTTP/1.1 Upgrade: tcp Connection: Upgrade &#x60;&#x60;&#x60;  The Docker daemon will respond with a &#x60;101 UPGRADED&#x60; response, and will similarly follow with the raw stream:  &#x60;&#x60;&#x60; HTTP/1.1 101 UPGRADED Content-Type: application/vnd.docker.raw-stream Connection: Upgrade Upgrade: tcp  [STREAM] &#x60;&#x60;&#x60;  ### Stream format  When the TTY setting is disabled in [&#x60;POST /containers/create&#x60;](#operation/ContainerCreate), the HTTP Content-Type header is set to application/vnd.docker.multiplexed-stream and the stream over the hijacked connected is multiplexed to separate out &#x60;stdout&#x60; and &#x60;stderr&#x60;. The stream consists of a series of frames, each containing a header and a payload.  The header contains the information which the stream writes (&#x60;stdout&#x60; or &#x60;stderr&#x60;). It also contains the size of the associated frame encoded in the last four bytes (&#x60;uint32&#x60;).  It is encoded on the first eight bytes like this:  &#x60;&#x60;&#x60;go header :&#x3D; [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4} &#x60;&#x60;&#x60;  &#x60;STREAM_TYPE&#x60; can be:  - 0: &#x60;stdin&#x60; (is written on &#x60;stdout&#x60;) - 1: &#x60;stdout&#x60; - 2: &#x60;stderr&#x60;  &#x60;SIZE1, SIZE2, SIZE3, SIZE4&#x60; are the four bytes of the &#x60;uint32&#x60; size encoded as big endian.  Following the header is the payload, which is the specified number of bytes of &#x60;STREAM_TYPE&#x60;.  The simplest way to implement this protocol is the following:  1. Read 8 bytes. 2. Choose &#x60;stdout&#x60; or &#x60;stderr&#x60; depending on the first byte. 3. Extract the frame size from the last four bytes. 4. Read the extracted size and output it on the correct output. 5. Goto 1.  ### Stream format when using a TTY  When the TTY setting is enabled in [&#x60;POST /containers/create&#x60;](#operation/ContainerCreate), the stream is not multiplexed. The data exchanged over the hijacked connection is simply the raw data from the process PTY and client&#39;s &#x60;stdin&#x60;.
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :detach_keys (String.t): Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
-    - :logs (boolean()): Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output. 
-    - :stream (boolean()): Stream attached streams from the time the request was made onwards. 
+    - :detach_keys (String.t): Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;.
+    - :logs (boolean()): Replay previous logs from the container.  This is useful for attaching to a container that has started and you want to output everything since the container started.  If &#x60;stream&#x60; is also enabled, once all the previous output has been returned, it will seamlessly transition into streaming current output.
+    - :stream (boolean()): Stream attached streams from the time the request was made onwards.
     - :stdin (boolean()): Attach to &#x60;stdin&#x60;
     - :stdout (boolean()): Attach to &#x60;stdout&#x60;
     - :stderr (boolean()): Attach to &#x60;stderr&#x60;
@@ -86,16 +83,16 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_attach(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_attach(connection, id, opts \\ []) do
     optional_params = %{
-      :"detachKeys" => :query,
-      :"logs" => :query,
-      :"stream" => :query,
-      :"stdin" => :query,
-      :"stdout" => :query,
-      :"stderr" => :query
+      :detachKeys => :query,
+      :logs => :query,
+      :stream => :query,
+      :stdin => :query,
+      :stdout => :query,
+      :stderr => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/attach")
@@ -113,7 +110,7 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :detach_keys (String.t): Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;. 
+    - :detach_keys (String.t): Override the key sequence for detaching a container.Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60;, or &#x60;_&#x60;.
     - :logs (boolean()): Return logs
     - :stream (boolean()): Return stream
     - :stdin (boolean()): Attach to &#x60;stdin&#x60;
@@ -125,16 +122,16 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_attach_websocket(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_attach_websocket(connection, id, opts \\ []) do
     optional_params = %{
-      :"detachKeys" => :query,
-      :"logs" => :query,
-      :"stream" => :query,
-      :"stdin" => :query,
-      :"stdout" => :query,
-      :"stderr" => :query
+      :detachKeys => :query,
+      :logs => :query,
+      :stream => :query,
+      :stdin => :query,
+      :stdout => :query,
+      :stderr => :query
     }
+
     %{}
     |> method(:get)
     |> url("/containers/#{id}/attach/ws")
@@ -146,7 +143,7 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Get changes on a container’s filesystem
-  Returns which files in a container&#39;s filesystem have been added, deleted, or modified. The &#x60;Kind&#x60; of modification can be one of:  - &#x60;0&#x60;: Modified (\&quot;C\&quot;) - &#x60;1&#x60;: Added (\&quot;A\&quot;) - &#x60;2&#x60;: Deleted (\&quot;D\&quot;) 
+  Returns which files in a container&#39;s filesystem have been added, deleted, or modified. The &#x60;Kind&#x60; of modification can be one of:  - &#x60;0&#x60;: Modified (\&quot;C\&quot;) - &#x60;1&#x60;: Added (\&quot;A\&quot;) - &#x60;2&#x60;: Deleted (\&quot;D\&quot;)
 
   ## Parameters
 
@@ -159,7 +156,6 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, [%FilesystemChange{}, ...]} on success
   {:error, info} on failure
   """
-  @spec container_changes(Tesla.Env.client, String.t, keyword()) :: {:ok, list(DockerEngineAPI.Model.FilesystemChange.t)} | {:error, Tesla.Env.t}
   def container_changes(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -177,24 +173,24 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - body (object): Container to create
   - opts (KeywordList): [optional] Optional parameters
-    - :name (String.t): Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;. 
-    - :platform (String.t): Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested 
+    - :name (String.t): Assign the specified name to the container. Must match &#x60;/?[a-zA-Z0-9][a-zA-Z0-9_.-]+&#x60;.
+    - :platform (String.t): Platform in the format &#x60;os[/arch[/variant]]&#x60; used for image lookup.  When specified, the daemon checks if the requested image is present in the local image cache with the given OS and Architecture, and otherwise returns a &#x60;404&#x60; status.  If the option is not set, the host&#39;s native OS and Architecture are used to look up the image in the image cache. However, if no platform is passed and the given image does exist in the local image cache, but its OS or architecture does not match, the container is created with the available image, and a warning is added to the &#x60;Warnings&#x60; field in the response, for example;      WARNING: The requested image&#39;s platform (linux/arm64/v8) does not              match the detected host platform (linux/amd64) and no              specific platform was requested
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.ContainerCreateResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_create(Tesla.Env.client, DockerEngineAPI.Model.object.t, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerCreateResponse.t} | {:error, Tesla.Env.t}
   def container_create(connection, body, opts \\ []) do
     optional_params = %{
-      :"name" => :query,
-      :"platform" => :query
+      :name => :query,
+      :platform => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/create")
-    |> add_param(:body, :"body", body)
+    |> add_param(:body, :body, body)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -218,13 +214,13 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_delete(connection, id, opts \\ []) do
     optional_params = %{
-      :"v" => :query,
-      :"force" => :query,
-      :"link" => :query
+      :v => :query,
+      :force => :query,
+      :link => :query
     }
+
     %{}
     |> method(:delete)
     |> url("/containers/#{id}")
@@ -249,7 +245,6 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_export(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_export(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -275,11 +270,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %DockerEngineAPI.Model.ContainerInspectResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerInspectResponse.t} | {:error, Tesla.Env.t}
   def container_inspect(connection, id, opts \\ []) do
     optional_params = %{
-      :"size" => :query
+      :size => :query
     }
+
     %{}
     |> method(:get)
     |> url("/containers/#{id}/json")
@@ -291,25 +286,25 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Kill a container
-  Send a POSIX signal to a container, defaulting to killing to the container. 
+  Send a POSIX signal to a container, defaulting to killing to the container.
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;).
 
   ## Returns
 
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_kill(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_kill(connection, id, opts \\ []) do
     optional_params = %{
-      :"signal" => :query
+      :signal => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/kill")
@@ -321,30 +316,30 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   List containers
-  Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated . 
+  Returns a list of containers. For details on the format, see the [inspect endpoint](#operation/ContainerInspect).  Note that it uses a different, smaller representation of a container than inspecting a single container. For example, the list of linked containers is not propagated .
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - opts (KeywordList): [optional] Optional parameters
-    - :all (boolean()): Return all containers. By default, only running containers are shown. 
-    - :limit (integer()): Return this number of most recently created containers, including non-running ones. 
-    - :size (boolean()): Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;. 
-    - :filters (String.t): Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;) 
+    - :all (boolean()): Return all containers. By default, only running containers are shown.
+    - :limit (integer()): Return this number of most recently created containers, including non-running ones.
+    - :size (boolean()): Return the size of container as fields &#x60;SizeRw&#x60; and &#x60;SizeRootFs&#x60;.
+    - :filters (String.t): Filters to process on the container list, encoded as JSON (a &#x60;map[string][]string&#x60;). For example, &#x60;{\&quot;status\&quot;: [\&quot;paused\&quot;]}&#x60; will only return paused containers.  Available filters:  - &#x60;ancestor&#x60;&#x3D;(&#x60;&lt;image-name&gt;[:&lt;tag&gt;]&#x60;, &#x60;&lt;image id&gt;&#x60;, or &#x60;&lt;image@digest&gt;&#x60;) - &#x60;before&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;expose&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;exited&#x3D;&lt;int&gt;&#x60; containers with exit code of &#x60;&lt;int&gt;&#x60; - &#x60;health&#x60;&#x3D;(&#x60;starting&#x60;|&#x60;healthy&#x60;|&#x60;unhealthy&#x60;|&#x60;none&#x60;) - &#x60;id&#x3D;&lt;ID&gt;&#x60; a container&#39;s ID - &#x60;isolation&#x3D;&#x60;(&#x60;default&#x60;|&#x60;process&#x60;|&#x60;hyperv&#x60;) (Windows daemon only) - &#x60;is-task&#x3D;&#x60;(&#x60;true&#x60;|&#x60;false&#x60;) - &#x60;label&#x3D;key&#x60; or &#x60;label&#x3D;\&quot;key&#x3D;value\&quot;&#x60; of a container label - &#x60;name&#x3D;&lt;name&gt;&#x60; a container&#39;s name - &#x60;network&#x60;&#x3D;(&#x60;&lt;network id&gt;&#x60; or &#x60;&lt;network name&gt;&#x60;) - &#x60;publish&#x60;&#x3D;(&#x60;&lt;port&gt;[/&lt;proto&gt;]&#x60;|&#x60;&lt;startport-endport&gt;/[&lt;proto&gt;]&#x60;) - &#x60;since&#x60;&#x3D;(&#x60;&lt;container id&gt;&#x60; or &#x60;&lt;container name&gt;&#x60;) - &#x60;status&#x3D;&#x60;(&#x60;created&#x60;|&#x60;restarting&#x60;|&#x60;running&#x60;|&#x60;removing&#x60;|&#x60;paused&#x60;|&#x60;exited&#x60;|&#x60;dead&#x60;) - &#x60;volume&#x60;&#x3D;(&#x60;&lt;volume name&gt;&#x60; or &#x60;&lt;mount point destination&gt;&#x60;)
 
   ## Returns
 
   {:ok, [%ContainerSummary{}, ...]} on success
   {:error, info} on failure
   """
-  @spec container_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.ContainerSummary.t)} | {:error, Tesla.Env.t}
   def container_list(connection, opts \\ []) do
     optional_params = %{
-      :"all" => :query,
-      :"limit" => :query,
-      :"size" => :query,
-      :"filters" => :query
+      :all => :query,
+      :limit => :query,
+      :size => :query,
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/containers/json")
@@ -356,7 +351,7 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Get container logs
-  Get &#x60;stdout&#x60; and &#x60;stderr&#x60; logs from a container.  Note: This endpoint works only for containers with the &#x60;json-file&#x60; or &#x60;journald&#x60; logging driver. 
+  Get &#x60;stdout&#x60; and &#x60;stderr&#x60; logs from a container.  Note: This endpoint works only for containers with the &#x60;json-file&#x60; or &#x60;journald&#x60; logging driver.
 
   ## Parameters
 
@@ -369,24 +364,24 @@ defmodule DockerEngineAPI.Api.Container do
     - :since (integer()): Only return logs since this time, as a UNIX timestamp
     - :until (integer()): Only return logs before this time, as a UNIX timestamp
     - :timestamps (boolean()): Add timestamps to every log line
-    - :tail (String.t): Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines. 
+    - :tail (String.t): Only return this number of log lines from the end of the logs. Specify as an integer or &#x60;all&#x60; to output all log lines.
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.binary(){}} on success
   {:error, info} on failure
   """
-  @spec container_logs(Tesla.Env.client, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def container_logs(connection, id, opts \\ []) do
     optional_params = %{
-      :"follow" => :query,
-      :"stdout" => :query,
-      :"stderr" => :query,
-      :"since" => :query,
-      :"until" => :query,
-      :"timestamps" => :query,
-      :"tail" => :query
+      :follow => :query,
+      :stdout => :query,
+      :stderr => :query,
+      :since => :query,
+      :until => :query,
+      :timestamps => :query,
+      :tail => :query
     }
+
     %{}
     |> method(:get)
     |> url("/containers/#{id}/logs")
@@ -398,7 +393,7 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Pause a container
-  Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the &#x60;SIGSTOP&#x60; signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed. 
+  Use the freezer cgroup to suspend all processes in a container.  Traditionally, when suspending a process the &#x60;SIGSTOP&#x60; signal is used, which is observable by the process being suspended. With the freezer cgroup the process is unaware, and unable to capture, that it is being suspended, and subsequently resumed.
 
   ## Parameters
 
@@ -411,7 +406,6 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_pause(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_pause(connection, id, _opts \\ []) do
     %{}
     |> method(:post)
@@ -428,18 +422,18 @@ defmodule DockerEngineAPI.Api.Container do
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - opts (KeywordList): [optional] Optional parameters
-    - :filters (String.t): Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels. 
+    - :filters (String.t): Filters to process on the prune list, encoded as JSON (a &#x60;map[string][]string&#x60;).  Available filters: - &#x60;until&#x3D;&lt;timestamp&gt;&#x60; Prune containers created before this timestamp. The &#x60;&lt;timestamp&gt;&#x60; can be Unix timestamps, date formatted timestamps, or Go duration strings (e.g. &#x60;10m&#x60;, &#x60;1h30m&#x60;) computed relative to the daemon machine’s time. - &#x60;label&#x60; (&#x60;label&#x3D;&lt;key&gt;&#x60;, &#x60;label&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;, &#x60;label!&#x3D;&lt;key&gt;&#x60;, or &#x60;label!&#x3D;&lt;key&gt;&#x3D;&lt;value&gt;&#x60;) Prune containers with (or without, in case &#x60;label!&#x3D;...&#x60; is used) the specified labels.
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.ContainerPruneResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_prune(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerPruneResponse.t} | {:error, Tesla.Env.t}
   def container_prune(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/prune")
@@ -464,12 +458,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_rename(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_rename(connection, id, name, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/containers/#{id}/rename")
-    |> add_param(:query, :"name", name)
+    |> add_param(:query, :name, name)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -492,12 +485,12 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_resize(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_resize(connection, id, opts \\ []) do
     optional_params = %{
-      :"h" => :query,
-      :"w" => :query
+      :h => :query,
+      :w => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/resize")
@@ -515,7 +508,7 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;).
     - :t (integer()): Number of seconds to wait before killing the container
 
   ## Returns
@@ -523,12 +516,12 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_restart(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_restart(connection, id, opts \\ []) do
     optional_params = %{
-      :"signal" => :query,
-      :"t" => :query
+      :signal => :query,
+      :t => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/restart")
@@ -546,18 +539,18 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :detach_keys (String.t): Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;. 
+    - :detach_keys (String.t): Override the key sequence for detaching a container. Format is a single character &#x60;[a-Z]&#x60; or &#x60;ctrl-&lt;value&gt;&#x60; where &#x60;&lt;value&gt;&#x60; is one of: &#x60;a-z&#x60;, &#x60;@&#x60;, &#x60;^&#x60;, &#x60;[&#x60;, &#x60;,&#x60; or &#x60;_&#x60;.
 
   ## Returns
 
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_start(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_start(connection, id, opts \\ []) do
     optional_params = %{
-      :"detachKeys" => :query
+      :detachKeys => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/start")
@@ -569,35 +562,35 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Get container stats based on resource usage
-  This endpoint returns a live stream of a container’s resource usage statistics.  The &#x60;precpu_stats&#x60; is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the &#x60;cpu_stats&#x60; field.  If either &#x60;precpu_stats.online_cpus&#x60; or &#x60;cpu_stats.online_cpus&#x60; is nil then for compatibility with older daemons the length of the corresponding &#x60;cpu_usage.percpu_usage&#x60; array should be used.  On a cgroup v2 host, the following fields are not set * &#x60;blkio_stats&#x60;: all fields other than &#x60;io_service_bytes_recursive&#x60; * &#x60;cpu_stats&#x60;: &#x60;cpu_usage.percpu_usage&#x60; * &#x60;memory_stats&#x60;: &#x60;max_usage&#x60; and &#x60;failcnt&#x60; Also, &#x60;memory_stats.stats&#x60; fields are incompatible with cgroup v1.  To calculate the values shown by the &#x60;stats&#x60; command of the docker cli tool the following formulas can be used: * used_memory &#x3D; &#x60;memory_stats.usage - memory_stats.stats.cache&#x60; * available_memory &#x3D; &#x60;memory_stats.limit&#x60; * Memory usage % &#x3D; &#x60;(used_memory / available_memory) * 100.0&#x60; * cpu_delta &#x3D; &#x60;cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage&#x60; * system_cpu_delta &#x3D; &#x60;cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage&#x60; * number_cpus &#x3D; &#x60;lenght(cpu_stats.cpu_usage.percpu_usage)&#x60; or &#x60;cpu_stats.online_cpus&#x60; * CPU usage % &#x3D; &#x60;(cpu_delta / system_cpu_delta) * number_cpus * 100.0&#x60; 
+  This endpoint returns a live stream of a container’s resource usage statistics.  The &#x60;precpu_stats&#x60; is the CPU statistic of the *previous* read, and is used to calculate the CPU usage percentage. It is not an exact copy of the &#x60;cpu_stats&#x60; field.  If either &#x60;precpu_stats.online_cpus&#x60; or &#x60;cpu_stats.online_cpus&#x60; is nil then for compatibility with older daemons the length of the corresponding &#x60;cpu_usage.percpu_usage&#x60; array should be used.  On a cgroup v2 host, the following fields are not set * &#x60;blkio_stats&#x60;: all fields other than &#x60;io_service_bytes_recursive&#x60; * &#x60;cpu_stats&#x60;: &#x60;cpu_usage.percpu_usage&#x60; * &#x60;memory_stats&#x60;: &#x60;max_usage&#x60; and &#x60;failcnt&#x60; Also, &#x60;memory_stats.stats&#x60; fields are incompatible with cgroup v1.  To calculate the values shown by the &#x60;stats&#x60; command of the docker cli tool the following formulas can be used: * used_memory &#x3D; &#x60;memory_stats.usage - memory_stats.stats.cache&#x60; * available_memory &#x3D; &#x60;memory_stats.limit&#x60; * Memory usage % &#x3D; &#x60;(used_memory / available_memory) * 100.0&#x60; * cpu_delta &#x3D; &#x60;cpu_stats.cpu_usage.total_usage - precpu_stats.cpu_usage.total_usage&#x60; * system_cpu_delta &#x3D; &#x60;cpu_stats.system_cpu_usage - precpu_stats.system_cpu_usage&#x60; * number_cpus &#x3D; &#x60;lenght(cpu_stats.cpu_usage.percpu_usage)&#x60; or &#x60;cpu_stats.online_cpus&#x60; * CPU usage % &#x3D; &#x60;(cpu_delta / system_cpu_delta) * number_cpus * 100.0&#x60;
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :stream (boolean()): Stream the output. If false, the stats will be output once and then it will disconnect. 
-    - :one_shot (boolean()): Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;. 
+    - :stream (boolean()): Stream the output. If false, the stats will be output once and then it will disconnect.
+    - :one_shot (boolean()): Only get a single stat instead of waiting for 2 cycles. Must be used with &#x60;stream&#x3D;false&#x60;.
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.Object{}} on success
   {:error, info} on failure
   """
-  @spec container_stats(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Object.t} | {:error, Tesla.Env.t}
-  def container_stats(connection, id, opts \\ []) do
-    optional_params = %{
-      :"stream" => :query,
-      :"one-shot" => :query
-    }
-    %{}
-    |> method(:get)
-    |> url("/containers/#{id}/stats")
-    |> add_optional_params(optional_params, opts)
-    |> Enum.into([])
-    |> (&Connection.request(connection, &1)).()
-    |> decode(%DockerEngineAPI.Model.Object{})
-  end
+
+  # def container_stats(connection, id, opts \\ []) do
+  #   optional_params = %{
+  #     :"stream" => :query,
+  #     :"one-shot" => :query
+  #   }
+  #   %{}
+  #   |> method(:get)
+  #   |> url("/containers/#{id}/stats")
+  #   |> add_optional_params(optional_params, opts)
+  #   |> Enum.into([])
+  #   |> (&Connection.request(connection, &1)).()
+  #   |> decode(%DockerEngineAPI.Model.Object{})
+  # end
 
   @doc """
   Stop a container
@@ -607,7 +600,7 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;). 
+    - :signal (String.t): Signal to send to the container as an integer or string (e.g. &#x60;SIGINT&#x60;).
     - :t (integer()): Number of seconds to wait before killing the container
 
   ## Returns
@@ -615,12 +608,12 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_stop(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_stop(connection, id, opts \\ []) do
     optional_params = %{
-      :"signal" => :query,
-      :"t" => :query
+      :signal => :query,
+      :t => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/stop")
@@ -632,7 +625,7 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   List processes running inside a container
-  On Unix systems, this is done by running the &#x60;ps&#x60; command. This endpoint is not supported on Windows. 
+  On Unix systems, this is done by running the &#x60;ps&#x60; command. This endpoint is not supported on Windows.
 
   ## Parameters
 
@@ -646,11 +639,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %DockerEngineAPI.Model.ContainerTopResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_top(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerTopResponse.t} | {:error, Tesla.Env.t}
   def container_top(connection, id, opts \\ []) do
     optional_params = %{
-      :"ps_args" => :query
+      :ps_args => :query
     }
+
     %{}
     |> method(:get)
     |> url("/containers/#{id}/top")
@@ -675,7 +668,6 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec container_unpause(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def container_unpause(connection, id, _opts \\ []) do
     %{}
     |> method(:post)
@@ -687,13 +679,13 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Update a container
-  Change various configuration options of a container without having to recreate it. 
+  Change various configuration options of a container without having to recreate it.
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
-  - update (object): 
+  - update (object):
   - opts (KeywordList): [optional] Optional parameters
 
   ## Returns
@@ -701,12 +693,11 @@ defmodule DockerEngineAPI.Api.Container do
   {:ok, %DockerEngineAPI.Model.ContainerUpdateResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_update(Tesla.Env.client, String.t, DockerEngineAPI.Model.object.t, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerUpdateResponse.t} | {:error, Tesla.Env.t}
   def container_update(connection, id, update, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/containers/#{id}/update")
-    |> add_param(:body, :"update", update)
+    |> add_param(:body, :update, update)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%DockerEngineAPI.Model.ContainerUpdateResponse{})
@@ -721,18 +712,18 @@ defmodule DockerEngineAPI.Api.Container do
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
   - opts (KeywordList): [optional] Optional parameters
-    - :condition (String.t): Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty. 
+    - :condition (String.t): Wait until a container state reaches the given condition.  Defaults to &#x60;not-running&#x60; if omitted or empty.
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.ContainerWaitResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_wait(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.ContainerWaitResponse.t} | {:error, Tesla.Env.t}
   def container_wait(connection, id, opts \\ []) do
     optional_params = %{
-      :"condition" => :query
+      :condition => :query
     }
+
     %{}
     |> method(:post)
     |> url("/containers/#{id}/wait")
@@ -744,34 +735,34 @@ defmodule DockerEngineAPI.Api.Container do
 
   @doc """
   Extract an archive of files or folders to a directory in a container
-  Upload a tar archive to be extracted to a path in the filesystem of container id. &#x60;path&#x60; parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \&quot;not a directory\&quot;. 
+  Upload a tar archive to be extracted to a path in the filesystem of container id. &#x60;path&#x60; parameter is asserted to be a directory. If it exists as a file, 400 error will be returned with message \&quot;not a directory\&quot;.
 
   ## Parameters
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - id (String.t): ID or name of the container
-  - path (String.t): Path to a directory in the container to extract the archive’s contents into. 
-  - input_stream (binary()): The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;. 
+  - path (String.t): Path to a directory in the container to extract the archive’s contents into.
+  - input_stream (binary()): The input stream must be a tar archive compressed with one of the following algorithms: &#x60;identity&#x60; (no compression), &#x60;gzip&#x60;, &#x60;bzip2&#x60;, or &#x60;xz&#x60;.
   - opts (KeywordList): [optional] Optional parameters
-    - :no_overwrite_dir_non_dir (String.t): If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa. 
-    - :copy_uidgid (String.t): If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir 
+    - :no_overwrite_dir_non_dir (String.t): If &#x60;1&#x60;, &#x60;true&#x60;, or &#x60;True&#x60; then it will be an error if unpacking the given content would cause an existing directory to be replaced with a non-directory and vice versa.
+    - :copy_uidgid (String.t): If &#x60;1&#x60;, &#x60;true&#x60;, then it will copy UID/GID maps to the dest file or dir
 
   ## Returns
 
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec put_container_archive(Tesla.Env.client, String.t, String.t, binary(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def put_container_archive(connection, id, path, input_stream, opts \\ []) do
     optional_params = %{
-      :"noOverwriteDirNonDir" => :query,
-      :"copyUIDGID" => :query
+      :noOverwriteDirNonDir => :query,
+      :copyUIDGID => :query
     }
+
     %{}
     |> method(:put)
     |> url("/containers/#{id}/archive")
-    |> add_param(:query, :"path", path)
-    |> add_param(:body, :"inputStream", input_stream)
+    |> add_param(:query, :path, path)
+    |> add_param(:body, :inputStream, input_stream)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

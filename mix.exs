@@ -31,8 +31,10 @@ defmodule DockerEngineAPI.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:tesla, "~> 1.0"},
-      {:poison, ">= 1.0.0"}
+      {:tesla, "~> 1.4"},
+      {:hackney, "~> 1.17"},
+      {:poison, ">= 1.0.0"},
+      {:jason, ">= 1.0.0"}
     ]
   end
 end

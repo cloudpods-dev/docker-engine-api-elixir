@@ -10,10 +10,9 @@ defmodule DockerEngineAPI.Api.System do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Check auth configuration
-  Validate credentials for a registry and, if available, get an identity token for accessing the registry without password. 
+  Validate credentials for a registry and, if available, get an identity token for accessing the registry without password.
 
   ## Parameters
 
@@ -26,11 +25,13 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemAuthResponse{}} on success
   {:error, info} on failure
   """
-  @spec system_auth(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.SystemAuthResponse.t} | {:error, Tesla.Env.t}
+  @spec system_auth(Tesla.Env.client(), keyword()) ::
+          {:ok, DockerEngineAPI.Model.SystemAuthResponse.t()} | {:error, Tesla.Env.t()}
   def system_auth(connection, opts \\ []) do
     optional_params = %{
-      :"authConfig" => :body
+      :authConfig => :body
     }
+
     %{}
     |> method(:post)
     |> url("/auth")
@@ -47,18 +48,20 @@ defmodule DockerEngineAPI.Api.System do
 
   - connection (DockerEngineAPI.Connection): Connection to server
   - opts (KeywordList): [optional] Optional parameters
-    - :type ([String.t]): Object types, for which to compute and return data. 
+    - :type ([String.t]): Object types, for which to compute and return data.
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.SystemDataUsageResponse{}} on success
   {:error, info} on failure
   """
-  @spec system_data_usage(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.SystemDataUsageResponse.t} | {:error, Tesla.Env.t}
+  @spec system_data_usage(Tesla.Env.client(), keyword()) ::
+          {:ok, DockerEngineAPI.Model.SystemDataUsageResponse.t()} | {:error, Tesla.Env.t()}
   def system_data_usage(connection, opts \\ []) do
     optional_params = %{
-      :"type" => :query
+      :type => :query
     }
+
     %{}
     |> method(:get)
     |> url("/system/df")
@@ -70,7 +73,7 @@ defmodule DockerEngineAPI.Api.System do
 
   @doc """
   Monitor events
-  Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: &#x60;attach&#x60;, &#x60;commit&#x60;, &#x60;copy&#x60;, &#x60;create&#x60;, &#x60;destroy&#x60;, &#x60;detach&#x60;, &#x60;die&#x60;, &#x60;exec_create&#x60;, &#x60;exec_detach&#x60;, &#x60;exec_start&#x60;, &#x60;exec_die&#x60;, &#x60;export&#x60;, &#x60;health_status&#x60;, &#x60;kill&#x60;, &#x60;oom&#x60;, &#x60;pause&#x60;, &#x60;rename&#x60;, &#x60;resize&#x60;, &#x60;restart&#x60;, &#x60;start&#x60;, &#x60;stop&#x60;, &#x60;top&#x60;, &#x60;unpause&#x60;, &#x60;update&#x60;, and &#x60;prune&#x60;  Images report these events: &#x60;delete&#x60;, &#x60;import&#x60;, &#x60;load&#x60;, &#x60;pull&#x60;, &#x60;push&#x60;, &#x60;save&#x60;, &#x60;tag&#x60;, &#x60;untag&#x60;, and &#x60;prune&#x60;  Volumes report these events: &#x60;create&#x60;, &#x60;mount&#x60;, &#x60;unmount&#x60;, &#x60;destroy&#x60;, and &#x60;prune&#x60;  Networks report these events: &#x60;create&#x60;, &#x60;connect&#x60;, &#x60;disconnect&#x60;, &#x60;destroy&#x60;, &#x60;update&#x60;, &#x60;remove&#x60;, and &#x60;prune&#x60;  The Docker daemon reports these events: &#x60;reload&#x60;  Services report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Nodes report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Secrets report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Configs report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  The Builder reports &#x60;prune&#x60; events 
+  Stream real-time events from the server.  Various objects within Docker report events when something happens to them.  Containers report these events: &#x60;attach&#x60;, &#x60;commit&#x60;, &#x60;copy&#x60;, &#x60;create&#x60;, &#x60;destroy&#x60;, &#x60;detach&#x60;, &#x60;die&#x60;, &#x60;exec_create&#x60;, &#x60;exec_detach&#x60;, &#x60;exec_start&#x60;, &#x60;exec_die&#x60;, &#x60;export&#x60;, &#x60;health_status&#x60;, &#x60;kill&#x60;, &#x60;oom&#x60;, &#x60;pause&#x60;, &#x60;rename&#x60;, &#x60;resize&#x60;, &#x60;restart&#x60;, &#x60;start&#x60;, &#x60;stop&#x60;, &#x60;top&#x60;, &#x60;unpause&#x60;, &#x60;update&#x60;, and &#x60;prune&#x60;  Images report these events: &#x60;delete&#x60;, &#x60;import&#x60;, &#x60;load&#x60;, &#x60;pull&#x60;, &#x60;push&#x60;, &#x60;save&#x60;, &#x60;tag&#x60;, &#x60;untag&#x60;, and &#x60;prune&#x60;  Volumes report these events: &#x60;create&#x60;, &#x60;mount&#x60;, &#x60;unmount&#x60;, &#x60;destroy&#x60;, and &#x60;prune&#x60;  Networks report these events: &#x60;create&#x60;, &#x60;connect&#x60;, &#x60;disconnect&#x60;, &#x60;destroy&#x60;, &#x60;update&#x60;, &#x60;remove&#x60;, and &#x60;prune&#x60;  The Docker daemon reports these events: &#x60;reload&#x60;  Services report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Nodes report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Secrets report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  Configs report these events: &#x60;create&#x60;, &#x60;update&#x60;, and &#x60;remove&#x60;  The Builder reports &#x60;prune&#x60; events
 
   ## Parameters
 
@@ -78,20 +81,22 @@ defmodule DockerEngineAPI.Api.System do
   - opts (KeywordList): [optional] Optional parameters
     - :since (String.t): Show events created since this timestamp then stream new events.
     - :until (String.t): Show events created until this timestamp then stop streaming.
-    - :filters (String.t): A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name 
+    - :filters (String.t): A JSON encoded value of filters (a &#x60;map[string][]string&#x60;) to process on the event list. Available filters:  - &#x60;config&#x3D;&lt;string&gt;&#x60; config name or ID - &#x60;container&#x3D;&lt;string&gt;&#x60; container name or ID - &#x60;daemon&#x3D;&lt;string&gt;&#x60; daemon name or ID - &#x60;event&#x3D;&lt;string&gt;&#x60; event type - &#x60;image&#x3D;&lt;string&gt;&#x60; image name or ID - &#x60;label&#x3D;&lt;string&gt;&#x60; image or container label - &#x60;network&#x3D;&lt;string&gt;&#x60; network name or ID - &#x60;node&#x3D;&lt;string&gt;&#x60; node ID - &#x60;plugin&#x60;&#x3D;&lt;string&gt; plugin name or ID - &#x60;scope&#x60;&#x3D;&lt;string&gt; local or swarm - &#x60;secret&#x3D;&lt;string&gt;&#x60; secret name or ID - &#x60;service&#x3D;&lt;string&gt;&#x60; service name or ID - &#x60;type&#x3D;&lt;string&gt;&#x60; object to filter by, one of &#x60;container&#x60;, &#x60;image&#x60;, &#x60;volume&#x60;, &#x60;network&#x60;, &#x60;daemon&#x60;, &#x60;plugin&#x60;, &#x60;node&#x60;, &#x60;service&#x60;, &#x60;secret&#x60; or &#x60;config&#x60; - &#x60;volume&#x3D;&lt;string&gt;&#x60; volume name
 
   ## Returns
 
   {:ok, %DockerEngineAPI.Model.EventMessage{}} on success
   {:error, info} on failure
   """
-  @spec system_events(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.EventMessage.t} | {:error, Tesla.Env.t}
+  @spec system_events(Tesla.Env.client(), keyword()) ::
+          {:ok, DockerEngineAPI.Model.EventMessage.t()} | {:error, Tesla.Env.t()}
   def system_events(connection, opts \\ []) do
     optional_params = %{
-      :"since" => :query,
-      :"until" => :query,
-      :"filters" => :query
+      :since => :query,
+      :until => :query,
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/events")
@@ -114,7 +119,8 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemInfo{}} on success
   {:error, info} on failure
   """
-  @spec system_info(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.SystemInfo.t} | {:error, Tesla.Env.t}
+  @spec system_info(Tesla.Env.client(), keyword()) ::
+          {:ok, DockerEngineAPI.Model.SystemInfo.t()} | {:error, Tesla.Env.t()}
   def system_info(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -138,7 +144,7 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.String.t{}} on success
   {:error, info} on failure
   """
-  @spec system_ping(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
+  @spec system_ping(Tesla.Env.client(), keyword()) :: {:ok, String.t()} | {:error, Tesla.Env.t()}
   def system_ping(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -162,7 +168,8 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.String.t{}} on success
   {:error, info} on failure
   """
-  @spec system_ping_head(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
+  @spec system_ping_head(Tesla.Env.client(), keyword()) ::
+          {:ok, String.t()} | {:error, Tesla.Env.t()}
   def system_ping_head(connection, _opts \\ []) do
     %{}
     |> method(:head)
@@ -186,7 +193,8 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemVersion{}} on success
   {:error, info} on failure
   """
-  @spec system_version(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.SystemVersion.t} | {:error, Tesla.Env.t}
+  @spec system_version(Tesla.Env.client(), keyword()) ::
+          {:ok, DockerEngineAPI.Model.SystemVersion.t()} | {:error, Tesla.Env.t()}
   def system_version(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -194,5 +202,6 @@ defmodule DockerEngineAPI.Api.System do
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%DockerEngineAPI.Model.SystemVersion{})
+    |> dbg()
   end
 end
