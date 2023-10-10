@@ -8,7 +8,10 @@ defmodule DockerEngineAPI.Mixfile do
       elixir: "~> 1.15",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: description(),
+      package: package(),
+      deps: deps(),
+      source_url: "https://github.com/cloudpods-dev/docker-engine-api-elixir"
     ]
   end
 
@@ -34,7 +37,19 @@ defmodule DockerEngineAPI.Mixfile do
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
       {:poison, ">= 1.0.0"},
-      {:jason, ">= 1.0.0"}
+      {:jason, ">= 1.0.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp description() do
+    "A docker engine api client generated using swagger codegen."
+  end
+
+  defp package() do
+    [
+      licenses: ["MIT"],
+      links: %{"Github" => "https://github.com/cloudpods-dev/docker-engine-api-elixir"}
     ]
   end
 end
