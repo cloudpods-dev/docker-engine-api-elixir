@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.ResourceObject do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NanoCPUs",
-    :"MemoryBytes",
-    :"GenericResources"
+    :NanoCPUs,
+    :MemoryBytes,
+    :GenericResources
   ]
 
   @type t :: %__MODULE__{
-    :"NanoCPUs" => integer(),
-    :"MemoryBytes" => integer(),
-    :"GenericResources" => GenericResources
-  }
+          :NanoCPUs => integer(),
+          :MemoryBytes => integer(),
+          :GenericResources => GenericResources
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ResourceObject do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"GenericResources", :struct, DockerEngineAPI.Model.GenericResources, options)
+    |> deserialize(:GenericResources, :struct, DockerEngineAPI.Model.GenericResources, options)
   end
 end
-

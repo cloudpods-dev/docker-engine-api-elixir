@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.PluginConfigNetwork do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Type"
+    :Type
   ]
 
   @type t :: %__MODULE__{
-    :"Type" => String.t
-  }
+          :Type => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigNetwork do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigNetwork do
     value
   end
 end
-

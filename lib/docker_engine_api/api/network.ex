@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Network do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Connect a container to a network
 
@@ -26,12 +25,11 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec network_connect(Tesla.Env.client, String.t, DockerEngineAPI.Model.NetworkConnectRequest.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def network_connect(connection, id, container, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/networks/#{id}/connect")
-    |> add_param(:body, :"container", container)
+    |> add_param(:body, :container, container)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -51,12 +49,11 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %DockerEngineAPI.Model.NetworkCreateResponse{}} on success
   {:error, info} on failure
   """
-  @spec network_create(Tesla.Env.client, DockerEngineAPI.Model.NetworkCreateRequest.t, keyword()) :: {:ok, DockerEngineAPI.Model.NetworkCreateResponse.t} | {:error, Tesla.Env.t}
   def network_create(connection, network_config, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/networks/create")
-    |> add_param(:body, :"networkConfig", network_config)
+    |> add_param(:body, :networkConfig, network_config)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%DockerEngineAPI.Model.NetworkCreateResponse{})
@@ -76,7 +73,6 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec network_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def network_delete(connection, id, _opts \\ []) do
     %{}
     |> method(:delete)
@@ -101,12 +97,11 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec network_disconnect(Tesla.Env.client, String.t, DockerEngineAPI.Model.NetworkDisconnectRequest.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def network_disconnect(connection, id, container, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/networks/#{id}/disconnect")
-    |> add_param(:body, :"container", container)
+    |> add_param(:body, :container, container)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -128,12 +123,12 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %DockerEngineAPI.Model.Network{}} on success
   {:error, info} on failure
   """
-  @spec network_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Network.t} | {:error, Tesla.Env.t}
   def network_inspect(connection, id, opts \\ []) do
     optional_params = %{
-      :"verbose" => :query,
-      :"scope" => :query
+      :verbose => :query,
+      :scope => :query
     }
+
     %{}
     |> method(:get)
     |> url("/networks/#{id}")
@@ -158,11 +153,11 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, [%Network{}, ...]} on success
   {:error, info} on failure
   """
-  @spec network_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Network.t)} | {:error, Tesla.Env.t}
   def network_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/networks")
@@ -186,11 +181,11 @@ defmodule DockerEngineAPI.Api.Network do
   {:ok, %DockerEngineAPI.Model.NetworkPruneResponse{}} on success
   {:error, info} on failure
   """
-  @spec network_prune(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.NetworkPruneResponse.t} | {:error, Tesla.Env.t}
   def network_prune(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:post)
     |> url("/networks/prune")

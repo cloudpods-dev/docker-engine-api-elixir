@@ -4,28 +4,28 @@
 
 defmodule DockerEngineAPI.Model.Ipam do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Driver",
-    :"Config",
-    :"Options"
+    :Driver,
+    :Config,
+    :Options
   ]
 
   @type t :: %__MODULE__{
-    :"Driver" => String.t,
-    :"Config" => [IpamConfig],
-    :"Options" => %{optional(String.t) => String.t}
-  }
+          :Driver => String.t(),
+          :Config => [IpamConfig],
+          :Options => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Ipam do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Config", :list, DockerEngineAPI.Model.IpamConfig, options)
+    |> deserialize(:Config, :list, DockerEngineAPI.Model.IpamConfig, options)
   end
 end
-

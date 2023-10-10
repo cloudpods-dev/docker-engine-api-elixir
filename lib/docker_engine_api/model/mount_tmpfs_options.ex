@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.MountTmpfsOptions do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"SizeBytes",
-    :"Mode"
+    :SizeBytes,
+    :Mode
   ]
 
   @type t :: %__MODULE__{
-    :"SizeBytes" => integer(),
-    :"Mode" => integer()
-  }
+          :SizeBytes => integer(),
+          :Mode => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountTmpfsOptions do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountTmpfsOptions do
     value
   end
 end
-

@@ -9,21 +9,21 @@ defmodule DockerEngineAPI.Model.FilesystemChange do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Path",
-    :"Kind"
+    :Path,
+    :Kind
   ]
 
   @type t :: %__MODULE__{
-    :"Path" => String.t,
-    :"Kind" => ChangeType
-  }
+          :Path => String.t(),
+          :Kind => ChangeType
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.FilesystemChange do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Kind", :struct, DockerEngineAPI.Model.ChangeType, options)
+    |> deserialize(:Kind, :struct, DockerEngineAPI.Model.ChangeType, options)
   end
 end
-

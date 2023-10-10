@@ -8,13 +8,9 @@ defmodule DockerEngineAPI.Model.GenericResources do
   """
 
   @derive [Poison.Encoder]
-  defstruct [
-    
-  ]
+  defstruct []
 
-  @type t :: %__MODULE__{
-    
-  }
+  @type t :: %__MODULE__{}
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.GenericResources do
@@ -22,4 +18,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.GenericResources do
     value
   end
 end
-

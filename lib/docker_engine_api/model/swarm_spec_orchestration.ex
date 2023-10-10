@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.SwarmSpecOrchestration do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"TaskHistoryRetentionLimit"
+    :TaskHistoryRetentionLimit
   ]
 
   @type t :: %__MODULE__{
-    :"TaskHistoryRetentionLimit" => integer()
-  }
+          :TaskHistoryRetentionLimit => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecOrchestration do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecOrchestration do
     value
   end
 end
-

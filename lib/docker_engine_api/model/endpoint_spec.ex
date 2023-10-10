@@ -9,21 +9,21 @@ defmodule DockerEngineAPI.Model.EndpointSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Mode",
-    :"Ports"
+    :Mode,
+    :Ports
   ]
 
   @type t :: %__MODULE__{
-    :"Mode" => String.t,
-    :"Ports" => [EndpointPortConfig]
-  }
+          :Mode => String.t(),
+          :Ports => [EndpointPortConfig]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EndpointSpec do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Ports", :list, DockerEngineAPI.Model.EndpointPortConfig, options)
+    |> deserialize(:Ports, :list, DockerEngineAPI.Model.EndpointPortConfig, options)
   end
 end
-

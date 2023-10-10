@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.ImageInspectMetadata do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"LastTagTime"
+    :LastTagTime
   ]
 
   @type t :: %__MODULE__{
-    :"LastTagTime" => String.t
-  }
+          :LastTagTime => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageInspectMetadata do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageInspectMetadata do
     value
   end
 end
-

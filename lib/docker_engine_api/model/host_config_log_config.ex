@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.HostConfigLogConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Type",
-    :"Config"
+    :Type,
+    :Config
   ]
 
   @type t :: %__MODULE__{
-    :"Type" => String.t,
-    :"Config" => %{optional(String.t) => String.t}
-  }
+          :Type => String.t(),
+          :Config => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.HostConfigLogConfig do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.HostConfigLogConfig do
     value
   end
 end
-

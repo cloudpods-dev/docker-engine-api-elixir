@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.Port do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"IP",
-    :"PrivatePort",
-    :"PublicPort",
-    :"Type"
+    :IP,
+    :PrivatePort,
+    :PublicPort,
+    :Type
   ]
 
   @type t :: %__MODULE__{
-    :"IP" => String.t,
-    :"PrivatePort" => integer(),
-    :"PublicPort" => integer(),
-    :"Type" => String.t
-  }
+          :IP => String.t(),
+          :PrivatePort => integer(),
+          :PublicPort => integer(),
+          :Type => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Port do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Port do
     value
   end
 end
-

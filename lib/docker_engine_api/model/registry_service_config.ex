@@ -9,27 +9,27 @@ defmodule DockerEngineAPI.Model.RegistryServiceConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"AllowNondistributableArtifactsCIDRs",
-    :"AllowNondistributableArtifactsHostnames",
-    :"InsecureRegistryCIDRs",
-    :"IndexConfigs",
-    :"Mirrors"
+    :AllowNondistributableArtifactsCIDRs,
+    :AllowNondistributableArtifactsHostnames,
+    :InsecureRegistryCIDRs,
+    :IndexConfigs,
+    :Mirrors
   ]
 
   @type t :: %__MODULE__{
-    :"AllowNondistributableArtifactsCIDRs" => [String.t],
-    :"AllowNondistributableArtifactsHostnames" => [String.t],
-    :"InsecureRegistryCIDRs" => [String.t],
-    :"IndexConfigs" => %{optional(String.t) => IndexInfo},
-    :"Mirrors" => [String.t]
-  }
+          :AllowNondistributableArtifactsCIDRs => [String.t()],
+          :AllowNondistributableArtifactsHostnames => [String.t()],
+          :InsecureRegistryCIDRs => [String.t()],
+          :IndexConfigs => %{optional(String.t()) => IndexInfo},
+          :Mirrors => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.RegistryServiceConfig do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"IndexConfigs", :map, DockerEngineAPI.Model.IndexInfo, options)
+    |> deserialize(:IndexConfigs, :map, DockerEngineAPI.Model.IndexInfo, options)
   end
 end
-

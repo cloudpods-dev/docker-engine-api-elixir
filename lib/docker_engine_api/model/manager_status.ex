@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.ManagerStatus do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Leader",
-    :"Reachability",
-    :"Addr"
+    :Leader,
+    :Reachability,
+    :Addr
   ]
 
   @type t :: %__MODULE__{
-    :"Leader" => boolean(),
-    :"Reachability" => Reachability,
-    :"Addr" => String.t
-  }
+          :Leader => boolean(),
+          :Reachability => Reachability,
+          :Addr => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ManagerStatus do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Reachability", :struct, DockerEngineAPI.Model.Reachability, options)
+    |> deserialize(:Reachability, :struct, DockerEngineAPI.Model.Reachability, options)
   end
 end
-

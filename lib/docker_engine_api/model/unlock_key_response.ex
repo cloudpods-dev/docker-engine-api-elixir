@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.UnlockKeyResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"UnlockKey"
+    :UnlockKey
   ]
 
   @type t :: %__MODULE__{
-    :"UnlockKey" => String.t
-  }
+          :UnlockKey => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.UnlockKeyResponse do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.UnlockKeyResponse do
     value
   end
 end
-

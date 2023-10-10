@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.ServiceSpecModeReplicated do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Replicas"
+    :Replicas
   ]
 
   @type t :: %__MODULE__{
-    :"Replicas" => integer()
-  }
+          :Replicas => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecModeReplicated do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecModeReplicated do
     value
   end
 end
-

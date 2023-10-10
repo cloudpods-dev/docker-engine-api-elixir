@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ErrorDetail do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"code",
-    :"message"
+    :code,
+    :message
   ]
 
   @type t :: %__MODULE__{
-    :"code" => integer(),
-    :"message" => String.t
-  }
+          :code => integer(),
+          :message => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ErrorDetail do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ErrorDetail do
     value
   end
 end
-

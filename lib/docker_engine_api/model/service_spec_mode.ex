@@ -9,28 +9,33 @@ defmodule DockerEngineAPI.Model.ServiceSpecMode do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Replicated",
-    :"Global",
-    :"ReplicatedJob",
-    :"GlobalJob"
+    :Replicated,
+    :Global,
+    :ReplicatedJob,
+    :GlobalJob
   ]
 
   @type t :: %__MODULE__{
-    :"Replicated" => ServiceSpecModeReplicated,
-    :"Global" => Object,
-    :"ReplicatedJob" => ServiceSpecModeReplicatedJob,
-    :"GlobalJob" => Object
-  }
+          :Replicated => ServiceSpecModeReplicated,
+          :Global => Object,
+          :ReplicatedJob => ServiceSpecModeReplicatedJob,
+          :GlobalJob => Object
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecMode do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Replicated", :struct, DockerEngineAPI.Model.ServiceSpecModeReplicated, options)
-    |> deserialize(:"Global", :struct, DockerEngineAPI.Model.Object, options)
-    |> deserialize(:"ReplicatedJob", :struct, DockerEngineAPI.Model.ServiceSpecModeReplicatedJob, options)
-    |> deserialize(:"GlobalJob", :struct, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:Replicated, :struct, DockerEngineAPI.Model.ServiceSpecModeReplicated, options)
+    |> deserialize(:Global, :struct, DockerEngineAPI.Model.Object, options)
+    |> deserialize(
+      :ReplicatedJob,
+      :struct,
+      DockerEngineAPI.Model.ServiceSpecModeReplicatedJob,
+      options
+    )
+    |> deserialize(:GlobalJob, :struct, DockerEngineAPI.Model.Object, options)
   end
 end
-

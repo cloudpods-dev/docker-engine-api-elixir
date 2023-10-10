@@ -9,56 +9,56 @@ defmodule DockerEngineAPI.Model.PluginConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"DockerVersion",
-    :"Description",
-    :"Documentation",
-    :"Interface",
-    :"Entrypoint",
-    :"WorkDir",
-    :"User",
-    :"Network",
-    :"Linux",
-    :"PropagatedMount",
-    :"IpcHost",
-    :"PidHost",
-    :"Mounts",
-    :"Env",
-    :"Args",
-    :"rootfs"
+    :DockerVersion,
+    :Description,
+    :Documentation,
+    :Interface,
+    :Entrypoint,
+    :WorkDir,
+    :User,
+    :Network,
+    :Linux,
+    :PropagatedMount,
+    :IpcHost,
+    :PidHost,
+    :Mounts,
+    :Env,
+    :Args,
+    :rootfs
   ]
 
   @type t :: %__MODULE__{
-    :"DockerVersion" => String.t,
-    :"Description" => String.t,
-    :"Documentation" => String.t,
-    :"Interface" => PluginConfigInterface,
-    :"Entrypoint" => [String.t],
-    :"WorkDir" => String.t,
-    :"User" => PluginConfigUser,
-    :"Network" => PluginConfigNetwork,
-    :"Linux" => PluginConfigLinux,
-    :"PropagatedMount" => String.t,
-    :"IpcHost" => boolean(),
-    :"PidHost" => boolean(),
-    :"Mounts" => [PluginMount],
-    :"Env" => [PluginEnv],
-    :"Args" => PluginConfigArgs,
-    :"rootfs" => PluginConfigRootfs
-  }
+          :DockerVersion => String.t(),
+          :Description => String.t(),
+          :Documentation => String.t(),
+          :Interface => PluginConfigInterface,
+          :Entrypoint => [String.t()],
+          :WorkDir => String.t(),
+          :User => PluginConfigUser,
+          :Network => PluginConfigNetwork,
+          :Linux => PluginConfigLinux,
+          :PropagatedMount => String.t(),
+          :IpcHost => boolean(),
+          :PidHost => boolean(),
+          :Mounts => [PluginMount],
+          :Env => [PluginEnv],
+          :Args => PluginConfigArgs,
+          :rootfs => PluginConfigRootfs
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfig do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Interface", :struct, DockerEngineAPI.Model.PluginConfigInterface, options)
-    |> deserialize(:"User", :struct, DockerEngineAPI.Model.PluginConfigUser, options)
-    |> deserialize(:"Network", :struct, DockerEngineAPI.Model.PluginConfigNetwork, options)
-    |> deserialize(:"Linux", :struct, DockerEngineAPI.Model.PluginConfigLinux, options)
-    |> deserialize(:"Mounts", :list, DockerEngineAPI.Model.PluginMount, options)
-    |> deserialize(:"Env", :list, DockerEngineAPI.Model.PluginEnv, options)
-    |> deserialize(:"Args", :struct, DockerEngineAPI.Model.PluginConfigArgs, options)
-    |> deserialize(:"rootfs", :struct, DockerEngineAPI.Model.PluginConfigRootfs, options)
+    |> deserialize(:Interface, :struct, DockerEngineAPI.Model.PluginConfigInterface, options)
+    |> deserialize(:User, :struct, DockerEngineAPI.Model.PluginConfigUser, options)
+    |> deserialize(:Network, :struct, DockerEngineAPI.Model.PluginConfigNetwork, options)
+    |> deserialize(:Linux, :struct, DockerEngineAPI.Model.PluginConfigLinux, options)
+    |> deserialize(:Mounts, :list, DockerEngineAPI.Model.PluginMount, options)
+    |> deserialize(:Env, :list, DockerEngineAPI.Model.PluginEnv, options)
+    |> deserialize(:Args, :struct, DockerEngineAPI.Model.PluginConfigArgs, options)
+    |> deserialize(:rootfs, :struct, DockerEngineAPI.Model.PluginConfigRootfs, options)
   end
 end
-

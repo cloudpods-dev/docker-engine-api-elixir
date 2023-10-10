@@ -4,23 +4,23 @@
 
 defmodule DockerEngineAPI.Model.PluginDevice do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Description",
-    :"Settable",
-    :"Path"
+    :Name,
+    :Description,
+    :Settable,
+    :Path
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Description" => String.t,
-    :"Settable" => [String.t],
-    :"Path" => String.t
-  }
+          :Name => String.t(),
+          :Description => String.t(),
+          :Settable => [String.t()],
+          :Path => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginDevice do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginDevice do
     value
   end
 end
-

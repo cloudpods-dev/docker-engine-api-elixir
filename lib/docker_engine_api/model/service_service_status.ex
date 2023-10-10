@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.ServiceServiceStatus do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"RunningTasks",
-    :"DesiredTasks",
-    :"CompletedTasks"
+    :RunningTasks,
+    :DesiredTasks,
+    :CompletedTasks
   ]
 
   @type t :: %__MODULE__{
-    :"RunningTasks" => integer(),
-    :"DesiredTasks" => integer(),
-    :"CompletedTasks" => integer()
-  }
+          :RunningTasks => integer(),
+          :DesiredTasks => integer(),
+          :CompletedTasks => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceServiceStatus do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceServiceStatus do
     value
   end
 end
-

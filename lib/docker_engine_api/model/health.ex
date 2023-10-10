@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.Health do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Status",
-    :"FailingStreak",
-    :"Log"
+    :Status,
+    :FailingStreak,
+    :Log
   ]
 
   @type t :: %__MODULE__{
-    :"Status" => String.t,
-    :"FailingStreak" => integer(),
-    :"Log" => [HealthcheckResult]
-  }
+          :Status => String.t(),
+          :FailingStreak => integer(),
+          :Log => [HealthcheckResult]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Health do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Log", :list, DockerEngineAPI.Model.HealthcheckResult, options)
+    |> deserialize(:Log, :list, DockerEngineAPI.Model.HealthcheckResult, options)
   end
 end
-

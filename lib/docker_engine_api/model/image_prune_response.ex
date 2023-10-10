@@ -4,26 +4,26 @@
 
 defmodule DockerEngineAPI.Model.ImagePruneResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ImagesDeleted",
-    :"SpaceReclaimed"
+    :ImagesDeleted,
+    :SpaceReclaimed
   ]
 
   @type t :: %__MODULE__{
-    :"ImagesDeleted" => [ImageDeleteResponseItem],
-    :"SpaceReclaimed" => integer()
-  }
+          :ImagesDeleted => [ImageDeleteResponseItem],
+          :SpaceReclaimed => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImagePruneResponse do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ImagesDeleted", :list, DockerEngineAPI.Model.ImageDeleteResponseItem, options)
+    |> deserialize(:ImagesDeleted, :list, DockerEngineAPI.Model.ImageDeleteResponseItem, options)
   end
 end
-

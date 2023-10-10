@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.PluginConfigRootfs do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"type",
-    :"diff_ids"
+    :type,
+    :diff_ids
   ]
 
   @type t :: %__MODULE__{
-    :"type" => String.t,
-    :"diff_ids" => [String.t]
-  }
+          :type => String.t(),
+          :diff_ids => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigRootfs do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigRootfs do
     value
   end
 end
-

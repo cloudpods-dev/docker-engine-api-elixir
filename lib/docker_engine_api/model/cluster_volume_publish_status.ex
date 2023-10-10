@@ -4,21 +4,21 @@
 
 defmodule DockerEngineAPI.Model.ClusterVolumePublishStatus do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NodeID",
-    :"State",
-    :"PublishContext"
+    :NodeID,
+    :State,
+    :PublishContext
   ]
 
   @type t :: %__MODULE__{
-    :"NodeID" => String.t,
-    :"State" => String.t,
-    :"PublishContext" => %{optional(String.t) => String.t}
-  }
+          :NodeID => String.t(),
+          :State => String.t(),
+          :PublishContext => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumePublishStatus do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumePublishStatus do
     value
   end
 end
-

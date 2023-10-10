@@ -9,22 +9,22 @@ defmodule DockerEngineAPI.Model.TaskSpecResources do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Limits",
-    :"Reservations"
+    :Limits,
+    :Reservations
   ]
 
   @type t :: %__MODULE__{
-    :"Limits" => Limit,
-    :"Reservations" => ResourceObject
-  }
+          :Limits => Limit,
+          :Reservations => ResourceObject
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecResources do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Limits", :struct, DockerEngineAPI.Model.Limit, options)
-    |> deserialize(:"Reservations", :struct, DockerEngineAPI.Model.ResourceObject, options)
+    |> deserialize(:Limits, :struct, DockerEngineAPI.Model.Limit, options)
+    |> deserialize(:Reservations, :struct, DockerEngineAPI.Model.ResourceObject, options)
   end
 end
-

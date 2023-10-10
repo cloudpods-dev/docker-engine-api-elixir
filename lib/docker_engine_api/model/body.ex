@@ -9,19 +9,19 @@ defmodule DockerEngineAPI.Model.Body do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Spec"
+    :Spec
   ]
 
   @type t :: %__MODULE__{
-    :"Spec" => ClusterVolumeSpec
-  }
+          :Spec => ClusterVolumeSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Body do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
   end
 end
-

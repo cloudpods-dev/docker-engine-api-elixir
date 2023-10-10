@@ -4,33 +4,38 @@
 
 defmodule DockerEngineAPI.Model.TaskStatus do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Timestamp",
-    :"State",
-    :"Message",
-    :"Err",
-    :"ContainerStatus"
+    :Timestamp,
+    :State,
+    :Message,
+    :Err,
+    :ContainerStatus
   ]
 
   @type t :: %__MODULE__{
-    :"Timestamp" => String.t,
-    :"State" => TaskState,
-    :"Message" => String.t,
-    :"Err" => String.t,
-    :"ContainerStatus" => TaskStatusContainerStatus
-  }
+          :Timestamp => String.t(),
+          :State => TaskState,
+          :Message => String.t(),
+          :Err => String.t(),
+          :ContainerStatus => TaskStatusContainerStatus
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskStatus do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"State", :struct, DockerEngineAPI.Model.TaskState, options)
-    |> deserialize(:"ContainerStatus", :struct, DockerEngineAPI.Model.TaskStatusContainerStatus, options)
+    |> deserialize(:State, :struct, DockerEngineAPI.Model.TaskState, options)
+    |> deserialize(
+      :ContainerStatus,
+      :struct,
+      DockerEngineAPI.Model.TaskStatusContainerStatus,
+      options
+    )
   end
 end
-

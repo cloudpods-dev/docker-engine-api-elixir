@@ -9,30 +9,30 @@ defmodule DockerEngineAPI.Model.NodeDescription do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Hostname",
-    :"Platform",
-    :"Resources",
-    :"Engine",
-    :"TLSInfo"
+    :Hostname,
+    :Platform,
+    :Resources,
+    :Engine,
+    :TLSInfo
   ]
 
   @type t :: %__MODULE__{
-    :"Hostname" => String.t,
-    :"Platform" => Platform,
-    :"Resources" => ResourceObject,
-    :"Engine" => EngineDescription,
-    :"TLSInfo" => TlsInfo
-  }
+          :Hostname => String.t(),
+          :Platform => Platform,
+          :Resources => ResourceObject,
+          :Engine => EngineDescription,
+          :TLSInfo => TlsInfo
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeDescription do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Platform", :struct, DockerEngineAPI.Model.Platform, options)
-    |> deserialize(:"Resources", :struct, DockerEngineAPI.Model.ResourceObject, options)
-    |> deserialize(:"Engine", :struct, DockerEngineAPI.Model.EngineDescription, options)
-    |> deserialize(:"TLSInfo", :struct, DockerEngineAPI.Model.TlsInfo, options)
+    |> deserialize(:Platform, :struct, DockerEngineAPI.Model.Platform, options)
+    |> deserialize(:Resources, :struct, DockerEngineAPI.Model.ResourceObject, options)
+    |> deserialize(:Engine, :struct, DockerEngineAPI.Model.EngineDescription, options)
+    |> deserialize(:TLSInfo, :struct, DockerEngineAPI.Model.TlsInfo, options)
   end
 end
-

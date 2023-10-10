@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.IdResponse do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Id"
+    :Id
   ]
 
   @type t :: %__MODULE__{
-    :"Id" => String.t
-  }
+          :Id => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.IdResponse do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.IdResponse do
     value
   end
 end
-

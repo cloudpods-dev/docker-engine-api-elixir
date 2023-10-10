@@ -9,21 +9,26 @@ defmodule DockerEngineAPI.Model.ClusterVolumeSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Group",
-    :"AccessMode"
+    :Group,
+    :AccessMode
   ]
 
   @type t :: %__MODULE__{
-    :"Group" => String.t,
-    :"AccessMode" => ClusterVolumeSpecAccessMode
-  }
+          :Group => String.t(),
+          :AccessMode => ClusterVolumeSpecAccessMode
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpec do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"AccessMode", :struct, DockerEngineAPI.Model.ClusterVolumeSpecAccessMode, options)
+    |> deserialize(
+      :AccessMode,
+      :struct,
+      DockerEngineAPI.Model.ClusterVolumeSpecAccessMode,
+      options
+    )
   end
 end
-

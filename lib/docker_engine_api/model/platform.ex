@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.Platform do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Architecture",
-    :"OS"
+    :Architecture,
+    :OS
   ]
 
   @type t :: %__MODULE__{
-    :"Architecture" => String.t,
-    :"OS" => String.t
-  }
+          :Architecture => String.t(),
+          :OS => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Platform do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Platform do
     value
   end
 end
-

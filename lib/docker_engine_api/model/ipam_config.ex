@@ -4,23 +4,23 @@
 
 defmodule DockerEngineAPI.Model.IpamConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Subnet",
-    :"IPRange",
-    :"Gateway",
-    :"AuxiliaryAddresses"
+    :Subnet,
+    :IPRange,
+    :Gateway,
+    :AuxiliaryAddresses
   ]
 
   @type t :: %__MODULE__{
-    :"Subnet" => String.t,
-    :"IPRange" => String.t,
-    :"Gateway" => String.t,
-    :"AuxiliaryAddresses" => %{optional(String.t) => String.t}
-  }
+          :Subnet => String.t(),
+          :IPRange => String.t(),
+          :Gateway => String.t(),
+          :AuxiliaryAddresses => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.IpamConfig do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.IpamConfig do
     value
   end
 end
-

@@ -4,25 +4,25 @@
 
 defmodule DockerEngineAPI.Model.ImageSearchResponseItem do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"description",
-    :"is_official",
-    :"is_automated",
-    :"name",
-    :"star_count"
+    :description,
+    :is_official,
+    :is_automated,
+    :name,
+    :star_count
   ]
 
   @type t :: %__MODULE__{
-    :"description" => String.t,
-    :"is_official" => boolean(),
-    :"is_automated" => boolean(),
-    :"name" => String.t,
-    :"star_count" => integer()
-  }
+          :description => String.t(),
+          :is_official => boolean(),
+          :is_automated => boolean(),
+          :name => String.t(),
+          :star_count => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageSearchResponseItem do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageSearchResponseItem do
     value
   end
 end
-

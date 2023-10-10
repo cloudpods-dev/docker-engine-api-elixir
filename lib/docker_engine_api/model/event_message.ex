@@ -9,29 +9,29 @@ defmodule DockerEngineAPI.Model.EventMessage do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Type",
-    :"Action",
-    :"Actor",
-    :"scope",
-    :"time",
-    :"timeNano"
+    :Type,
+    :Action,
+    :Actor,
+    :scope,
+    :time,
+    :timeNano
   ]
 
   @type t :: %__MODULE__{
-    :"Type" => String.t,
-    :"Action" => String.t,
-    :"Actor" => EventActor,
-    :"scope" => String.t,
-    :"time" => integer(),
-    :"timeNano" => integer()
-  }
+          :Type => String.t(),
+          :Action => String.t(),
+          :Actor => EventActor,
+          :scope => String.t(),
+          :time => integer(),
+          :timeNano => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EventMessage do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Actor", :struct, DockerEngineAPI.Model.EventActor, options)
+    |> deserialize(:Actor, :struct, DockerEngineAPI.Model.EventActor, options)
   end
 end
-

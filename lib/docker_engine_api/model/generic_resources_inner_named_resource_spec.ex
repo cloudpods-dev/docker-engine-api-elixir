@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.GenericResourcesInnerNamedResourceSpec do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Kind",
-    :"Value"
+    :Kind,
+    :Value
   ]
 
   @type t :: %__MODULE__{
-    :"Kind" => String.t,
-    :"Value" => String.t
-  }
+          :Kind => String.t(),
+          :Value => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.GenericResourcesInnerNamedResourceSpec do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.GenericResourcesInnerNamedRes
     value
   end
 end
-

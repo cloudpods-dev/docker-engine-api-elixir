@@ -9,42 +9,42 @@ defmodule DockerEngineAPI.Model.SystemVersion do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Platform",
-    :"Components",
-    :"Version",
-    :"ApiVersion",
-    :"MinAPIVersion",
-    :"GitCommit",
-    :"GoVersion",
-    :"Os",
-    :"Arch",
-    :"KernelVersion",
-    :"Experimental",
-    :"BuildTime"
+    :Platform,
+    :Components,
+    :Version,
+    :ApiVersion,
+    :MinAPIVersion,
+    :GitCommit,
+    :GoVersion,
+    :Os,
+    :Arch,
+    :KernelVersion,
+    :Experimental,
+    :BuildTime
   ]
 
   @type t :: %__MODULE__{
-    :"Platform" => SystemVersionPlatform,
-    :"Components" => [SystemVersionComponents],
-    :"Version" => String.t,
-    :"ApiVersion" => String.t,
-    :"MinAPIVersion" => String.t,
-    :"GitCommit" => String.t,
-    :"GoVersion" => String.t,
-    :"Os" => String.t,
-    :"Arch" => String.t,
-    :"KernelVersion" => String.t,
-    :"Experimental" => boolean(),
-    :"BuildTime" => String.t
-  }
+          :Platform => SystemVersionPlatform,
+          :Components => [SystemVersionComponents],
+          :Version => String.t(),
+          :ApiVersion => String.t(),
+          :MinAPIVersion => String.t(),
+          :GitCommit => String.t(),
+          :GoVersion => String.t(),
+          :Os => String.t(),
+          :Arch => String.t(),
+          :KernelVersion => String.t(),
+          :Experimental => boolean(),
+          :BuildTime => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemVersion do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Platform", :struct, DockerEngineAPI.Model.SystemVersionPlatform, options)
-    |> deserialize(:"Components", :list, DockerEngineAPI.Model.SystemVersionComponents, options)
+    |> deserialize(:Platform, :struct, DockerEngineAPI.Model.SystemVersionPlatform, options)
+    |> deserialize(:Components, :list, DockerEngineAPI.Model.SystemVersionComponents, options)
   end
 end
-

@@ -4,33 +4,33 @@
 
 defmodule DockerEngineAPI.Model.Secret do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => SecretSpec
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => SecretSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Secret do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.SecretSpec, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.SecretSpec, options)
   end
 end
-

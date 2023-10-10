@@ -9,38 +9,43 @@ defmodule DockerEngineAPI.Model.ServiceSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Labels",
-    :"TaskTemplate",
-    :"Mode",
-    :"UpdateConfig",
-    :"RollbackConfig",
-    :"Networks",
-    :"EndpointSpec"
+    :Name,
+    :Labels,
+    :TaskTemplate,
+    :Mode,
+    :UpdateConfig,
+    :RollbackConfig,
+    :Networks,
+    :EndpointSpec
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Labels" => %{optional(String.t) => String.t},
-    :"TaskTemplate" => TaskSpec,
-    :"Mode" => ServiceSpecMode,
-    :"UpdateConfig" => ServiceSpecUpdateConfig,
-    :"RollbackConfig" => ServiceSpecRollbackConfig,
-    :"Networks" => [NetworkAttachmentConfig],
-    :"EndpointSpec" => EndpointSpec
-  }
+          :Name => String.t(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :TaskTemplate => TaskSpec,
+          :Mode => ServiceSpecMode,
+          :UpdateConfig => ServiceSpecUpdateConfig,
+          :RollbackConfig => ServiceSpecRollbackConfig,
+          :Networks => [NetworkAttachmentConfig],
+          :EndpointSpec => EndpointSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpec do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"TaskTemplate", :struct, DockerEngineAPI.Model.TaskSpec, options)
-    |> deserialize(:"Mode", :struct, DockerEngineAPI.Model.ServiceSpecMode, options)
-    |> deserialize(:"UpdateConfig", :struct, DockerEngineAPI.Model.ServiceSpecUpdateConfig, options)
-    |> deserialize(:"RollbackConfig", :struct, DockerEngineAPI.Model.ServiceSpecRollbackConfig, options)
-    |> deserialize(:"Networks", :list, DockerEngineAPI.Model.NetworkAttachmentConfig, options)
-    |> deserialize(:"EndpointSpec", :struct, DockerEngineAPI.Model.EndpointSpec, options)
+    |> deserialize(:TaskTemplate, :struct, DockerEngineAPI.Model.TaskSpec, options)
+    |> deserialize(:Mode, :struct, DockerEngineAPI.Model.ServiceSpecMode, options)
+    |> deserialize(:UpdateConfig, :struct, DockerEngineAPI.Model.ServiceSpecUpdateConfig, options)
+    |> deserialize(
+      :RollbackConfig,
+      :struct,
+      DockerEngineAPI.Model.ServiceSpecRollbackConfig,
+      options
+    )
+    |> deserialize(:Networks, :list, DockerEngineAPI.Model.NetworkAttachmentConfig, options)
+    |> deserialize(:EndpointSpec, :struct, DockerEngineAPI.Model.EndpointSpec, options)
   end
 end
-

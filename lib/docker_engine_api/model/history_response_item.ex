@@ -9,22 +9,22 @@ defmodule DockerEngineAPI.Model.HistoryResponseItem do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Id",
-    :"Created",
-    :"CreatedBy",
-    :"Tags",
-    :"Size",
-    :"Comment"
+    :Id,
+    :Created,
+    :CreatedBy,
+    :Tags,
+    :Size,
+    :Comment
   ]
 
   @type t :: %__MODULE__{
-    :"Id" => String.t,
-    :"Created" => integer(),
-    :"CreatedBy" => String.t,
-    :"Tags" => [String.t],
-    :"Size" => integer(),
-    :"Comment" => String.t
-  }
+          :Id => String.t(),
+          :Created => integer(),
+          :CreatedBy => String.t(),
+          :Tags => [String.t()],
+          :Size => integer(),
+          :Comment => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.HistoryResponseItem do
@@ -32,4 +32,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.HistoryResponseItem do
     value
   end
 end
-

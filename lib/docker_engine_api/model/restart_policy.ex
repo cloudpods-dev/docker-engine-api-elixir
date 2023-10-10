@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.RestartPolicy do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"MaximumRetryCount"
+    :Name,
+    :MaximumRetryCount
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"MaximumRetryCount" => integer()
-  }
+          :Name => String.t(),
+          :MaximumRetryCount => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.RestartPolicy do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.RestartPolicy do
     value
   end
 end
-

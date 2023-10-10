@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.Runtime do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"path",
-    :"runtimeArgs"
+    :path,
+    :runtimeArgs
   ]
 
   @type t :: %__MODULE__{
-    :"path" => String.t,
-    :"runtimeArgs" => [String.t]
-  }
+          :path => String.t(),
+          :runtimeArgs => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Runtime do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Runtime do
     value
   end
 end
-

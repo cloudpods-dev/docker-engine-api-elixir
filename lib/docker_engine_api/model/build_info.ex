@@ -4,40 +4,40 @@
 
 defmodule DockerEngineAPI.Model.BuildInfo do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
-    :"stream",
-    :"error",
-    :"errorDetail",
-    :"status",
-    :"progress",
-    :"progressDetail",
-    :"aux"
+    :id,
+    :stream,
+    :error,
+    :errorDetail,
+    :status,
+    :progress,
+    :progressDetail,
+    :aux
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t,
-    :"stream" => String.t,
-    :"error" => String.t,
-    :"errorDetail" => ErrorDetail,
-    :"status" => String.t,
-    :"progress" => String.t,
-    :"progressDetail" => ProgressDetail,
-    :"aux" => ImageId
-  }
+          :id => String.t(),
+          :stream => String.t(),
+          :error => String.t(),
+          :errorDetail => ErrorDetail,
+          :status => String.t(),
+          :progress => String.t(),
+          :progressDetail => ProgressDetail,
+          :aux => ImageId
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.BuildInfo do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"errorDetail", :struct, DockerEngineAPI.Model.ErrorDetail, options)
-    |> deserialize(:"progressDetail", :struct, DockerEngineAPI.Model.ProgressDetail, options)
-    |> deserialize(:"aux", :struct, DockerEngineAPI.Model.ImageId, options)
+    |> deserialize(:errorDetail, :struct, DockerEngineAPI.Model.ErrorDetail, options)
+    |> deserialize(:progressDetail, :struct, DockerEngineAPI.Model.ProgressDetail, options)
+    |> deserialize(:aux, :struct, DockerEngineAPI.Model.ImageId, options)
   end
 end
-

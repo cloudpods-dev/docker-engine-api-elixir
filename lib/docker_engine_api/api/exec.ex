@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Exec do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Create an exec instance
   Run a command inside a running container.
@@ -27,12 +26,11 @@ defmodule DockerEngineAPI.Api.Exec do
   {:ok, %DockerEngineAPI.Model.IdResponse{}} on success
   {:error, info} on failure
   """
-  @spec container_exec(Tesla.Env.client, DockerEngineAPI.Model.ExecConfig.t, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.IdResponse.t} | {:error, Tesla.Env.t}
   def container_exec(connection, exec_config, id, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/containers/#{id}/exec")
-    |> add_param(:body, :"execConfig", exec_config)
+    |> add_param(:body, :execConfig, exec_config)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%DockerEngineAPI.Model.IdResponse{})
@@ -53,7 +51,6 @@ defmodule DockerEngineAPI.Api.Exec do
   {:ok, %DockerEngineAPI.Model.ExecInspectResponse{}} on success
   {:error, info} on failure
   """
-  @spec exec_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.ExecInspectResponse.t} | {:error, Tesla.Env.t}
   def exec_inspect(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -80,12 +77,12 @@ defmodule DockerEngineAPI.Api.Exec do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec exec_resize(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def exec_resize(connection, id, opts \\ []) do
     optional_params = %{
-      :"h" => :query,
-      :"w" => :query
+      :h => :query,
+      :w => :query
     }
+
     %{}
     |> method(:post)
     |> url("/exec/#{id}/resize")
@@ -111,11 +108,11 @@ defmodule DockerEngineAPI.Api.Exec do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec exec_start(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def exec_start(connection, id, opts \\ []) do
     optional_params = %{
-      :"execStartConfig" => :body
+      :execStartConfig => :body
     }
+
     %{}
     |> method(:post)
     |> url("/exec/#{id}/start")

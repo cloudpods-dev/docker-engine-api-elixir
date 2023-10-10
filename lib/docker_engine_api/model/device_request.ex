@@ -9,20 +9,20 @@ defmodule DockerEngineAPI.Model.DeviceRequest do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Driver",
-    :"Count",
-    :"DeviceIDs",
-    :"Capabilities",
-    :"Options"
+    :Driver,
+    :Count,
+    :DeviceIDs,
+    :Capabilities,
+    :Options
   ]
 
   @type t :: %__MODULE__{
-    :"Driver" => String.t,
-    :"Count" => integer(),
-    :"DeviceIDs" => [String.t],
-    :"Capabilities" => [[String.t]],
-    :"Options" => %{optional(String.t) => String.t}
-  }
+          :Driver => String.t(),
+          :Count => integer(),
+          :DeviceIDs => [String.t()],
+          :Capabilities => [[String.t()]],
+          :Options => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.DeviceRequest do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.DeviceRequest do
     value
   end
 end
-

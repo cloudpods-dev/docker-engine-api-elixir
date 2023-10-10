@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.TaskSpecPlacementSpread do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"SpreadDescriptor"
+    :SpreadDescriptor
   ]
 
   @type t :: %__MODULE__{
-    :"SpreadDescriptor" => String.t
-  }
+          :SpreadDescriptor => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecPlacementSpread do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecPlacementSpread do
     value
   end
 end
-

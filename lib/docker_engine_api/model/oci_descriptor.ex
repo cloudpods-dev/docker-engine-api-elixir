@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.OciDescriptor do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"mediaType",
-    :"digest",
-    :"size"
+    :mediaType,
+    :digest,
+    :size
   ]
 
   @type t :: %__MODULE__{
-    :"mediaType" => String.t,
-    :"digest" => String.t,
-    :"size" => integer()
-  }
+          :mediaType => String.t(),
+          :digest => String.t(),
+          :size => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.OciDescriptor do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.OciDescriptor do
     value
   end
 end
-

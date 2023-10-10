@@ -4,27 +4,37 @@
 
 defmodule DockerEngineAPI.Model.GenericResourcesInner do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NamedResourceSpec",
-    :"DiscreteResourceSpec"
+    :NamedResourceSpec,
+    :DiscreteResourceSpec
   ]
 
   @type t :: %__MODULE__{
-    :"NamedResourceSpec" => GenericResourcesInnerNamedResourceSpec,
-    :"DiscreteResourceSpec" => GenericResourcesInnerDiscreteResourceSpec
-  }
+          :NamedResourceSpec => GenericResourcesInnerNamedResourceSpec,
+          :DiscreteResourceSpec => GenericResourcesInnerDiscreteResourceSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.GenericResourcesInner do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"NamedResourceSpec", :struct, DockerEngineAPI.Model.GenericResourcesInnerNamedResourceSpec, options)
-    |> deserialize(:"DiscreteResourceSpec", :struct, DockerEngineAPI.Model.GenericResourcesInnerDiscreteResourceSpec, options)
+    |> deserialize(
+      :NamedResourceSpec,
+      :struct,
+      DockerEngineAPI.Model.GenericResourcesInnerNamedResourceSpec,
+      options
+    )
+    |> deserialize(
+      :DiscreteResourceSpec,
+      :struct,
+      DockerEngineAPI.Model.GenericResourcesInnerDiscreteResourceSpec,
+      options
+    )
   end
 end
-

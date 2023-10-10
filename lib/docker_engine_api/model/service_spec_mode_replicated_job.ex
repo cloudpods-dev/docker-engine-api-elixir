@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.ServiceSpecModeReplicatedJob do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"MaxConcurrent",
-    :"TotalCompletions"
+    :MaxConcurrent,
+    :TotalCompletions
   ]
 
   @type t :: %__MODULE__{
-    :"MaxConcurrent" => integer(),
-    :"TotalCompletions" => integer()
-  }
+          :MaxConcurrent => integer(),
+          :TotalCompletions => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecModeReplicatedJob do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecModeReplicatedJob 
     value
   end
 end
-

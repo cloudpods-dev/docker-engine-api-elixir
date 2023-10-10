@@ -9,21 +9,21 @@ defmodule DockerEngineAPI.Model.ServiceJobStatus do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"JobIteration",
-    :"LastExecution"
+    :JobIteration,
+    :LastExecution
   ]
 
   @type t :: %__MODULE__{
-    :"JobIteration" => ObjectVersion,
-    :"LastExecution" => String.t
-  }
+          :JobIteration => ObjectVersion,
+          :LastExecution => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceJobStatus do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"JobIteration", :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:JobIteration, :struct, DockerEngineAPI.Model.ObjectVersion, options)
   end
 end
-

@@ -9,20 +9,20 @@ defmodule DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesSeLinuxContext do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Disable",
-    :"User",
-    :"Role",
-    :"Type",
-    :"Level"
+    :Disable,
+    :User,
+    :Role,
+    :Type,
+    :Level
   ]
 
   @type t :: %__MODULE__{
-    :"Disable" => boolean(),
-    :"User" => String.t,
-    :"Role" => String.t,
-    :"Type" => String.t,
-    :"Level" => String.t
-  }
+          :Disable => boolean(),
+          :User => String.t(),
+          :Role => String.t(),
+          :Type => String.t(),
+          :Level => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesSeLinuxContext do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecPrivileg
     value
   end
 end
-

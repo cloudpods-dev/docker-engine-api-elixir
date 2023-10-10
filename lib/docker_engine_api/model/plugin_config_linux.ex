@@ -4,28 +4,28 @@
 
 defmodule DockerEngineAPI.Model.PluginConfigLinux do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Capabilities",
-    :"AllowAllDevices",
-    :"Devices"
+    :Capabilities,
+    :AllowAllDevices,
+    :Devices
   ]
 
   @type t :: %__MODULE__{
-    :"Capabilities" => [String.t],
-    :"AllowAllDevices" => boolean(),
-    :"Devices" => [PluginDevice]
-  }
+          :Capabilities => [String.t()],
+          :AllowAllDevices => boolean(),
+          :Devices => [PluginDevice]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigLinux do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Devices", :list, DockerEngineAPI.Model.PluginDevice, options)
+    |> deserialize(:Devices, :list, DockerEngineAPI.Model.PluginDevice, options)
   end
 end
-

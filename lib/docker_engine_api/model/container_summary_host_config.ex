@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.ContainerSummaryHostConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NetworkMode"
+    :NetworkMode
   ]
 
   @type t :: %__MODULE__{
-    :"NetworkMode" => String.t
-  }
+          :NetworkMode => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerSummaryHostConfig do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerSummaryHostConfig do
     value
   end
 end
-

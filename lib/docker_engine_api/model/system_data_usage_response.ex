@@ -4,35 +4,35 @@
 
 defmodule DockerEngineAPI.Model.SystemDataUsageResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"LayersSize",
-    :"Images",
-    :"Containers",
-    :"Volumes",
-    :"BuildCache"
+    :LayersSize,
+    :Images,
+    :Containers,
+    :Volumes,
+    :BuildCache
   ]
 
   @type t :: %__MODULE__{
-    :"LayersSize" => integer(),
-    :"Images" => [ImageSummary],
-    :"Containers" => [ContainerSummary],
-    :"Volumes" => [Volume],
-    :"BuildCache" => [BuildCache]
-  }
+          :LayersSize => integer(),
+          :Images => [ImageSummary],
+          :Containers => [ContainerSummary],
+          :Volumes => [Volume],
+          :BuildCache => [BuildCache]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemDataUsageResponse do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Images", :list, DockerEngineAPI.Model.ImageSummary, options)
-    |> deserialize(:"Containers", :list, DockerEngineAPI.Model.ContainerSummary, options)
-    |> deserialize(:"Volumes", :list, DockerEngineAPI.Model.Volume, options)
-    |> deserialize(:"BuildCache", :list, DockerEngineAPI.Model.BuildCache, options)
+    |> deserialize(:Images, :list, DockerEngineAPI.Model.ImageSummary, options)
+    |> deserialize(:Containers, :list, DockerEngineAPI.Model.ContainerSummary, options)
+    |> deserialize(:Volumes, :list, DockerEngineAPI.Model.Volume, options)
+    |> deserialize(:BuildCache, :list, DockerEngineAPI.Model.BuildCache, options)
   end
 end
-

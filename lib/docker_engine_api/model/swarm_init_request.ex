@@ -4,38 +4,38 @@
 
 defmodule DockerEngineAPI.Model.SwarmInitRequest do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ListenAddr",
-    :"AdvertiseAddr",
-    :"DataPathAddr",
-    :"DataPathPort",
-    :"DefaultAddrPool",
-    :"ForceNewCluster",
-    :"SubnetSize",
-    :"Spec"
+    :ListenAddr,
+    :AdvertiseAddr,
+    :DataPathAddr,
+    :DataPathPort,
+    :DefaultAddrPool,
+    :ForceNewCluster,
+    :SubnetSize,
+    :Spec
   ]
 
   @type t :: %__MODULE__{
-    :"ListenAddr" => String.t,
-    :"AdvertiseAddr" => String.t,
-    :"DataPathAddr" => String.t,
-    :"DataPathPort" => integer(),
-    :"DefaultAddrPool" => [String.t],
-    :"ForceNewCluster" => boolean(),
-    :"SubnetSize" => integer(),
-    :"Spec" => SwarmSpec
-  }
+          :ListenAddr => String.t(),
+          :AdvertiseAddr => String.t(),
+          :DataPathAddr => String.t(),
+          :DataPathPort => integer(),
+          :DefaultAddrPool => [String.t()],
+          :ForceNewCluster => boolean(),
+          :SubnetSize => integer(),
+          :Spec => SwarmSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmInitRequest do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.SwarmSpec, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.SwarmSpec, options)
   end
 end
-

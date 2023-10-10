@@ -4,23 +4,23 @@
 
 defmodule DockerEngineAPI.Model.SwarmSpecCaConfigExternalCas do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Protocol",
-    :"URL",
-    :"Options",
-    :"CACert"
+    :Protocol,
+    :URL,
+    :Options,
+    :CACert
   ]
 
   @type t :: %__MODULE__{
-    :"Protocol" => String.t,
-    :"URL" => String.t,
-    :"Options" => %{optional(String.t) => String.t},
-    :"CACert" => String.t
-  }
+          :Protocol => String.t(),
+          :URL => String.t(),
+          :Options => %{optional(String.t()) => String.t()},
+          :CACert => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecCaConfigExternalCas do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecCaConfigExternalCas 
     value
   end
 end
-

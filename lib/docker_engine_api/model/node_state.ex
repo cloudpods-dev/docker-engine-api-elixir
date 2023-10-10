@@ -8,13 +8,9 @@ defmodule DockerEngineAPI.Model.NodeState do
   """
 
   @derive [Poison.Encoder]
-  defstruct [
-    
-  ]
+  defstruct []
 
-  @type t :: %__MODULE__{
-    
-  }
+  @type t :: %__MODULE__{}
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeState do
@@ -22,4 +18,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeState do
     value
   end
 end
-

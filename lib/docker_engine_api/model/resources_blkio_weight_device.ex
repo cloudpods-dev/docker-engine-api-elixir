@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ResourcesBlkioWeightDevice do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Path",
-    :"Weight"
+    :Path,
+    :Weight
   ]
 
   @type t :: %__MODULE__{
-    :"Path" => String.t,
-    :"Weight" => integer()
-  }
+          :Path => String.t(),
+          :Weight => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ResourcesBlkioWeightDevice do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ResourcesBlkioWeightDevice do
     value
   end
 end
-

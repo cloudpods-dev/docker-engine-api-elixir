@@ -4,35 +4,35 @@
 
 defmodule DockerEngineAPI.Model.CreateImageInfo do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
-    :"error",
-    :"errorDetail",
-    :"status",
-    :"progress",
-    :"progressDetail"
+    :id,
+    :error,
+    :errorDetail,
+    :status,
+    :progress,
+    :progressDetail
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t,
-    :"error" => String.t,
-    :"errorDetail" => ErrorDetail,
-    :"status" => String.t,
-    :"progress" => String.t,
-    :"progressDetail" => ProgressDetail
-  }
+          :id => String.t(),
+          :error => String.t(),
+          :errorDetail => ErrorDetail,
+          :status => String.t(),
+          :progress => String.t(),
+          :progressDetail => ProgressDetail
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.CreateImageInfo do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"errorDetail", :struct, DockerEngineAPI.Model.ErrorDetail, options)
-    |> deserialize(:"progressDetail", :struct, DockerEngineAPI.Model.ProgressDetail, options)
+    |> deserialize(:errorDetail, :struct, DockerEngineAPI.Model.ErrorDetail, options)
+    |> deserialize(:progressDetail, :struct, DockerEngineAPI.Model.ProgressDetail, options)
   end
 end
-

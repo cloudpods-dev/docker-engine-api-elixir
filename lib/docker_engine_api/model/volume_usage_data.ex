@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.VolumeUsageData do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Size",
-    :"RefCount"
+    :Size,
+    :RefCount
   ]
 
   @type t :: %__MODULE__{
-    :"Size" => integer(),
-    :"RefCount" => integer()
-  }
+          :Size => integer(),
+          :RefCount => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumeUsageData do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumeUsageData do
     value
   end
 end
-

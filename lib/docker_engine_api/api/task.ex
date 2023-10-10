@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Task do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Inspect a task
 
@@ -25,7 +24,6 @@ defmodule DockerEngineAPI.Api.Task do
   {:ok, %DockerEngineAPI.Model.Task{}} on success
   {:error, info} on failure
   """
-  @spec task_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Task.t} | {:error, Tesla.Env.t}
   def task_inspect(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -49,11 +47,11 @@ defmodule DockerEngineAPI.Api.Task do
   {:ok, [%Task{}, ...]} on success
   {:error, info} on failure
   """
-  @spec task_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Task.t)} | {:error, Tesla.Env.t}
   def task_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/tasks")
@@ -85,17 +83,17 @@ defmodule DockerEngineAPI.Api.Task do
   {:ok, %DockerEngineAPI.Model.binary(){}} on success
   {:error, info} on failure
   """
-  @spec task_logs(Tesla.Env.client, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def task_logs(connection, id, opts \\ []) do
     optional_params = %{
-      :"details" => :query,
-      :"follow" => :query,
-      :"stdout" => :query,
-      :"stderr" => :query,
-      :"since" => :query,
-      :"timestamps" => :query,
-      :"tail" => :query
+      :details => :query,
+      :follow => :query,
+      :stdout => :query,
+      :stderr => :query,
+      :since => :query,
+      :timestamps => :query,
+      :tail => :query
     }
+
     %{}
     |> method(:get)
     |> url("/tasks/#{id}/logs")

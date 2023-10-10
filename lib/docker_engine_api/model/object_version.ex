@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.ObjectVersion do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Index"
+    :Index
   ]
 
   @type t :: %__MODULE__{
-    :"Index" => integer()
-  }
+          :Index => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ObjectVersion do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ObjectVersion do
     value
   end
 end
-

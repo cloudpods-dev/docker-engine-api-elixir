@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ServiceEndpointVirtualIps do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NetworkID",
-    :"Addr"
+    :NetworkID,
+    :Addr
   ]
 
   @type t :: %__MODULE__{
-    :"NetworkID" => String.t,
-    :"Addr" => String.t
-  }
+          :NetworkID => String.t(),
+          :Addr => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceEndpointVirtualIps do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceEndpointVirtualIps do
     value
   end
 end
-

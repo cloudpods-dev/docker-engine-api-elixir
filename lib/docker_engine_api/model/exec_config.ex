@@ -4,37 +4,37 @@
 
 defmodule DockerEngineAPI.Model.ExecConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"AttachStdin",
-    :"AttachStdout",
-    :"AttachStderr",
-    :"ConsoleSize",
-    :"DetachKeys",
-    :"Tty",
-    :"Env",
-    :"Cmd",
-    :"Privileged",
-    :"User",
-    :"WorkingDir"
+    :AttachStdin,
+    :AttachStdout,
+    :AttachStderr,
+    :ConsoleSize,
+    :DetachKeys,
+    :Tty,
+    :Env,
+    :Cmd,
+    :Privileged,
+    :User,
+    :WorkingDir
   ]
 
   @type t :: %__MODULE__{
-    :"AttachStdin" => boolean(),
-    :"AttachStdout" => boolean(),
-    :"AttachStderr" => boolean(),
-    :"ConsoleSize" => [integer()],
-    :"DetachKeys" => String.t,
-    :"Tty" => boolean(),
-    :"Env" => [String.t],
-    :"Cmd" => [String.t],
-    :"Privileged" => boolean(),
-    :"User" => String.t,
-    :"WorkingDir" => String.t
-  }
+          :AttachStdin => boolean(),
+          :AttachStdout => boolean(),
+          :AttachStderr => boolean(),
+          :ConsoleSize => [integer()],
+          :DetachKeys => String.t(),
+          :Tty => boolean(),
+          :Env => [String.t()],
+          :Cmd => [String.t()],
+          :Privileged => boolean(),
+          :User => String.t(),
+          :WorkingDir => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ExecConfig do
@@ -42,4 +42,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ExecConfig do
     value
   end
 end
-

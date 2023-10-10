@@ -4,47 +4,47 @@
 
 defmodule DockerEngineAPI.Model.Swarm do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec",
-    :"TLSInfo",
-    :"RootRotationInProgress",
-    :"DataPathPort",
-    :"DefaultAddrPool",
-    :"SubnetSize",
-    :"JoinTokens"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec,
+    :TLSInfo,
+    :RootRotationInProgress,
+    :DataPathPort,
+    :DefaultAddrPool,
+    :SubnetSize,
+    :JoinTokens
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => SwarmSpec,
-    :"TLSInfo" => TlsInfo,
-    :"RootRotationInProgress" => boolean(),
-    :"DataPathPort" => integer(),
-    :"DefaultAddrPool" => [String.t],
-    :"SubnetSize" => integer(),
-    :"JoinTokens" => JoinTokens
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => SwarmSpec,
+          :TLSInfo => TlsInfo,
+          :RootRotationInProgress => boolean(),
+          :DataPathPort => integer(),
+          :DefaultAddrPool => [String.t()],
+          :SubnetSize => integer(),
+          :JoinTokens => JoinTokens
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Swarm do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.SwarmSpec, options)
-    |> deserialize(:"TLSInfo", :struct, DockerEngineAPI.Model.TlsInfo, options)
-    |> deserialize(:"JoinTokens", :struct, DockerEngineAPI.Model.JoinTokens, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.SwarmSpec, options)
+    |> deserialize(:TLSInfo, :struct, DockerEngineAPI.Model.TlsInfo, options)
+    |> deserialize(:JoinTokens, :struct, DockerEngineAPI.Model.JoinTokens, options)
   end
 end
-

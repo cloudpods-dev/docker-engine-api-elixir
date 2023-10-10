@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.Address do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Addr",
-    :"PrefixLen"
+    :Addr,
+    :PrefixLen
   ]
 
   @type t :: %__MODULE__{
-    :"Addr" => String.t,
-    :"PrefixLen" => integer()
-  }
+          :Addr => String.t(),
+          :PrefixLen => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Address do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Address do
     value
   end
 end
-

@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.PeerNode do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NodeID",
-    :"Addr"
+    :NodeID,
+    :Addr
   ]
 
   @type t :: %__MODULE__{
-    :"NodeID" => String.t,
-    :"Addr" => String.t
-  }
+          :NodeID => String.t(),
+          :Addr => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PeerNode do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PeerNode do
     value
   end
 end
-

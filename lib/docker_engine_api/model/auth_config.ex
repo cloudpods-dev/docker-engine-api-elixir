@@ -4,23 +4,23 @@
 
 defmodule DockerEngineAPI.Model.AuthConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"username",
-    :"password",
-    :"email",
-    :"serveraddress"
+    :username,
+    :password,
+    :email,
+    :serveraddress
   ]
 
   @type t :: %__MODULE__{
-    :"username" => String.t,
-    :"password" => String.t,
-    :"email" => String.t,
-    :"serveraddress" => String.t
-  }
+          :username => String.t(),
+          :password => String.t(),
+          :email => String.t(),
+          :serveraddress => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.AuthConfig do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.AuthConfig do
     value
   end
 end
-

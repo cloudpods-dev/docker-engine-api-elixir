@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.JoinTokens do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Worker",
-    :"Manager"
+    :Worker,
+    :Manager
   ]
 
   @type t :: %__MODULE__{
-    :"Worker" => String.t,
-    :"Manager" => String.t
-  }
+          :Worker => String.t(),
+          :Manager => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.JoinTokens do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.JoinTokens do
     value
   end
 end
-

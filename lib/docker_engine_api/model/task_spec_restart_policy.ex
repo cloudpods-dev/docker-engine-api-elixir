@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.TaskSpecRestartPolicy do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Condition",
-    :"Delay",
-    :"MaxAttempts",
-    :"Window"
+    :Condition,
+    :Delay,
+    :MaxAttempts,
+    :Window
   ]
 
   @type t :: %__MODULE__{
-    :"Condition" => String.t,
-    :"Delay" => integer(),
-    :"MaxAttempts" => integer(),
-    :"Window" => integer()
-  }
+          :Condition => String.t(),
+          :Delay => integer(),
+          :MaxAttempts => integer(),
+          :Window => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecRestartPolicy do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecRestartPolicy do
     value
   end
 end
-

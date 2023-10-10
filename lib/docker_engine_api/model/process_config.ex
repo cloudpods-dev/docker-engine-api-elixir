@@ -4,25 +4,25 @@
 
 defmodule DockerEngineAPI.Model.ProcessConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"privileged",
-    :"user",
-    :"tty",
-    :"entrypoint",
-    :"arguments"
+    :privileged,
+    :user,
+    :tty,
+    :entrypoint,
+    :arguments
   ]
 
   @type t :: %__MODULE__{
-    :"privileged" => boolean(),
-    :"user" => String.t,
-    :"tty" => boolean(),
-    :"entrypoint" => String.t,
-    :"arguments" => [String.t]
-  }
+          :privileged => boolean(),
+          :user => String.t(),
+          :tty => boolean(),
+          :entrypoint => String.t(),
+          :arguments => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ProcessConfig do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ProcessConfig do
     value
   end
 end
-

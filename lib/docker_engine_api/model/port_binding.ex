@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.PortBinding do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"HostIp",
-    :"HostPort"
+    :HostIp,
+    :HostPort
   ]
 
   @type t :: %__MODULE__{
-    :"HostIp" => String.t,
-    :"HostPort" => String.t
-  }
+          :HostIp => String.t(),
+          :HostPort => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PortBinding do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PortBinding do
     value
   end
 end
-

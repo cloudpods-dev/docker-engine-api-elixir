@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Service do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Create a service
 
@@ -30,10 +29,11 @@ defmodule DockerEngineAPI.Api.Service do
     optional_params = %{
       :"X-Registry-Auth" => :headers
     }
+
     %{}
     |> method(:post)
     |> url("/services/create")
-    |> add_param(:body, :"body", body)
+    |> add_param(:body, :body, body)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -80,8 +80,9 @@ defmodule DockerEngineAPI.Api.Service do
   """
   def service_inspect(connection, id, opts \\ []) do
     optional_params = %{
-      :"insertDefaults" => :query
+      :insertDefaults => :query
     }
+
     %{}
     |> method(:get)
     |> url("/services/#{id}")
@@ -108,9 +109,10 @@ defmodule DockerEngineAPI.Api.Service do
   """
   def service_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query,
-      :"status" => :query
+      :filters => :query,
+      :status => :query
     }
+
     %{}
     |> method(:get)
     |> url("/services")
@@ -144,14 +146,15 @@ defmodule DockerEngineAPI.Api.Service do
   """
   def service_logs(connection, id, opts \\ []) do
     optional_params = %{
-      :"details" => :query,
-      :"follow" => :query,
-      :"stdout" => :query,
-      :"stderr" => :query,
-      :"since" => :query,
-      :"timestamps" => :query,
-      :"tail" => :query
+      :details => :query,
+      :follow => :query,
+      :stdout => :query,
+      :stderr => :query,
+      :since => :query,
+      :timestamps => :query,
+      :tail => :query
     }
+
     %{}
     |> method(:get)
     |> url("/services/#{id}/logs")
@@ -182,15 +185,16 @@ defmodule DockerEngineAPI.Api.Service do
   """
   def service_update(connection, id, body, version, opts \\ []) do
     optional_params = %{
-      :"registryAuthFrom" => :query,
-      :"rollback" => :query,
+      :registryAuthFrom => :query,
+      :rollback => :query,
       :"X-Registry-Auth" => :headers
     }
+
     %{}
     |> method(:post)
     |> url("/services/#{id}/update")
-    |> add_param(:body, :"body", body)
-    |> add_param(:query, :"version", version)
+    |> add_param(:body, :body, body)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

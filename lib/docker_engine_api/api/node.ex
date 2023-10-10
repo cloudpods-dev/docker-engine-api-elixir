@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Node do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Delete a node
 
@@ -26,11 +25,11 @@ defmodule DockerEngineAPI.Api.Node do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec node_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def node_delete(connection, id, opts \\ []) do
     optional_params = %{
-      :"force" => :query
+      :force => :query
     }
+
     %{}
     |> method(:delete)
     |> url("/nodes/#{id}")
@@ -54,7 +53,6 @@ defmodule DockerEngineAPI.Api.Node do
   {:ok, %DockerEngineAPI.Model.Node{}} on success
   {:error, info} on failure
   """
-  @spec node_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Node.t} | {:error, Tesla.Env.t}
   def node_inspect(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -78,11 +76,11 @@ defmodule DockerEngineAPI.Api.Node do
   {:ok, [%Node{}, ...]} on success
   {:error, info} on failure
   """
-  @spec node_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Node.t)} | {:error, Tesla.Env.t}
   def node_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/nodes")
@@ -108,15 +106,15 @@ defmodule DockerEngineAPI.Api.Node do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec node_update(Tesla.Env.client, String.t, integer(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def node_update(connection, id, version, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/nodes/#{id}/update")
-    |> add_param(:query, :"version", version)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

@@ -9,39 +9,39 @@ defmodule DockerEngineAPI.Model.ClusterInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec",
-    :"TLSInfo",
-    :"RootRotationInProgress",
-    :"DataPathPort",
-    :"DefaultAddrPool",
-    :"SubnetSize"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec,
+    :TLSInfo,
+    :RootRotationInProgress,
+    :DataPathPort,
+    :DefaultAddrPool,
+    :SubnetSize
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => SwarmSpec,
-    :"TLSInfo" => TlsInfo,
-    :"RootRotationInProgress" => boolean(),
-    :"DataPathPort" => integer(),
-    :"DefaultAddrPool" => [String.t],
-    :"SubnetSize" => integer()
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => SwarmSpec,
+          :TLSInfo => TlsInfo,
+          :RootRotationInProgress => boolean(),
+          :DataPathPort => integer(),
+          :DefaultAddrPool => [String.t()],
+          :SubnetSize => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterInfo do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.SwarmSpec, options)
-    |> deserialize(:"TLSInfo", :struct, DockerEngineAPI.Model.TlsInfo, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.SwarmSpec, options)
+    |> deserialize(:TLSInfo, :struct, DockerEngineAPI.Model.TlsInfo, options)
   end
 end
-

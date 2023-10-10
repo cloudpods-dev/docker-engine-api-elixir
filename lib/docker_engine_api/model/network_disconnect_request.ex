@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.NetworkDisconnectRequest do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Container",
-    :"Force"
+    :Container,
+    :Force
   ]
 
   @type t :: %__MODULE__{
-    :"Container" => String.t,
-    :"Force" => boolean()
-  }
+          :Container => String.t(),
+          :Force => boolean()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkDisconnectRequest do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkDisconnectRequest do
     value
   end
 end
-

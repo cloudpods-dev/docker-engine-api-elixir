@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.TaskSpecNetworkAttachmentSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ContainerID"
+    :ContainerID
   ]
 
   @type t :: %__MODULE__{
-    :"ContainerID" => String.t
-  }
+          :ContainerID => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecNetworkAttachmentSpec do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecNetworkAttachmentSpec
     value
   end
 end
-

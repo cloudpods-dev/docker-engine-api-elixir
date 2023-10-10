@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.ImageId do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID"
+    :ID
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t
-  }
+          :ID => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageId do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageId do
     value
   end
 end
-

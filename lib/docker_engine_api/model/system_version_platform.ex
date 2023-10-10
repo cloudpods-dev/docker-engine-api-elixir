@@ -4,17 +4,17 @@
 
 defmodule DockerEngineAPI.Model.SystemVersionPlatform do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name"
+    :Name
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t
-  }
+          :Name => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemVersionPlatform do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemVersionPlatform do
     value
   end
 end
-

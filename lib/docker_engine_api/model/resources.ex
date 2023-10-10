@@ -9,86 +9,91 @@ defmodule DockerEngineAPI.Model.Resources do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"CpuShares",
-    :"Memory",
-    :"CgroupParent",
-    :"BlkioWeight",
-    :"BlkioWeightDevice",
-    :"BlkioDeviceReadBps",
-    :"BlkioDeviceWriteBps",
-    :"BlkioDeviceReadIOps",
-    :"BlkioDeviceWriteIOps",
-    :"CpuPeriod",
-    :"CpuQuota",
-    :"CpuRealtimePeriod",
-    :"CpuRealtimeRuntime",
-    :"CpusetCpus",
-    :"CpusetMems",
-    :"Devices",
-    :"DeviceCgroupRules",
-    :"DeviceRequests",
-    :"KernelMemoryTCP",
-    :"MemoryReservation",
-    :"MemorySwap",
-    :"MemorySwappiness",
-    :"NanoCpus",
-    :"OomKillDisable",
-    :"Init",
-    :"PidsLimit",
-    :"Ulimits",
-    :"CpuCount",
-    :"CpuPercent",
-    :"IOMaximumIOps",
-    :"IOMaximumBandwidth"
+    :CpuShares,
+    :Memory,
+    :CgroupParent,
+    :BlkioWeight,
+    :BlkioWeightDevice,
+    :BlkioDeviceReadBps,
+    :BlkioDeviceWriteBps,
+    :BlkioDeviceReadIOps,
+    :BlkioDeviceWriteIOps,
+    :CpuPeriod,
+    :CpuQuota,
+    :CpuRealtimePeriod,
+    :CpuRealtimeRuntime,
+    :CpusetCpus,
+    :CpusetMems,
+    :Devices,
+    :DeviceCgroupRules,
+    :DeviceRequests,
+    :KernelMemoryTCP,
+    :MemoryReservation,
+    :MemorySwap,
+    :MemorySwappiness,
+    :NanoCpus,
+    :OomKillDisable,
+    :Init,
+    :PidsLimit,
+    :Ulimits,
+    :CpuCount,
+    :CpuPercent,
+    :IOMaximumIOps,
+    :IOMaximumBandwidth
   ]
 
   @type t :: %__MODULE__{
-    :"CpuShares" => integer(),
-    :"Memory" => integer(),
-    :"CgroupParent" => String.t,
-    :"BlkioWeight" => integer(),
-    :"BlkioWeightDevice" => [ResourcesBlkioWeightDevice],
-    :"BlkioDeviceReadBps" => [ThrottleDevice],
-    :"BlkioDeviceWriteBps" => [ThrottleDevice],
-    :"BlkioDeviceReadIOps" => [ThrottleDevice],
-    :"BlkioDeviceWriteIOps" => [ThrottleDevice],
-    :"CpuPeriod" => integer(),
-    :"CpuQuota" => integer(),
-    :"CpuRealtimePeriod" => integer(),
-    :"CpuRealtimeRuntime" => integer(),
-    :"CpusetCpus" => String.t,
-    :"CpusetMems" => String.t,
-    :"Devices" => [DeviceMapping],
-    :"DeviceCgroupRules" => [String.t],
-    :"DeviceRequests" => [DeviceRequest],
-    :"KernelMemoryTCP" => integer(),
-    :"MemoryReservation" => integer(),
-    :"MemorySwap" => integer(),
-    :"MemorySwappiness" => integer(),
-    :"NanoCpus" => integer(),
-    :"OomKillDisable" => boolean(),
-    :"Init" => boolean(),
-    :"PidsLimit" => integer(),
-    :"Ulimits" => [ResourcesUlimits],
-    :"CpuCount" => integer(),
-    :"CpuPercent" => integer(),
-    :"IOMaximumIOps" => integer(),
-    :"IOMaximumBandwidth" => integer()
-  }
+          :CpuShares => integer(),
+          :Memory => integer(),
+          :CgroupParent => String.t(),
+          :BlkioWeight => integer(),
+          :BlkioWeightDevice => [ResourcesBlkioWeightDevice],
+          :BlkioDeviceReadBps => [ThrottleDevice],
+          :BlkioDeviceWriteBps => [ThrottleDevice],
+          :BlkioDeviceReadIOps => [ThrottleDevice],
+          :BlkioDeviceWriteIOps => [ThrottleDevice],
+          :CpuPeriod => integer(),
+          :CpuQuota => integer(),
+          :CpuRealtimePeriod => integer(),
+          :CpuRealtimeRuntime => integer(),
+          :CpusetCpus => String.t(),
+          :CpusetMems => String.t(),
+          :Devices => [DeviceMapping],
+          :DeviceCgroupRules => [String.t()],
+          :DeviceRequests => [DeviceRequest],
+          :KernelMemoryTCP => integer(),
+          :MemoryReservation => integer(),
+          :MemorySwap => integer(),
+          :MemorySwappiness => integer(),
+          :NanoCpus => integer(),
+          :OomKillDisable => boolean(),
+          :Init => boolean(),
+          :PidsLimit => integer(),
+          :Ulimits => [ResourcesUlimits],
+          :CpuCount => integer(),
+          :CpuPercent => integer(),
+          :IOMaximumIOps => integer(),
+          :IOMaximumBandwidth => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Resources do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"BlkioWeightDevice", :list, DockerEngineAPI.Model.ResourcesBlkioWeightDevice, options)
-    |> deserialize(:"BlkioDeviceReadBps", :list, DockerEngineAPI.Model.ThrottleDevice, options)
-    |> deserialize(:"BlkioDeviceWriteBps", :list, DockerEngineAPI.Model.ThrottleDevice, options)
-    |> deserialize(:"BlkioDeviceReadIOps", :list, DockerEngineAPI.Model.ThrottleDevice, options)
-    |> deserialize(:"BlkioDeviceWriteIOps", :list, DockerEngineAPI.Model.ThrottleDevice, options)
-    |> deserialize(:"Devices", :list, DockerEngineAPI.Model.DeviceMapping, options)
-    |> deserialize(:"DeviceRequests", :list, DockerEngineAPI.Model.DeviceRequest, options)
-    |> deserialize(:"Ulimits", :list, DockerEngineAPI.Model.ResourcesUlimits, options)
+    |> deserialize(
+      :BlkioWeightDevice,
+      :list,
+      DockerEngineAPI.Model.ResourcesBlkioWeightDevice,
+      options
+    )
+    |> deserialize(:BlkioDeviceReadBps, :list, DockerEngineAPI.Model.ThrottleDevice, options)
+    |> deserialize(:BlkioDeviceWriteBps, :list, DockerEngineAPI.Model.ThrottleDevice, options)
+    |> deserialize(:BlkioDeviceReadIOps, :list, DockerEngineAPI.Model.ThrottleDevice, options)
+    |> deserialize(:BlkioDeviceWriteIOps, :list, DockerEngineAPI.Model.ThrottleDevice, options)
+    |> deserialize(:Devices, :list, DockerEngineAPI.Model.DeviceMapping, options)
+    |> deserialize(:DeviceRequests, :list, DockerEngineAPI.Model.DeviceRequest, options)
+    |> deserialize(:Ulimits, :list, DockerEngineAPI.Model.ResourcesUlimits, options)
   end
 end
-

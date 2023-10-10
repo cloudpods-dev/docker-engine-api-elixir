@@ -4,21 +4,21 @@
 
 defmodule DockerEngineAPI.Model.ExecStartConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Detach",
-    :"Tty",
-    :"ConsoleSize"
+    :Detach,
+    :Tty,
+    :ConsoleSize
   ]
 
   @type t :: %__MODULE__{
-    :"Detach" => boolean(),
-    :"Tty" => boolean(),
-    :"ConsoleSize" => [integer()]
-  }
+          :Detach => boolean(),
+          :Tty => boolean(),
+          :ConsoleSize => [integer()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ExecStartConfig do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ExecStartConfig do
     value
   end
 end
-

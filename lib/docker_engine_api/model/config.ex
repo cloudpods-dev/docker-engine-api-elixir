@@ -4,33 +4,33 @@
 
 defmodule DockerEngineAPI.Model.Config do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => ConfigSpec
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => ConfigSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Config do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.ConfigSpec, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.ConfigSpec, options)
   end
 end
-

@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.ClusterVolumeSpecAccessModeSecrets do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Key",
-    :"Secret"
+    :Key,
+    :Secret
   ]
 
   @type t :: %__MODULE__{
-    :"Key" => String.t,
-    :"Secret" => String.t
-  }
+          :Key => String.t(),
+          :Secret => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeSecrets do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeSe
     value
   end
 end
-

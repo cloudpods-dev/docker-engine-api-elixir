@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.HealthcheckResult do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Start",
-    :"End",
-    :"ExitCode",
-    :"Output"
+    :Start,
+    :End,
+    :ExitCode,
+    :Output
   ]
 
   @type t :: %__MODULE__{
-    :"Start" => DateTime.t,
-    :"End" => String.t,
-    :"ExitCode" => integer(),
-    :"Output" => String.t
-  }
+          :Start => DateTime.t(),
+          :End => String.t(),
+          :ExitCode => integer(),
+          :Output => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.HealthcheckResult do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.HealthcheckResult do
     value
   end
 end
-

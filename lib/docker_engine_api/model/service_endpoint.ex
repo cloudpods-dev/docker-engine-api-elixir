@@ -4,30 +4,30 @@
 
 defmodule DockerEngineAPI.Model.ServiceEndpoint do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Spec",
-    :"Ports",
-    :"VirtualIPs"
+    :Spec,
+    :Ports,
+    :VirtualIPs
   ]
 
   @type t :: %__MODULE__{
-    :"Spec" => EndpointSpec,
-    :"Ports" => [EndpointPortConfig],
-    :"VirtualIPs" => [ServiceEndpointVirtualIps]
-  }
+          :Spec => EndpointSpec,
+          :Ports => [EndpointPortConfig],
+          :VirtualIPs => [ServiceEndpointVirtualIps]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceEndpoint do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.EndpointSpec, options)
-    |> deserialize(:"Ports", :list, DockerEngineAPI.Model.EndpointPortConfig, options)
-    |> deserialize(:"VirtualIPs", :list, DockerEngineAPI.Model.ServiceEndpointVirtualIps, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.EndpointSpec, options)
+    |> deserialize(:Ports, :list, DockerEngineAPI.Model.EndpointPortConfig, options)
+    |> deserialize(:VirtualIPs, :list, DockerEngineAPI.Model.ServiceEndpointVirtualIps, options)
   end
 end
-

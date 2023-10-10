@@ -19,7 +19,6 @@ defmodule DockerEngineAPI.RequestBuilder do
 
   Map
   """
-  @spec method(map(), atom) :: map()
   def method(request, m) do
     Map.put_new(request, :method, m)
   end
@@ -36,7 +35,6 @@ defmodule DockerEngineAPI.RequestBuilder do
 
   Map
   """
-  @spec url(map(), String.t()) :: map()
   def url(request, u) do
     Map.put_new(request, :url, u)
   end
@@ -54,7 +52,6 @@ defmodule DockerEngineAPI.RequestBuilder do
 
   Map
   """
-  @spec add_optional_params(map(), %{optional(atom) => atom}, keyword()) :: map()
   def add_optional_params(request, _, []), do: request
 
   def add_optional_params(request, definitions, [{key, value} | tail]) do
@@ -83,7 +80,6 @@ defmodule DockerEngineAPI.RequestBuilder do
 
   Map
   """
-  @spec add_param(map(), atom, atom, any()) :: map()
   def add_param(request, :body, :body, value), do: Map.put(request, :body, value)
 
   def add_param(request, :body, key, value) do

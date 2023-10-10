@@ -9,21 +9,21 @@ defmodule DockerEngineAPI.Model.ContainerWaitResponse do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"StatusCode",
-    :"Error"
+    :StatusCode,
+    :Error
   ]
 
   @type t :: %__MODULE__{
-    :"StatusCode" => integer(),
-    :"Error" => ContainerWaitExitError
-  }
+          :StatusCode => integer(),
+          :Error => ContainerWaitExitError
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerWaitResponse do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Error", :struct, DockerEngineAPI.Model.ContainerWaitExitError, options)
+    |> deserialize(:Error, :struct, DockerEngineAPI.Model.ContainerWaitExitError, options)
   end
 end
-

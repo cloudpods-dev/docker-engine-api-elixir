@@ -4,44 +4,44 @@
 
 defmodule DockerEngineAPI.Model.Volume do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Driver",
-    :"Mountpoint",
-    :"CreatedAt",
-    :"Status",
-    :"Labels",
-    :"Scope",
-    :"ClusterVolume",
-    :"Options",
-    :"UsageData"
+    :Name,
+    :Driver,
+    :Mountpoint,
+    :CreatedAt,
+    :Status,
+    :Labels,
+    :Scope,
+    :ClusterVolume,
+    :Options,
+    :UsageData
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Driver" => String.t,
-    :"Mountpoint" => String.t,
-    :"CreatedAt" => String.t,
-    :"Status" => %{optional(String.t) => Object},
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Scope" => String.t,
-    :"ClusterVolume" => ClusterVolume,
-    :"Options" => %{optional(String.t) => String.t},
-    :"UsageData" => VolumeUsageData
-  }
+          :Name => String.t(),
+          :Driver => String.t(),
+          :Mountpoint => String.t(),
+          :CreatedAt => String.t(),
+          :Status => %{optional(String.t()) => Object},
+          :Labels => %{optional(String.t()) => String.t()},
+          :Scope => String.t(),
+          :ClusterVolume => ClusterVolume,
+          :Options => %{optional(String.t()) => String.t()},
+          :UsageData => VolumeUsageData
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Volume do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Status", :map, DockerEngineAPI.Model.Object, options)
-    |> deserialize(:"ClusterVolume", :struct, DockerEngineAPI.Model.ClusterVolume, options)
-    |> deserialize(:"UsageData", :struct, DockerEngineAPI.Model.VolumeUsageData, options)
+    |> deserialize(:Status, :map, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:ClusterVolume, :struct, DockerEngineAPI.Model.ClusterVolume, options)
+    |> deserialize(:UsageData, :struct, DockerEngineAPI.Model.VolumeUsageData, options)
   end
 end
-

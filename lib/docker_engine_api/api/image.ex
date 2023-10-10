@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Image do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Delete builder cache
 
@@ -27,13 +26,13 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.BuildPruneResponse{}} on success
   {:error, info} on failure
   """
-  @spec build_prune(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.BuildPruneResponse.t} | {:error, Tesla.Env.t}
   def build_prune(connection, opts \\ []) do
     optional_params = %{
       :"keep-storage" => :query,
-      :"all" => :query,
-      :"filters" => :query
+      :all => :query,
+      :filters => :query
     }
+
     %{}
     |> method(:post)
     |> url("/build/prune")
@@ -84,37 +83,37 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec image_build(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def image_build(connection, opts \\ []) do
     optional_params = %{
-      :"inputStream" => :body,
-      :"dockerfile" => :query,
-      :"t" => :query,
-      :"extrahosts" => :query,
-      :"remote" => :query,
-      :"q" => :query,
-      :"nocache" => :query,
-      :"cachefrom" => :query,
-      :"pull" => :query,
-      :"rm" => :query,
-      :"forcerm" => :query,
-      :"memory" => :query,
-      :"memswap" => :query,
-      :"cpushares" => :query,
-      :"cpusetcpus" => :query,
-      :"cpuperiod" => :query,
-      :"cpuquota" => :query,
-      :"buildargs" => :query,
-      :"shmsize" => :query,
-      :"squash" => :query,
-      :"labels" => :query,
-      :"networkmode" => :query,
+      :inputStream => :body,
+      :dockerfile => :query,
+      :t => :query,
+      :extrahosts => :query,
+      :remote => :query,
+      :q => :query,
+      :nocache => :query,
+      :cachefrom => :query,
+      :pull => :query,
+      :rm => :query,
+      :forcerm => :query,
+      :memory => :query,
+      :memswap => :query,
+      :cpushares => :query,
+      :cpusetcpus => :query,
+      :cpuperiod => :query,
+      :cpuquota => :query,
+      :buildargs => :query,
+      :shmsize => :query,
+      :squash => :query,
+      :labels => :query,
+      :networkmode => :query,
       :"Content-type" => :headers,
       :"X-Registry-Config" => :headers,
-      :"platform" => :query,
-      :"target" => :query,
-      :"outputs" => :query
+      :platform => :query,
+      :target => :query,
+      :outputs => :query
     }
+
     %{}
     |> method(:post)
     |> url("/build")
@@ -145,18 +144,18 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.IdResponse{}} on success
   {:error, info} on failure
   """
-  @spec image_commit(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.IdResponse.t} | {:error, Tesla.Env.t}
   def image_commit(connection, opts \\ []) do
     optional_params = %{
-      :"containerConfig" => :body,
-      :"container" => :query,
-      :"repo" => :query,
-      :"tag" => :query,
-      :"comment" => :query,
-      :"author" => :query,
-      :"pause" => :query,
-      :"changes" => :query
+      :containerConfig => :body,
+      :container => :query,
+      :repo => :query,
+      :tag => :query,
+      :comment => :query,
+      :author => :query,
+      :pause => :query,
+      :changes => :query
     }
+
     %{}
     |> method(:post)
     |> url("/commit")
@@ -189,19 +188,19 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec image_create(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def image_create(connection, opts \\ []) do
     optional_params = %{
-      :"fromImage" => :query,
-      :"fromSrc" => :query,
-      :"repo" => :query,
-      :"tag" => :query,
-      :"message" => :query,
-      :"inputImage" => :body,
+      :fromImage => :query,
+      :fromSrc => :query,
+      :repo => :query,
+      :tag => :query,
+      :message => :query,
+      :inputImage => :body,
       :"X-Registry-Auth" => :headers,
-      :"changes" => :query,
-      :"platform" => :query
+      :changes => :query,
+      :platform => :query
     }
+
     %{}
     |> method(:post)
     |> url("/images/create")
@@ -228,12 +227,12 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, [%ImageDeleteResponseItem{}, ...]} on success
   {:error, info} on failure
   """
-  @spec image_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, list(DockerEngineAPI.Model.ImageDeleteResponseItem.t)} | {:error, Tesla.Env.t}
   def image_delete(connection, name, opts \\ []) do
     optional_params = %{
-      :"force" => :query,
-      :"noprune" => :query
+      :force => :query,
+      :noprune => :query
     }
+
     %{}
     |> method(:delete)
     |> url("/images/#{name}")
@@ -258,7 +257,6 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.binary(){}} on success
   {:error, info} on failure
   """
-  @spec image_get(Tesla.Env.client, String.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def image_get(connection, name, _opts \\ []) do
     %{}
     |> method(:get)
@@ -283,11 +281,11 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.binary(){}} on success
   {:error, info} on failure
   """
-  @spec image_get_all(Tesla.Env.client, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def image_get_all(connection, opts \\ []) do
     optional_params = %{
-      :"names" => :query
+      :names => :query
     }
+
     %{}
     |> method(:get)
     |> url("/images/get")
@@ -312,7 +310,6 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, [%HistoryResponseItem{}, ...]} on success
   {:error, info} on failure
   """
-  @spec image_history(Tesla.Env.client, String.t, keyword()) :: {:ok, list(DockerEngineAPI.Model.HistoryResponseItem.t)} | {:error, Tesla.Env.t}
   def image_history(connection, name, _opts \\ []) do
     %{}
     |> method(:get)
@@ -337,7 +334,6 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.ImageInspect{}} on success
   {:error, info} on failure
   """
-  @spec image_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.ImageInspect.t} | {:error, Tesla.Env.t}
   def image_inspect(connection, name, _opts \\ []) do
     %{}
     |> method(:get)
@@ -365,14 +361,14 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, [%ImageSummary{}, ...]} on success
   {:error, info} on failure
   """
-  @spec image_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.ImageSummary.t)} | {:error, Tesla.Env.t}
   def image_list(connection, opts \\ []) do
     optional_params = %{
-      :"all" => :query,
-      :"filters" => :query,
+      :all => :query,
+      :filters => :query,
       :"shared-size" => :query,
-      :"digests" => :query
+      :digests => :query
     }
+
     %{}
     |> method(:get)
     |> url("/images/json")
@@ -398,12 +394,12 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec image_load(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def image_load(connection, opts \\ []) do
     optional_params = %{
-      :"imagesTarball" => :body,
-      :"quiet" => :query
+      :imagesTarball => :body,
+      :quiet => :query
     }
+
     %{}
     |> method(:post)
     |> url("/images/load")
@@ -427,11 +423,11 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %DockerEngineAPI.Model.ImagePruneResponse{}} on success
   {:error, info} on failure
   """
-  @spec image_prune(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.ImagePruneResponse.t} | {:error, Tesla.Env.t}
   def image_prune(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:post)
     |> url("/images/prune")
@@ -458,11 +454,11 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec image_push(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def image_push(connection, name, x_registry_auth, opts \\ []) do
     optional_params = %{
-      :"tag" => :query
+      :tag => :query
     }
+
     %{}
     |> method(:post)
     |> url("/images/#{name}/push")
@@ -490,16 +486,16 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, [%ImageSearchResponseItem{}, ...]} on success
   {:error, info} on failure
   """
-  @spec image_search(Tesla.Env.client, String.t, keyword()) :: {:ok, list(DockerEngineAPI.Model.ImageSearchResponseItem.t)} | {:error, Tesla.Env.t}
   def image_search(connection, term, opts \\ []) do
     optional_params = %{
-      :"limit" => :query,
-      :"filters" => :query
+      :limit => :query,
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/images/search")
-    |> add_param(:query, :"term", term)
+    |> add_param(:query, :term, term)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -523,12 +519,12 @@ defmodule DockerEngineAPI.Api.Image do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec image_tag(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def image_tag(connection, name, opts \\ []) do
     optional_params = %{
-      :"repo" => :query,
-      :"tag" => :query
+      :repo => :query,
+      :tag => :query
     }
+
     %{}
     |> method(:post)
     |> url("/images/#{name}/tag")

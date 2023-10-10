@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.EngineDescription do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"EngineVersion",
-    :"Labels",
-    :"Plugins"
+    :EngineVersion,
+    :Labels,
+    :Plugins
   ]
 
   @type t :: %__MODULE__{
-    :"EngineVersion" => String.t,
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Plugins" => [EngineDescriptionPlugins]
-  }
+          :EngineVersion => String.t(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :Plugins => [EngineDescriptionPlugins]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EngineDescription do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Plugins", :list, DockerEngineAPI.Model.EngineDescriptionPlugins, options)
+    |> deserialize(:Plugins, :list, DockerEngineAPI.Model.EngineDescriptionPlugins, options)
   end
 end
-

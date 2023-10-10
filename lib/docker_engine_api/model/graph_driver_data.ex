@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.GraphDriverData do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Data"
+    :Name,
+    :Data
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Data" => %{optional(String.t) => String.t}
-  }
+          :Name => String.t(),
+          :Data => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.GraphDriverData do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.GraphDriverData do
     value
   end
 end
-

@@ -9,27 +9,27 @@ defmodule DockerEngineAPI.Model.VolumeCreateOptions do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Driver",
-    :"DriverOpts",
-    :"Labels",
-    :"ClusterVolumeSpec"
+    :Name,
+    :Driver,
+    :DriverOpts,
+    :Labels,
+    :ClusterVolumeSpec
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Driver" => String.t,
-    :"DriverOpts" => %{optional(String.t) => String.t},
-    :"Labels" => %{optional(String.t) => String.t},
-    :"ClusterVolumeSpec" => ClusterVolumeSpec
-  }
+          :Name => String.t(),
+          :Driver => String.t(),
+          :DriverOpts => %{optional(String.t()) => String.t()},
+          :Labels => %{optional(String.t()) => String.t()},
+          :ClusterVolumeSpec => ClusterVolumeSpec
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumeCreateOptions do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ClusterVolumeSpec", :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
+    |> deserialize(:ClusterVolumeSpec, :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
   end
 end
-

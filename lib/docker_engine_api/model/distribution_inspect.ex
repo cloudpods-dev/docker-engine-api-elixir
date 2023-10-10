@@ -9,22 +9,22 @@ defmodule DockerEngineAPI.Model.DistributionInspect do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Descriptor",
-    :"Platforms"
+    :Descriptor,
+    :Platforms
   ]
 
   @type t :: %__MODULE__{
-    :"Descriptor" => OciDescriptor,
-    :"Platforms" => [OciPlatform]
-  }
+          :Descriptor => OciDescriptor,
+          :Platforms => [OciPlatform]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.DistributionInspect do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Descriptor", :struct, DockerEngineAPI.Model.OciDescriptor, options)
-    |> deserialize(:"Platforms", :list, DockerEngineAPI.Model.OciPlatform, options)
+    |> deserialize(:Descriptor, :struct, DockerEngineAPI.Model.OciDescriptor, options)
+    |> deserialize(:Platforms, :list, DockerEngineAPI.Model.OciPlatform, options)
   end
 end
-

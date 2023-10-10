@@ -9,22 +9,23 @@ defmodule DockerEngineAPI.Model.ClusterVolumeSpecAccessModeAccessibilityRequirem
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Requisite",
-    :"Preferred"
+    :Requisite,
+    :Preferred
   ]
 
   @type t :: %__MODULE__{
-    :"Requisite" => [Topology],
-    :"Preferred" => [Topology]
-  }
+          :Requisite => [Topology],
+          :Preferred => [Topology]
+        }
 end
 
-defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeAccessibilityRequirements do
+defimpl Poison.Decoder,
+  for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeAccessibilityRequirements do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Requisite", :list, DockerEngineAPI.Model.Topology, options)
-    |> deserialize(:"Preferred", :list, DockerEngineAPI.Model.Topology, options)
+    |> deserialize(:Requisite, :list, DockerEngineAPI.Model.Topology, options)
+    |> deserialize(:Preferred, :list, DockerEngineAPI.Model.Topology, options)
   end
 end
-

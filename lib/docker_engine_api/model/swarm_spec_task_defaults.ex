@@ -9,19 +9,24 @@ defmodule DockerEngineAPI.Model.SwarmSpecTaskDefaults do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"LogDriver"
+    :LogDriver
   ]
 
   @type t :: %__MODULE__{
-    :"LogDriver" => SwarmSpecTaskDefaultsLogDriver
-  }
+          :LogDriver => SwarmSpecTaskDefaultsLogDriver
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecTaskDefaults do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"LogDriver", :struct, DockerEngineAPI.Model.SwarmSpecTaskDefaultsLogDriver, options)
+    |> deserialize(
+      :LogDriver,
+      :struct,
+      DockerEngineAPI.Model.SwarmSpecTaskDefaultsLogDriver,
+      options
+    )
   end
 end
-

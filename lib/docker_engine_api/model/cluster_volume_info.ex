@@ -9,25 +9,25 @@ defmodule DockerEngineAPI.Model.ClusterVolumeInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"CapacityBytes",
-    :"VolumeContext",
-    :"VolumeID",
-    :"AccessibleTopology"
+    :CapacityBytes,
+    :VolumeContext,
+    :VolumeID,
+    :AccessibleTopology
   ]
 
   @type t :: %__MODULE__{
-    :"CapacityBytes" => integer(),
-    :"VolumeContext" => %{optional(String.t) => String.t},
-    :"VolumeID" => String.t,
-    :"AccessibleTopology" => [Topology]
-  }
+          :CapacityBytes => integer(),
+          :VolumeContext => %{optional(String.t()) => String.t()},
+          :VolumeID => String.t(),
+          :AccessibleTopology => [Topology]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeInfo do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"AccessibleTopology", :list, DockerEngineAPI.Model.Topology, options)
+    |> deserialize(:AccessibleTopology, :list, DockerEngineAPI.Model.Topology, options)
   end
 end
-

@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.PluginConfigUser do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"UID",
-    :"GID"
+    :UID,
+    :GID
   ]
 
   @type t :: %__MODULE__{
-    :"UID" => integer(),
-    :"GID" => integer()
-  }
+          :UID => integer(),
+          :GID => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigUser do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigUser do
     value
   end
 end
-

@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.SwarmSpecDispatcher do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"HeartbeatPeriod"
+    :HeartbeatPeriod
   ]
 
   @type t :: %__MODULE__{
-    :"HeartbeatPeriod" => integer()
-  }
+          :HeartbeatPeriod => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecDispatcher do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecDispatcher do
     value
   end
 end
-

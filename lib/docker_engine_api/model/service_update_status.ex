@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.ServiceUpdateStatus do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"State",
-    :"StartedAt",
-    :"CompletedAt",
-    :"Message"
+    :State,
+    :StartedAt,
+    :CompletedAt,
+    :Message
   ]
 
   @type t :: %__MODULE__{
-    :"State" => String.t,
-    :"StartedAt" => String.t,
-    :"CompletedAt" => String.t,
-    :"Message" => String.t
-  }
+          :State => String.t(),
+          :StartedAt => String.t(),
+          :CompletedAt => String.t(),
+          :Message => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceUpdateStatus do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceUpdateStatus do
     value
   end
 end
-

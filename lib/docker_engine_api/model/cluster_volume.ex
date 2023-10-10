@@ -9,34 +9,39 @@ defmodule DockerEngineAPI.Model.ClusterVolume do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec",
-    :"Info",
-    :"PublishStatus"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec,
+    :Info,
+    :PublishStatus
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => ClusterVolumeSpec,
-    :"Info" => ClusterVolumeInfo,
-    :"PublishStatus" => [ClusterVolumePublishStatus]
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => ClusterVolumeSpec,
+          :Info => ClusterVolumeInfo,
+          :PublishStatus => [ClusterVolumePublishStatus]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolume do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
-    |> deserialize(:"Info", :struct, DockerEngineAPI.Model.ClusterVolumeInfo, options)
-    |> deserialize(:"PublishStatus", :list, DockerEngineAPI.Model.ClusterVolumePublishStatus, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.ClusterVolumeSpec, options)
+    |> deserialize(:Info, :struct, DockerEngineAPI.Model.ClusterVolumeInfo, options)
+    |> deserialize(
+      :PublishStatus,
+      :list,
+      DockerEngineAPI.Model.ClusterVolumePublishStatus,
+      options
+    )
   end
 end
-

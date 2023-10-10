@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.Commit do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Expected"
+    :ID,
+    :Expected
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Expected" => String.t
-  }
+          :ID => String.t(),
+          :Expected => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Commit do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Commit do
     value
   end
 end
-

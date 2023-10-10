@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.ContainerWaitExitError do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Message"
+    :Message
   ]
 
   @type t :: %__MODULE__{
-    :"Message" => String.t
-  }
+          :Message => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerWaitExitError do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerWaitExitError do
     value
   end
 end
-

@@ -4,25 +4,25 @@
 
 defmodule DockerEngineAPI.Model.SwarmJoinRequest do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ListenAddr",
-    :"AdvertiseAddr",
-    :"DataPathAddr",
-    :"RemoteAddrs",
-    :"JoinToken"
+    :ListenAddr,
+    :AdvertiseAddr,
+    :DataPathAddr,
+    :RemoteAddrs,
+    :JoinToken
   ]
 
   @type t :: %__MODULE__{
-    :"ListenAddr" => String.t,
-    :"AdvertiseAddr" => String.t,
-    :"DataPathAddr" => String.t,
-    :"RemoteAddrs" => [String.t],
-    :"JoinToken" => String.t
-  }
+          :ListenAddr => String.t(),
+          :AdvertiseAddr => String.t(),
+          :DataPathAddr => String.t(),
+          :RemoteAddrs => [String.t()],
+          :JoinToken => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmJoinRequest do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmJoinRequest do
     value
   end
 end
-

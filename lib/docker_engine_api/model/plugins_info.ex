@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.PluginsInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Volume",
-    :"Network",
-    :"Authorization",
-    :"Log"
+    :Volume,
+    :Network,
+    :Authorization,
+    :Log
   ]
 
   @type t :: %__MODULE__{
-    :"Volume" => [String.t],
-    :"Network" => [String.t],
-    :"Authorization" => [String.t],
-    :"Log" => [String.t]
-  }
+          :Volume => [String.t()],
+          :Network => [String.t()],
+          :Authorization => [String.t()],
+          :Log => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginsInfo do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginsInfo do
     value
   end
 end
-

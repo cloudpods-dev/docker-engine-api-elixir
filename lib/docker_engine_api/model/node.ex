@@ -4,42 +4,42 @@
 
 defmodule DockerEngineAPI.Model.Node do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec",
-    :"Description",
-    :"Status",
-    :"ManagerStatus"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec,
+    :Description,
+    :Status,
+    :ManagerStatus
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => NodeSpec,
-    :"Description" => NodeDescription,
-    :"Status" => NodeStatus,
-    :"ManagerStatus" => ManagerStatus
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => NodeSpec,
+          :Description => NodeDescription,
+          :Status => NodeStatus,
+          :ManagerStatus => ManagerStatus
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Node do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.NodeSpec, options)
-    |> deserialize(:"Description", :struct, DockerEngineAPI.Model.NodeDescription, options)
-    |> deserialize(:"Status", :struct, DockerEngineAPI.Model.NodeStatus, options)
-    |> deserialize(:"ManagerStatus", :struct, DockerEngineAPI.Model.ManagerStatus, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.NodeSpec, options)
+    |> deserialize(:Description, :struct, DockerEngineAPI.Model.NodeDescription, options)
+    |> deserialize(:Status, :struct, DockerEngineAPI.Model.NodeStatus, options)
+    |> deserialize(:ManagerStatus, :struct, DockerEngineAPI.Model.ManagerStatus, options)
   end
 end
-

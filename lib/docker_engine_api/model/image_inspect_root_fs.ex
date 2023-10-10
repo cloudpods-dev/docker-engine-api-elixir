@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.ImageInspectRootFs do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Type",
-    :"Layers"
+    :Type,
+    :Layers
   ]
 
   @type t :: %__MODULE__{
-    :"Type" => String.t,
-    :"Layers" => [String.t]
-  }
+          :Type => String.t(),
+          :Layers => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageInspectRootFs do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageInspectRootFs do
     value
   end
 end
-

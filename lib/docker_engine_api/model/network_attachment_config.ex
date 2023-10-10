@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.NetworkAttachmentConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Target",
-    :"Aliases",
-    :"DriverOpts"
+    :Target,
+    :Aliases,
+    :DriverOpts
   ]
 
   @type t :: %__MODULE__{
-    :"Target" => String.t,
-    :"Aliases" => [String.t],
-    :"DriverOpts" => %{optional(String.t) => String.t}
-  }
+          :Target => String.t(),
+          :Aliases => [String.t()],
+          :DriverOpts => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkAttachmentConfig do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkAttachmentConfig do
     value
   end
 end
-

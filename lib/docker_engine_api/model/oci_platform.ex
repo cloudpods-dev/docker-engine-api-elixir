@@ -9,20 +9,20 @@ defmodule DockerEngineAPI.Model.OciPlatform do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"architecture",
-    :"os",
+    :architecture,
+    :os,
     :"os.version",
     :"os.features",
-    :"variant"
+    :variant
   ]
 
   @type t :: %__MODULE__{
-    :"architecture" => String.t,
-    :"os" => String.t,
-    :"os.version" => String.t,
-    :"os.features" => [String.t],
-    :"variant" => String.t
-  }
+          :architecture => String.t(),
+          :os => String.t(),
+          :"os.version" => String.t(),
+          :"os.features" => [String.t()],
+          :variant => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.OciPlatform do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.OciPlatform do
     value
   end
 end
-

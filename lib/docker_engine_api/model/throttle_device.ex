@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ThrottleDevice do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Path",
-    :"Rate"
+    :Path,
+    :Rate
   ]
 
   @type t :: %__MODULE__{
-    :"Path" => String.t,
-    :"Rate" => integer()
-  }
+          :Path => String.t(),
+          :Rate => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ThrottleDevice do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ThrottleDevice do
     value
   end
 end
-

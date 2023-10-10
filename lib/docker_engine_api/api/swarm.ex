@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Swarm do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Initialize a new swarm
 
@@ -25,12 +24,11 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %DockerEngineAPI.Model.String.t{}} on success
   {:error, info} on failure
   """
-  @spec swarm_init(Tesla.Env.client, DockerEngineAPI.Model.SwarmInitRequest.t, keyword()) :: {:ok, String.t} | {:error, Tesla.Env.t}
   def swarm_init(connection, body, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/swarm/init")
-    |> add_param(:body, :"body", body)
+    |> add_param(:body, :body, body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -49,7 +47,6 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %DockerEngineAPI.Model.Swarm{}} on success
   {:error, info} on failure
   """
-  @spec swarm_inspect(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.Swarm.t} | {:error, Tesla.Env.t}
   def swarm_inspect(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -73,12 +70,11 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec swarm_join(Tesla.Env.client, DockerEngineAPI.Model.SwarmJoinRequest.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def swarm_join(connection, body, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/swarm/join")
-    |> add_param(:body, :"body", body)
+    |> add_param(:body, :body, body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -98,11 +94,11 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec swarm_leave(Tesla.Env.client, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def swarm_leave(connection, opts \\ []) do
     optional_params = %{
-      :"force" => :query
+      :force => :query
     }
+
     %{}
     |> method(:post)
     |> url("/swarm/leave")
@@ -126,12 +122,11 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec swarm_unlock(Tesla.Env.client, DockerEngineAPI.Model.SwarmUnlockRequest.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def swarm_unlock(connection, body, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/swarm/unlock")
-    |> add_param(:body, :"body", body)
+    |> add_param(:body, :body, body)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(false)
@@ -150,7 +145,6 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %DockerEngineAPI.Model.UnlockKeyResponse{}} on success
   {:error, info} on failure
   """
-  @spec swarm_unlockkey(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.UnlockKeyResponse.t} | {:error, Tesla.Env.t}
   def swarm_unlockkey(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -178,18 +172,18 @@ defmodule DockerEngineAPI.Api.Swarm do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec swarm_update(Tesla.Env.client, DockerEngineAPI.Model.SwarmSpec.t, integer(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def swarm_update(connection, body, version, opts \\ []) do
     optional_params = %{
-      :"rotateWorkerToken" => :query,
-      :"rotateManagerToken" => :query,
-      :"rotateManagerUnlockKey" => :query
+      :rotateWorkerToken => :query,
+      :rotateManagerToken => :query,
+      :rotateManagerUnlockKey => :query
     }
+
     %{}
     |> method(:post)
     |> url("/swarm/update")
-    |> add_param(:body, :"body", body)
-    |> add_param(:query, :"version", version)
+    |> add_param(:body, :body, body)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

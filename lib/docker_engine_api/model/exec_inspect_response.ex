@@ -4,44 +4,44 @@
 
 defmodule DockerEngineAPI.Model.ExecInspectResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"CanRemove",
-    :"DetachKeys",
-    :"ID",
-    :"Running",
-    :"ExitCode",
-    :"ProcessConfig",
-    :"OpenStdin",
-    :"OpenStderr",
-    :"OpenStdout",
-    :"ContainerID",
-    :"Pid"
+    :CanRemove,
+    :DetachKeys,
+    :ID,
+    :Running,
+    :ExitCode,
+    :ProcessConfig,
+    :OpenStdin,
+    :OpenStderr,
+    :OpenStdout,
+    :ContainerID,
+    :Pid
   ]
 
   @type t :: %__MODULE__{
-    :"CanRemove" => boolean(),
-    :"DetachKeys" => String.t,
-    :"ID" => String.t,
-    :"Running" => boolean(),
-    :"ExitCode" => integer(),
-    :"ProcessConfig" => ProcessConfig,
-    :"OpenStdin" => boolean(),
-    :"OpenStderr" => boolean(),
-    :"OpenStdout" => boolean(),
-    :"ContainerID" => String.t,
-    :"Pid" => integer()
-  }
+          :CanRemove => boolean(),
+          :DetachKeys => String.t(),
+          :ID => String.t(),
+          :Running => boolean(),
+          :ExitCode => integer(),
+          :ProcessConfig => ProcessConfig,
+          :OpenStdin => boolean(),
+          :OpenStderr => boolean(),
+          :OpenStdout => boolean(),
+          :ContainerID => String.t(),
+          :Pid => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ExecInspectResponse do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ProcessConfig", :struct, DockerEngineAPI.Model.ProcessConfig, options)
+    |> deserialize(:ProcessConfig, :struct, DockerEngineAPI.Model.ProcessConfig, options)
   end
 end
-

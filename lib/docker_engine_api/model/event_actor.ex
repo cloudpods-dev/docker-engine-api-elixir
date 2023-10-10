@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.EventActor do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Attributes"
+    :ID,
+    :Attributes
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Attributes" => %{optional(String.t) => String.t}
-  }
+          :ID => String.t(),
+          :Attributes => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EventActor do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.EventActor do
     value
   end
 end
-

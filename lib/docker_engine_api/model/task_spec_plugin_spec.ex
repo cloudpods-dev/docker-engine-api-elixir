@@ -9,25 +9,25 @@ defmodule DockerEngineAPI.Model.TaskSpecPluginSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Remote",
-    :"Disabled",
-    :"PluginPrivilege"
+    :Name,
+    :Remote,
+    :Disabled,
+    :PluginPrivilege
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Remote" => String.t,
-    :"Disabled" => boolean(),
-    :"PluginPrivilege" => [PluginPrivilege]
-  }
+          :Name => String.t(),
+          :Remote => String.t(),
+          :Disabled => boolean(),
+          :PluginPrivilege => [PluginPrivilege]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecPluginSpec do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"PluginPrivilege", :list, DockerEngineAPI.Model.PluginPrivilege, options)
+    |> deserialize(:PluginPrivilege, :list, DockerEngineAPI.Model.PluginPrivilege, options)
   end
 end
-

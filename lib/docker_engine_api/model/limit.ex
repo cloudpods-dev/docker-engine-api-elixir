@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.Limit do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NanoCPUs",
-    :"MemoryBytes",
-    :"Pids"
+    :NanoCPUs,
+    :MemoryBytes,
+    :Pids
   ]
 
   @type t :: %__MODULE__{
-    :"NanoCPUs" => integer(),
-    :"MemoryBytes" => integer(),
-    :"Pids" => integer()
-  }
+          :NanoCPUs => integer(),
+          :MemoryBytes => integer(),
+          :Pids => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Limit do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.Limit do
     value
   end
 end
-

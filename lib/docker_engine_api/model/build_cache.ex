@@ -9,32 +9,32 @@ defmodule DockerEngineAPI.Model.BuildCache do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Parent",
-    :"Parents",
-    :"Type",
-    :"Description",
-    :"InUse",
-    :"Shared",
-    :"Size",
-    :"CreatedAt",
-    :"LastUsedAt",
-    :"UsageCount"
+    :ID,
+    :Parent,
+    :Parents,
+    :Type,
+    :Description,
+    :InUse,
+    :Shared,
+    :Size,
+    :CreatedAt,
+    :LastUsedAt,
+    :UsageCount
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Parent" => String.t,
-    :"Parents" => [String.t],
-    :"Type" => String.t,
-    :"Description" => String.t,
-    :"InUse" => boolean(),
-    :"Shared" => boolean(),
-    :"Size" => integer(),
-    :"CreatedAt" => String.t,
-    :"LastUsedAt" => String.t,
-    :"UsageCount" => integer()
-  }
+          :ID => String.t(),
+          :Parent => String.t(),
+          :Parents => [String.t()],
+          :Type => String.t(),
+          :Description => String.t(),
+          :InUse => boolean(),
+          :Shared => boolean(),
+          :Size => integer(),
+          :CreatedAt => String.t(),
+          :LastUsedAt => String.t(),
+          :UsageCount => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.BuildCache do
@@ -42,4 +42,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.BuildCache do
     value
   end
 end
-

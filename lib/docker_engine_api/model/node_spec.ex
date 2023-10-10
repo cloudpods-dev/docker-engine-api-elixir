@@ -4,23 +4,23 @@
 
 defmodule DockerEngineAPI.Model.NodeSpec do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Labels",
-    :"Role",
-    :"Availability"
+    :Name,
+    :Labels,
+    :Role,
+    :Availability
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Role" => String.t,
-    :"Availability" => String.t
-  }
+          :Name => String.t(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :Role => String.t(),
+          :Availability => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeSpec do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeSpec do
     value
   end
 end
-

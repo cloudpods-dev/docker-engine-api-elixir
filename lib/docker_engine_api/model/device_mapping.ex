@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.DeviceMapping do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"PathOnHost",
-    :"PathInContainer",
-    :"CgroupPermissions"
+    :PathOnHost,
+    :PathInContainer,
+    :CgroupPermissions
   ]
 
   @type t :: %__MODULE__{
-    :"PathOnHost" => String.t,
-    :"PathInContainer" => String.t,
-    :"CgroupPermissions" => String.t
-  }
+          :PathOnHost => String.t(),
+          :PathInContainer => String.t(),
+          :CgroupPermissions => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.DeviceMapping do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.DeviceMapping do
     value
   end
 end
-

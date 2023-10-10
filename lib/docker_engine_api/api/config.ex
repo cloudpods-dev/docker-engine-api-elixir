@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Config do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Create a config
 
@@ -25,11 +24,11 @@ defmodule DockerEngineAPI.Api.Config do
   {:ok, %DockerEngineAPI.Model.IdResponse{}} on success
   {:error, info} on failure
   """
-  @spec config_create(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.IdResponse.t} | {:error, Tesla.Env.t}
   def config_create(connection, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/configs/create")
@@ -53,7 +52,6 @@ defmodule DockerEngineAPI.Api.Config do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec config_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def config_delete(connection, id, _opts \\ []) do
     %{}
     |> method(:delete)
@@ -77,7 +75,6 @@ defmodule DockerEngineAPI.Api.Config do
   {:ok, %DockerEngineAPI.Model.Config{}} on success
   {:error, info} on failure
   """
-  @spec config_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Config.t} | {:error, Tesla.Env.t}
   def config_inspect(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -101,11 +98,11 @@ defmodule DockerEngineAPI.Api.Config do
   {:ok, [%Config{}, ...]} on success
   {:error, info} on failure
   """
-  @spec config_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Config.t)} | {:error, Tesla.Env.t}
   def config_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/configs")
@@ -131,15 +128,15 @@ defmodule DockerEngineAPI.Api.Config do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec config_update(Tesla.Env.client, String.t, integer(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def config_update(connection, id, version, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/configs/#{id}/update")
-    |> add_param(:query, :"version", version)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

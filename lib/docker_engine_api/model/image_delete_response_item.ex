@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ImageDeleteResponseItem do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Untagged",
-    :"Deleted"
+    :Untagged,
+    :Deleted
   ]
 
   @type t :: %__MODULE__{
-    :"Untagged" => String.t,
-    :"Deleted" => String.t
-  }
+          :Untagged => String.t(),
+          :Deleted => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageDeleteResponseItem do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageDeleteResponseItem do
     value
   end
 end
-

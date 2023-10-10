@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.PluginConfigInterface do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Types",
-    :"Socket",
-    :"ProtocolScheme"
+    :Types,
+    :Socket,
+    :ProtocolScheme
   ]
 
   @type t :: %__MODULE__{
-    :"Types" => [PluginInterfaceType],
-    :"Socket" => String.t,
-    :"ProtocolScheme" => String.t
-  }
+          :Types => [PluginInterfaceType],
+          :Socket => String.t(),
+          :ProtocolScheme => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginConfigInterface do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Types", :list, DockerEngineAPI.Model.PluginInterfaceType, options)
+    |> deserialize(:Types, :list, DockerEngineAPI.Model.PluginInterfaceType, options)
   end
 end
-

@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.SystemAuthResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Status",
-    :"IdentityToken"
+    :Status,
+    :IdentityToken
   ]
 
   @type t :: %__MODULE__{
-    :"Status" => String.t,
-    :"IdentityToken" => String.t
-  }
+          :Status => String.t(),
+          :IdentityToken => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemAuthResponse do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemAuthResponse do
     value
   end
 end
-

@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.MountVolumeOptionsDriverConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Options"
+    :Name,
+    :Options
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Options" => %{optional(String.t) => String.t}
-  }
+          :Name => String.t(),
+          :Options => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountVolumeOptionsDriverConfig do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountVolumeOptionsDriverConfi
     value
   end
 end
-

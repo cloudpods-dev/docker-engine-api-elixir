@@ -9,61 +9,61 @@ defmodule DockerEngineAPI.Model.ImageInspect do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Id",
-    :"RepoTags",
-    :"RepoDigests",
-    :"Parent",
-    :"Comment",
-    :"Created",
-    :"Container",
-    :"ContainerConfig",
-    :"DockerVersion",
-    :"Author",
-    :"Config",
-    :"Architecture",
-    :"Variant",
-    :"Os",
-    :"OsVersion",
-    :"Size",
-    :"VirtualSize",
-    :"GraphDriver",
-    :"RootFS",
-    :"Metadata"
+    :Id,
+    :RepoTags,
+    :RepoDigests,
+    :Parent,
+    :Comment,
+    :Created,
+    :Container,
+    :ContainerConfig,
+    :DockerVersion,
+    :Author,
+    :Config,
+    :Architecture,
+    :Variant,
+    :Os,
+    :OsVersion,
+    :Size,
+    :VirtualSize,
+    :GraphDriver,
+    :RootFS,
+    :Metadata
   ]
 
   @type t :: %__MODULE__{
-    :"Id" => String.t,
-    :"RepoTags" => [String.t],
-    :"RepoDigests" => [String.t],
-    :"Parent" => String.t,
-    :"Comment" => String.t,
-    :"Created" => String.t,
-    :"Container" => String.t,
-    :"ContainerConfig" => ContainerConfig,
-    :"DockerVersion" => String.t,
-    :"Author" => String.t,
-    :"Config" => ContainerConfig,
-    :"Architecture" => String.t,
-    :"Variant" => String.t,
-    :"Os" => String.t,
-    :"OsVersion" => String.t,
-    :"Size" => integer(),
-    :"VirtualSize" => integer(),
-    :"GraphDriver" => GraphDriverData,
-    :"RootFS" => ImageInspectRootFs,
-    :"Metadata" => ImageInspectMetadata
-  }
+          :Id => String.t(),
+          :RepoTags => [String.t()],
+          :RepoDigests => [String.t()],
+          :Parent => String.t(),
+          :Comment => String.t(),
+          :Created => String.t(),
+          :Container => String.t(),
+          :ContainerConfig => ContainerConfig,
+          :DockerVersion => String.t(),
+          :Author => String.t(),
+          :Config => ContainerConfig,
+          :Architecture => String.t(),
+          :Variant => String.t(),
+          :Os => String.t(),
+          :OsVersion => String.t(),
+          :Size => integer(),
+          :VirtualSize => integer(),
+          :GraphDriver => GraphDriverData,
+          :RootFS => ImageInspectRootFs,
+          :Metadata => ImageInspectMetadata
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageInspect do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ContainerConfig", :struct, DockerEngineAPI.Model.ContainerConfig, options)
-    |> deserialize(:"Config", :struct, DockerEngineAPI.Model.ContainerConfig, options)
-    |> deserialize(:"GraphDriver", :struct, DockerEngineAPI.Model.GraphDriverData, options)
-    |> deserialize(:"RootFS", :struct, DockerEngineAPI.Model.ImageInspectRootFs, options)
-    |> deserialize(:"Metadata", :struct, DockerEngineAPI.Model.ImageInspectMetadata, options)
+    |> deserialize(:ContainerConfig, :struct, DockerEngineAPI.Model.ContainerConfig, options)
+    |> deserialize(:Config, :struct, DockerEngineAPI.Model.ContainerConfig, options)
+    |> deserialize(:GraphDriver, :struct, DockerEngineAPI.Model.GraphDriverData, options)
+    |> deserialize(:RootFS, :struct, DockerEngineAPI.Model.ImageInspectRootFs, options)
+    |> deserialize(:Metadata, :struct, DockerEngineAPI.Model.ImageInspectMetadata, options)
   end
 end
-

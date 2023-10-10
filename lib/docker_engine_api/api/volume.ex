@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Volume do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Create a volume
 
@@ -25,12 +24,11 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %DockerEngineAPI.Model.Volume{}} on success
   {:error, info} on failure
   """
-  @spec volume_create(Tesla.Env.client, DockerEngineAPI.Model.VolumeCreateOptions.t, keyword()) :: {:ok, DockerEngineAPI.Model.Volume.t} | {:error, Tesla.Env.t}
   def volume_create(connection, volume_config, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/volumes/create")
-    |> add_param(:body, :"volumeConfig", volume_config)
+    |> add_param(:body, :volumeConfig, volume_config)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%DockerEngineAPI.Model.Volume{})
@@ -52,11 +50,11 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec volume_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def volume_delete(connection, name, opts \\ []) do
     optional_params = %{
-      :"force" => :query
+      :force => :query
     }
+
     %{}
     |> method(:delete)
     |> url("/volumes/#{name}")
@@ -80,7 +78,6 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %DockerEngineAPI.Model.Volume{}} on success
   {:error, info} on failure
   """
-  @spec volume_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Volume.t} | {:error, Tesla.Env.t}
   def volume_inspect(connection, name, _opts \\ []) do
     %{}
     |> method(:get)
@@ -104,11 +101,11 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %DockerEngineAPI.Model.VolumeListResponse{}} on success
   {:error, info} on failure
   """
-  @spec volume_list(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.VolumeListResponse.t} | {:error, Tesla.Env.t}
   def volume_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/volumes")
@@ -132,11 +129,11 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %DockerEngineAPI.Model.VolumePruneResponse{}} on success
   {:error, info} on failure
   """
-  @spec volume_prune(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.VolumePruneResponse.t} | {:error, Tesla.Env.t}
   def volume_prune(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:post)
     |> url("/volumes/prune")
@@ -162,15 +159,15 @@ defmodule DockerEngineAPI.Api.Volume do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec volume_update(Tesla.Env.client, String.t, integer(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def volume_update(connection, name, version, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:put)
     |> url("/volumes/#{name}")
-    |> add_param(:query, :"version", version)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

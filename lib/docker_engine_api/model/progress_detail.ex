@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ProgressDetail do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"current",
-    :"total"
+    :current,
+    :total
   ]
 
   @type t :: %__MODULE__{
-    :"current" => integer(),
-    :"total" => integer()
-  }
+          :current => integer(),
+          :total => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ProgressDetail do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ProgressDetail do
     value
   end
 end
-

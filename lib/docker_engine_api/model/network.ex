@@ -4,49 +4,49 @@
 
 defmodule DockerEngineAPI.Model.Network do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Id",
-    :"Created",
-    :"Scope",
-    :"Driver",
-    :"EnableIPv6",
-    :"IPAM",
-    :"Internal",
-    :"Attachable",
-    :"Ingress",
-    :"Containers",
-    :"Options",
-    :"Labels"
+    :Name,
+    :Id,
+    :Created,
+    :Scope,
+    :Driver,
+    :EnableIPv6,
+    :IPAM,
+    :Internal,
+    :Attachable,
+    :Ingress,
+    :Containers,
+    :Options,
+    :Labels
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Id" => String.t,
-    :"Created" => String.t,
-    :"Scope" => String.t,
-    :"Driver" => String.t,
-    :"EnableIPv6" => boolean(),
-    :"IPAM" => Ipam,
-    :"Internal" => boolean(),
-    :"Attachable" => boolean(),
-    :"Ingress" => boolean(),
-    :"Containers" => %{optional(String.t) => NetworkContainer},
-    :"Options" => %{optional(String.t) => String.t},
-    :"Labels" => %{optional(String.t) => String.t}
-  }
+          :Name => String.t(),
+          :Id => String.t(),
+          :Created => String.t(),
+          :Scope => String.t(),
+          :Driver => String.t(),
+          :EnableIPv6 => boolean(),
+          :IPAM => Ipam,
+          :Internal => boolean(),
+          :Attachable => boolean(),
+          :Ingress => boolean(),
+          :Containers => %{optional(String.t()) => NetworkContainer},
+          :Options => %{optional(String.t()) => String.t()},
+          :Labels => %{optional(String.t()) => String.t()}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Network do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"IPAM", :struct, DockerEngineAPI.Model.Ipam, options)
-    |> deserialize(:"Containers", :map, DockerEngineAPI.Model.NetworkContainer, options)
+    |> deserialize(:IPAM, :struct, DockerEngineAPI.Model.Ipam, options)
+    |> deserialize(:Containers, :map, DockerEngineAPI.Model.NetworkContainer, options)
   end
 end
-

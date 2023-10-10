@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.MountBindOptions do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Propagation",
-    :"NonRecursive",
-    :"CreateMountpoint"
+    :Propagation,
+    :NonRecursive,
+    :CreateMountpoint
   ]
 
   @type t :: %__MODULE__{
-    :"Propagation" => String.t,
-    :"NonRecursive" => boolean(),
-    :"CreateMountpoint" => boolean()
-  }
+          :Propagation => String.t(),
+          :NonRecursive => boolean(),
+          :CreateMountpoint => boolean()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountBindOptions do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountBindOptions do
     value
   end
 end
-

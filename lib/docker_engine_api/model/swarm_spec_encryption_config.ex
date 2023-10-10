@@ -9,12 +9,12 @@ defmodule DockerEngineAPI.Model.SwarmSpecEncryptionConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"AutoLockManagers"
+    :AutoLockManagers
   ]
 
   @type t :: %__MODULE__{
-    :"AutoLockManagers" => boolean()
-  }
+          :AutoLockManagers => boolean()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecEncryptionConfig do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecEncryptionConfig do
     value
   end
 end
-

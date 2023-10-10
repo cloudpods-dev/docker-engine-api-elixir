@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.PluginPrivilege do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Description",
-    :"Value"
+    :Name,
+    :Description,
+    :Value
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Description" => String.t,
-    :"Value" => [String.t]
-  }
+          :Name => String.t(),
+          :Description => String.t(),
+          :Value => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginPrivilege do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginPrivilege do
     value
   end
 end
-

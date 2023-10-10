@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Plugin do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Get plugin privileges
 
@@ -25,12 +24,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, [%PluginPrivilege{}, ...]} on success
   {:error, info} on failure
   """
-  @spec get_plugin_privileges(Tesla.Env.client, String.t, keyword()) :: {:ok, list(DockerEngineAPI.Model.PluginPrivilege.t)} | {:error, Tesla.Env.t}
   def get_plugin_privileges(connection, remote, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/plugins/privileges")
-    |> add_param(:query, :"remote", remote)
+    |> add_param(:query, :remote, remote)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode([%DockerEngineAPI.Model.PluginPrivilege{}])
@@ -51,15 +49,15 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_create(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_create(connection, name, opts \\ []) do
     optional_params = %{
-      :"tarContext" => :body
+      :tarContext => :body
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/create")
-    |> add_param(:query, :"name", name)
+    |> add_param(:query, :name, name)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -81,11 +79,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %DockerEngineAPI.Model.Plugin{}} on success
   {:error, info} on failure
   """
-  @spec plugin_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Plugin.t} | {:error, Tesla.Env.t}
   def plugin_delete(connection, name, opts \\ []) do
     optional_params = %{
-      :"force" => :query
+      :force => :query
     }
+
     %{}
     |> method(:delete)
     |> url("/plugins/#{name}")
@@ -110,11 +108,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_disable(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_disable(connection, name, opts \\ []) do
     optional_params = %{
-      :"force" => :query
+      :force => :query
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/#{name}/disable")
@@ -139,11 +137,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_enable(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_enable(connection, name, opts \\ []) do
     optional_params = %{
-      :"timeout" => :query
+      :timeout => :query
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/#{name}/enable")
@@ -167,7 +165,6 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %DockerEngineAPI.Model.Plugin{}} on success
   {:error, info} on failure
   """
-  @spec plugin_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Plugin.t} | {:error, Tesla.Env.t}
   def plugin_inspect(connection, name, _opts \\ []) do
     %{}
     |> method(:get)
@@ -192,11 +189,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, [%Plugin{}, ...]} on success
   {:error, info} on failure
   """
-  @spec plugin_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Plugin.t)} | {:error, Tesla.Env.t}
   def plugin_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/plugins")
@@ -224,17 +221,17 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_pull(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_pull(connection, remote, opts \\ []) do
     optional_params = %{
-      :"name" => :query,
+      :name => :query,
       :"X-Registry-Auth" => :headers,
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/pull")
-    |> add_param(:query, :"remote", remote)
+    |> add_param(:query, :remote, remote)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -256,7 +253,6 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_push(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_push(connection, name, _opts \\ []) do
     %{}
     |> method(:post)
@@ -281,11 +277,11 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_set(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_set(connection, name, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/#{name}/set")
@@ -312,16 +308,16 @@ defmodule DockerEngineAPI.Api.Plugin do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec plugin_upgrade(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def plugin_upgrade(connection, name, remote, opts \\ []) do
     optional_params = %{
       :"X-Registry-Auth" => :headers,
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/plugins/#{name}/upgrade")
-    |> add_param(:query, :"remote", remote)
+    |> add_param(:query, :remote, remote)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

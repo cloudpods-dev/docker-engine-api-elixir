@@ -9,21 +9,21 @@ defmodule DockerEngineAPI.Model.VolumeListResponse do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Volumes",
-    :"Warnings"
+    :Volumes,
+    :Warnings
   ]
 
   @type t :: %__MODULE__{
-    :"Volumes" => [Volume],
-    :"Warnings" => [String.t]
-  }
+          :Volumes => [Volume],
+          :Warnings => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumeListResponse do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Volumes", :list, DockerEngineAPI.Model.Volume, options)
+    |> deserialize(:Volumes, :list, DockerEngineAPI.Model.Volume, options)
   end
 end
-

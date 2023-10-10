@@ -4,21 +4,21 @@
 
 defmodule DockerEngineAPI.Model.ResourcesUlimits do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Soft",
-    :"Hard"
+    :Name,
+    :Soft,
+    :Hard
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Soft" => integer(),
-    :"Hard" => integer()
-  }
+          :Name => String.t(),
+          :Soft => integer(),
+          :Hard => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ResourcesUlimits do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ResourcesUlimits do
     value
   end
 end
-

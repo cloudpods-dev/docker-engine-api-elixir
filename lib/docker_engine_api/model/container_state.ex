@@ -9,41 +9,41 @@ defmodule DockerEngineAPI.Model.ContainerState do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Status",
-    :"Running",
-    :"Paused",
-    :"Restarting",
-    :"OOMKilled",
-    :"Dead",
-    :"Pid",
-    :"ExitCode",
-    :"Error",
-    :"StartedAt",
-    :"FinishedAt",
-    :"Health"
+    :Status,
+    :Running,
+    :Paused,
+    :Restarting,
+    :OOMKilled,
+    :Dead,
+    :Pid,
+    :ExitCode,
+    :Error,
+    :StartedAt,
+    :FinishedAt,
+    :Health
   ]
 
   @type t :: %__MODULE__{
-    :"Status" => String.t,
-    :"Running" => boolean(),
-    :"Paused" => boolean(),
-    :"Restarting" => boolean(),
-    :"OOMKilled" => boolean(),
-    :"Dead" => boolean(),
-    :"Pid" => integer(),
-    :"ExitCode" => integer(),
-    :"Error" => String.t,
-    :"StartedAt" => String.t,
-    :"FinishedAt" => String.t,
-    :"Health" => Health
-  }
+          :Status => String.t(),
+          :Running => boolean(),
+          :Paused => boolean(),
+          :Restarting => boolean(),
+          :OOMKilled => boolean(),
+          :Dead => boolean(),
+          :Pid => integer(),
+          :ExitCode => integer(),
+          :Error => String.t(),
+          :StartedAt => String.t(),
+          :FinishedAt => String.t(),
+          :Health => Health
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerState do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Health", :struct, DockerEngineAPI.Model.Health, options)
+    |> deserialize(:Health, :struct, DockerEngineAPI.Model.Health, options)
   end
 end
-

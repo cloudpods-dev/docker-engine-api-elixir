@@ -9,27 +9,32 @@ defmodule DockerEngineAPI.Model.SwarmSpecCaConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NodeCertExpiry",
-    :"ExternalCAs",
-    :"SigningCACert",
-    :"SigningCAKey",
-    :"ForceRotate"
+    :NodeCertExpiry,
+    :ExternalCAs,
+    :SigningCACert,
+    :SigningCAKey,
+    :ForceRotate
   ]
 
   @type t :: %__MODULE__{
-    :"NodeCertExpiry" => integer(),
-    :"ExternalCAs" => [SwarmSpecCaConfigExternalCas],
-    :"SigningCACert" => String.t,
-    :"SigningCAKey" => String.t,
-    :"ForceRotate" => integer()
-  }
+          :NodeCertExpiry => integer(),
+          :ExternalCAs => [SwarmSpecCaConfigExternalCas],
+          :SigningCACert => String.t(),
+          :SigningCAKey => String.t(),
+          :ForceRotate => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecCaConfig do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ExternalCAs", :list, DockerEngineAPI.Model.SwarmSpecCaConfigExternalCas, options)
+    |> deserialize(
+      :ExternalCAs,
+      :list,
+      DockerEngineAPI.Model.SwarmSpecCaConfigExternalCas,
+      options
+    )
   end
 end
-

@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.TlsInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"TrustRoot",
-    :"CertIssuerSubject",
-    :"CertIssuerPublicKey"
+    :TrustRoot,
+    :CertIssuerSubject,
+    :CertIssuerPublicKey
   ]
 
   @type t :: %__MODULE__{
-    :"TrustRoot" => String.t,
-    :"CertIssuerSubject" => String.t,
-    :"CertIssuerPublicKey" => String.t
-  }
+          :TrustRoot => String.t(),
+          :CertIssuerSubject => String.t(),
+          :CertIssuerPublicKey => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TlsInfo do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TlsInfo do
     value
   end
 end
-

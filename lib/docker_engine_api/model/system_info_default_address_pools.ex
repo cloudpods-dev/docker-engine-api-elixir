@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.SystemInfoDefaultAddressPools do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Base",
-    :"Size"
+    :Base,
+    :Size
   ]
 
   @type t :: %__MODULE__{
-    :"Base" => String.t,
-    :"Size" => integer()
-  }
+          :Base => String.t(),
+          :Size => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemInfoDefaultAddressPools do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemInfoDefaultAddressPools
     value
   end
 end
-

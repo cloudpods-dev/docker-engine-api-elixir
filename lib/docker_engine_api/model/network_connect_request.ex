@@ -4,26 +4,26 @@
 
 defmodule DockerEngineAPI.Model.NetworkConnectRequest do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Container",
-    :"EndpointConfig"
+    :Container,
+    :EndpointConfig
   ]
 
   @type t :: %__MODULE__{
-    :"Container" => String.t,
-    :"EndpointConfig" => EndpointSettings
-  }
+          :Container => String.t(),
+          :EndpointConfig => EndpointSettings
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkConnectRequest do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"EndpointConfig", :struct, DockerEngineAPI.Model.EndpointSettings, options)
+    |> deserialize(:EndpointConfig, :struct, DockerEngineAPI.Model.EndpointSettings, options)
   end
 end
-

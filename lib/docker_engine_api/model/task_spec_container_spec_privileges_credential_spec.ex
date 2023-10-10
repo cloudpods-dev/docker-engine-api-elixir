@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesCredentialSpec do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Config",
-    :"File",
-    :"Registry"
+    :Config,
+    :File,
+    :Registry
   ]
 
   @type t :: %__MODULE__{
-    :"Config" => String.t,
-    :"File" => String.t,
-    :"Registry" => String.t
-  }
+          :Config => String.t(),
+          :File => String.t(),
+          :Registry => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesCredentialSpec do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecPrivileg
     value
   end
 end
-

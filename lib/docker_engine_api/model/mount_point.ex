@@ -9,26 +9,26 @@ defmodule DockerEngineAPI.Model.MountPoint do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Type",
-    :"Name",
-    :"Source",
-    :"Destination",
-    :"Driver",
-    :"Mode",
-    :"RW",
-    :"Propagation"
+    :Type,
+    :Name,
+    :Source,
+    :Destination,
+    :Driver,
+    :Mode,
+    :RW,
+    :Propagation
   ]
 
   @type t :: %__MODULE__{
-    :"Type" => String.t,
-    :"Name" => String.t,
-    :"Source" => String.t,
-    :"Destination" => String.t,
-    :"Driver" => String.t,
-    :"Mode" => String.t,
-    :"RW" => boolean(),
-    :"Propagation" => String.t
-  }
+          :Type => String.t(),
+          :Name => String.t(),
+          :Source => String.t(),
+          :Destination => String.t(),
+          :Driver => String.t(),
+          :Mode => String.t(),
+          :RW => boolean(),
+          :Propagation => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountPoint do
@@ -36,4 +36,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountPoint do
     value
   end
 end
-

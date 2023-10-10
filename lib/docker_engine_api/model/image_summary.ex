@@ -4,35 +4,35 @@
 
 defmodule DockerEngineAPI.Model.ImageSummary do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Id",
-    :"ParentId",
-    :"RepoTags",
-    :"RepoDigests",
-    :"Created",
-    :"Size",
-    :"SharedSize",
-    :"VirtualSize",
-    :"Labels",
-    :"Containers"
+    :Id,
+    :ParentId,
+    :RepoTags,
+    :RepoDigests,
+    :Created,
+    :Size,
+    :SharedSize,
+    :VirtualSize,
+    :Labels,
+    :Containers
   ]
 
   @type t :: %__MODULE__{
-    :"Id" => String.t,
-    :"ParentId" => String.t,
-    :"RepoTags" => [String.t],
-    :"RepoDigests" => [String.t],
-    :"Created" => integer(),
-    :"Size" => integer(),
-    :"SharedSize" => integer(),
-    :"VirtualSize" => integer(),
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Containers" => integer()
-  }
+          :Id => String.t(),
+          :ParentId => String.t(),
+          :RepoTags => [String.t()],
+          :RepoDigests => [String.t()],
+          :Created => integer(),
+          :Size => integer(),
+          :SharedSize => integer(),
+          :VirtualSize => integer(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :Containers => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageSummary do
@@ -40,4 +40,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ImageSummary do
     value
   end
 end
-

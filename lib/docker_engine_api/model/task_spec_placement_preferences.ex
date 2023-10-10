@@ -4,24 +4,24 @@
 
 defmodule DockerEngineAPI.Model.TaskSpecPlacementPreferences do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Spread"
+    :Spread
   ]
 
   @type t :: %__MODULE__{
-    :"Spread" => TaskSpecPlacementSpread
-  }
+          :Spread => TaskSpecPlacementSpread
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecPlacementPreferences do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Spread", :struct, DockerEngineAPI.Model.TaskSpecPlacementSpread, options)
+    |> deserialize(:Spread, :struct, DockerEngineAPI.Model.TaskSpecPlacementSpread, options)
   end
 end
-

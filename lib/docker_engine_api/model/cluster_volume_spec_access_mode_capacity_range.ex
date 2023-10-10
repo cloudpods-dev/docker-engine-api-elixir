@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.ClusterVolumeSpecAccessModeCapacityRange do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"RequiredBytes",
-    :"LimitBytes"
+    :RequiredBytes,
+    :LimitBytes
   ]
 
   @type t :: %__MODULE__{
-    :"RequiredBytes" => integer(),
-    :"LimitBytes" => integer()
-  }
+          :RequiredBytes => integer(),
+          :LimitBytes => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeCapacityRange do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessModeCa
     value
   end
 end
-

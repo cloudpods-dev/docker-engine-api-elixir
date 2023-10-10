@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.EndpointIpamConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"IPv4Address",
-    :"IPv6Address",
-    :"LinkLocalIPs"
+    :IPv4Address,
+    :IPv6Address,
+    :LinkLocalIPs
   ]
 
   @type t :: %__MODULE__{
-    :"IPv4Address" => String.t,
-    :"IPv6Address" => String.t,
-    :"LinkLocalIPs" => [String.t]
-  }
+          :IPv4Address => String.t(),
+          :IPv6Address => String.t(),
+          :LinkLocalIPs => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EndpointIpamConfig do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.EndpointIpamConfig do
     value
   end
 end
-

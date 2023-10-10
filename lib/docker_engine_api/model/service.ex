@@ -4,45 +4,45 @@
 
 defmodule DockerEngineAPI.Model.Service do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Spec",
-    :"Endpoint",
-    :"UpdateStatus",
-    :"ServiceStatus",
-    :"JobStatus"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Spec,
+    :Endpoint,
+    :UpdateStatus,
+    :ServiceStatus,
+    :JobStatus
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Spec" => ServiceSpec,
-    :"Endpoint" => ServiceEndpoint,
-    :"UpdateStatus" => ServiceUpdateStatus,
-    :"ServiceStatus" => ServiceServiceStatus,
-    :"JobStatus" => ServiceJobStatus
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Spec => ServiceSpec,
+          :Endpoint => ServiceEndpoint,
+          :UpdateStatus => ServiceUpdateStatus,
+          :ServiceStatus => ServiceServiceStatus,
+          :JobStatus => ServiceJobStatus
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Service do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.ServiceSpec, options)
-    |> deserialize(:"Endpoint", :struct, DockerEngineAPI.Model.ServiceEndpoint, options)
-    |> deserialize(:"UpdateStatus", :struct, DockerEngineAPI.Model.ServiceUpdateStatus, options)
-    |> deserialize(:"ServiceStatus", :struct, DockerEngineAPI.Model.ServiceServiceStatus, options)
-    |> deserialize(:"JobStatus", :struct, DockerEngineAPI.Model.ServiceJobStatus, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.ServiceSpec, options)
+    |> deserialize(:Endpoint, :struct, DockerEngineAPI.Model.ServiceEndpoint, options)
+    |> deserialize(:UpdateStatus, :struct, DockerEngineAPI.Model.ServiceUpdateStatus, options)
+    |> deserialize(:ServiceStatus, :struct, DockerEngineAPI.Model.ServiceServiceStatus, options)
+    |> deserialize(:JobStatus, :struct, DockerEngineAPI.Model.ServiceJobStatus, options)
   end
 end
-

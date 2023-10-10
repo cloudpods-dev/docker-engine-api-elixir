@@ -9,22 +9,32 @@ defmodule DockerEngineAPI.Model.TaskSpecContainerSpecPrivileges do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"CredentialSpec",
-    :"SELinuxContext"
+    :CredentialSpec,
+    :SELinuxContext
   ]
 
   @type t :: %__MODULE__{
-    :"CredentialSpec" => TaskSpecContainerSpecPrivilegesCredentialSpec,
-    :"SELinuxContext" => TaskSpecContainerSpecPrivilegesSeLinuxContext
-  }
+          :CredentialSpec => TaskSpecContainerSpecPrivilegesCredentialSpec,
+          :SELinuxContext => TaskSpecContainerSpecPrivilegesSeLinuxContext
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecPrivileges do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"CredentialSpec", :struct, DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesCredentialSpec, options)
-    |> deserialize(:"SELinuxContext", :struct, DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesSeLinuxContext, options)
+    |> deserialize(
+      :CredentialSpec,
+      :struct,
+      DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesCredentialSpec,
+      options
+    )
+    |> deserialize(
+      :SELinuxContext,
+      :struct,
+      DockerEngineAPI.Model.TaskSpecContainerSpecPrivilegesSeLinuxContext,
+      options
+    )
   end
 end
-

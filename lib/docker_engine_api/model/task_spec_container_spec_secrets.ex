@@ -4,28 +4,28 @@
 
 defmodule DockerEngineAPI.Model.TaskSpecContainerSpecSecrets do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"File",
-    :"SecretID",
-    :"SecretName"
+    :File,
+    :SecretID,
+    :SecretName
   ]
 
   @type t :: %__MODULE__{
-    :"File" => TaskSpecContainerSpecFile,
-    :"SecretID" => String.t,
-    :"SecretName" => String.t
-  }
+          :File => TaskSpecContainerSpecFile,
+          :SecretID => String.t(),
+          :SecretName => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecSecrets do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"File", :struct, DockerEngineAPI.Model.TaskSpecContainerSpecFile, options)
+    |> deserialize(:File, :struct, DockerEngineAPI.Model.TaskSpecContainerSpecFile, options)
   end
 end
-

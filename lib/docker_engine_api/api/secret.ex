@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Secret do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Create a secret
 
@@ -25,11 +24,11 @@ defmodule DockerEngineAPI.Api.Secret do
   {:ok, %DockerEngineAPI.Model.IdResponse{}} on success
   {:error, info} on failure
   """
-  @spec secret_create(Tesla.Env.client, keyword()) :: {:ok, DockerEngineAPI.Model.IdResponse.t} | {:error, Tesla.Env.t}
   def secret_create(connection, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/secrets/create")
@@ -53,7 +52,6 @@ defmodule DockerEngineAPI.Api.Secret do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec secret_delete(Tesla.Env.client, String.t, keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def secret_delete(connection, id, _opts \\ []) do
     %{}
     |> method(:delete)
@@ -77,7 +75,6 @@ defmodule DockerEngineAPI.Api.Secret do
   {:ok, %DockerEngineAPI.Model.Secret{}} on success
   {:error, info} on failure
   """
-  @spec secret_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.Secret.t} | {:error, Tesla.Env.t}
   def secret_inspect(connection, id, _opts \\ []) do
     %{}
     |> method(:get)
@@ -101,11 +98,11 @@ defmodule DockerEngineAPI.Api.Secret do
   {:ok, [%Secret{}, ...]} on success
   {:error, info} on failure
   """
-  @spec secret_list(Tesla.Env.client, keyword()) :: {:ok, list(DockerEngineAPI.Model.Secret.t)} | {:error, Tesla.Env.t}
   def secret_list(connection, opts \\ []) do
     optional_params = %{
-      :"filters" => :query
+      :filters => :query
     }
+
     %{}
     |> method(:get)
     |> url("/secrets")
@@ -131,15 +128,15 @@ defmodule DockerEngineAPI.Api.Secret do
   {:ok, %{}} on success
   {:error, info} on failure
   """
-  @spec secret_update(Tesla.Env.client, String.t, integer(), keyword()) :: {:ok, nil} | {:error, Tesla.Env.t}
   def secret_update(connection, id, version, opts \\ []) do
     optional_params = %{
-      :"body" => :body
+      :body => :body
     }
+
     %{}
     |> method(:post)
     |> url("/secrets/#{id}/update")
-    |> add_param(:query, :"version", version)
+    |> add_param(:query, :version, version)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

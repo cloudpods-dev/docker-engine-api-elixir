@@ -9,34 +9,49 @@ defmodule DockerEngineAPI.Model.ClusterVolumeSpecAccessMode do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Scope",
-    :"Sharing",
-    :"MountVolume",
-    :"Secrets",
-    :"AccessibilityRequirements",
-    :"CapacityRange",
-    :"Availability"
+    :Scope,
+    :Sharing,
+    :MountVolume,
+    :Secrets,
+    :AccessibilityRequirements,
+    :CapacityRange,
+    :Availability
   ]
 
   @type t :: %__MODULE__{
-    :"Scope" => String.t,
-    :"Sharing" => String.t,
-    :"MountVolume" => Object,
-    :"Secrets" => [ClusterVolumeSpecAccessModeSecrets],
-    :"AccessibilityRequirements" => ClusterVolumeSpecAccessModeAccessibilityRequirements,
-    :"CapacityRange" => ClusterVolumeSpecAccessModeCapacityRange,
-    :"Availability" => String.t
-  }
+          :Scope => String.t(),
+          :Sharing => String.t(),
+          :MountVolume => Object,
+          :Secrets => [ClusterVolumeSpecAccessModeSecrets],
+          :AccessibilityRequirements => ClusterVolumeSpecAccessModeAccessibilityRequirements,
+          :CapacityRange => ClusterVolumeSpecAccessModeCapacityRange,
+          :Availability => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ClusterVolumeSpecAccessMode do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"MountVolume", :struct, DockerEngineAPI.Model.Object, options)
-    |> deserialize(:"Secrets", :list, DockerEngineAPI.Model.ClusterVolumeSpecAccessModeSecrets, options)
-    |> deserialize(:"AccessibilityRequirements", :struct, DockerEngineAPI.Model.ClusterVolumeSpecAccessModeAccessibilityRequirements, options)
-    |> deserialize(:"CapacityRange", :struct, DockerEngineAPI.Model.ClusterVolumeSpecAccessModeCapacityRange, options)
+    |> deserialize(:MountVolume, :struct, DockerEngineAPI.Model.Object, options)
+    |> deserialize(
+      :Secrets,
+      :list,
+      DockerEngineAPI.Model.ClusterVolumeSpecAccessModeSecrets,
+      options
+    )
+    |> deserialize(
+      :AccessibilityRequirements,
+      :struct,
+      DockerEngineAPI.Model.ClusterVolumeSpecAccessModeAccessibilityRequirements,
+      options
+    )
+    |> deserialize(
+      :CapacityRange,
+      :struct,
+      DockerEngineAPI.Model.ClusterVolumeSpecAccessModeCapacityRange,
+      options
+    )
   end
 end
-

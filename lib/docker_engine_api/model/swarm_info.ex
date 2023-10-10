@@ -9,37 +9,37 @@ defmodule DockerEngineAPI.Model.SwarmInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NodeID",
-    :"NodeAddr",
-    :"LocalNodeState",
-    :"ControlAvailable",
-    :"Error",
-    :"RemoteManagers",
-    :"Nodes",
-    :"Managers",
-    :"Cluster"
+    :NodeID,
+    :NodeAddr,
+    :LocalNodeState,
+    :ControlAvailable,
+    :Error,
+    :RemoteManagers,
+    :Nodes,
+    :Managers,
+    :Cluster
   ]
 
   @type t :: %__MODULE__{
-    :"NodeID" => String.t,
-    :"NodeAddr" => String.t,
-    :"LocalNodeState" => LocalNodeState,
-    :"ControlAvailable" => boolean(),
-    :"Error" => String.t,
-    :"RemoteManagers" => [PeerNode],
-    :"Nodes" => integer(),
-    :"Managers" => integer(),
-    :"Cluster" => ClusterInfo
-  }
+          :NodeID => String.t(),
+          :NodeAddr => String.t(),
+          :LocalNodeState => LocalNodeState,
+          :ControlAvailable => boolean(),
+          :Error => String.t(),
+          :RemoteManagers => [PeerNode],
+          :Nodes => integer(),
+          :Managers => integer(),
+          :Cluster => ClusterInfo
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmInfo do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"LocalNodeState", :struct, DockerEngineAPI.Model.LocalNodeState, options)
-    |> deserialize(:"RemoteManagers", :list, DockerEngineAPI.Model.PeerNode, options)
-    |> deserialize(:"Cluster", :struct, DockerEngineAPI.Model.ClusterInfo, options)
+    |> deserialize(:LocalNodeState, :struct, DockerEngineAPI.Model.LocalNodeState, options)
+    |> deserialize(:RemoteManagers, :list, DockerEngineAPI.Model.PeerNode, options)
+    |> deserialize(:Cluster, :struct, DockerEngineAPI.Model.ClusterInfo, options)
   end
 end
-

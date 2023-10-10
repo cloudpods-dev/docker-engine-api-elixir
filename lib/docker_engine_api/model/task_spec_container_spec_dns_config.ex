@@ -9,16 +9,16 @@ defmodule DockerEngineAPI.Model.TaskSpecContainerSpecDnsConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Nameservers",
-    :"Search",
-    :"Options"
+    :Nameservers,
+    :Search,
+    :Options
   ]
 
   @type t :: %__MODULE__{
-    :"Nameservers" => [String.t],
-    :"Search" => [String.t],
-    :"Options" => [String.t]
-  }
+          :Nameservers => [String.t()],
+          :Search => [String.t()],
+          :Options => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecDnsConfig do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecDnsConfi
     value
   end
 end
-

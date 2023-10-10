@@ -9,23 +9,23 @@ defmodule DockerEngineAPI.Model.NodeStatus do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"State",
-    :"Message",
-    :"Addr"
+    :State,
+    :Message,
+    :Addr
   ]
 
   @type t :: %__MODULE__{
-    :"State" => NodeState,
-    :"Message" => String.t,
-    :"Addr" => String.t
-  }
+          :State => NodeState,
+          :Message => String.t(),
+          :Addr => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NodeStatus do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"State", :struct, DockerEngineAPI.Model.NodeState, options)
+    |> deserialize(:State, :struct, DockerEngineAPI.Model.NodeState, options)
   end
 end
-

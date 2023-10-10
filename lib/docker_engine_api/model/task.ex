@@ -4,55 +4,60 @@
 
 defmodule DockerEngineAPI.Model.Task do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ID",
-    :"Version",
-    :"CreatedAt",
-    :"UpdatedAt",
-    :"Name",
-    :"Labels",
-    :"Spec",
-    :"ServiceID",
-    :"Slot",
-    :"NodeID",
-    :"AssignedGenericResources",
-    :"Status",
-    :"DesiredState",
-    :"JobIteration"
+    :ID,
+    :Version,
+    :CreatedAt,
+    :UpdatedAt,
+    :Name,
+    :Labels,
+    :Spec,
+    :ServiceID,
+    :Slot,
+    :NodeID,
+    :AssignedGenericResources,
+    :Status,
+    :DesiredState,
+    :JobIteration
   ]
 
   @type t :: %__MODULE__{
-    :"ID" => String.t,
-    :"Version" => ObjectVersion,
-    :"CreatedAt" => String.t,
-    :"UpdatedAt" => String.t,
-    :"Name" => String.t,
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Spec" => TaskSpec,
-    :"ServiceID" => String.t,
-    :"Slot" => integer(),
-    :"NodeID" => String.t,
-    :"AssignedGenericResources" => GenericResources,
-    :"Status" => TaskStatus,
-    :"DesiredState" => TaskState,
-    :"JobIteration" => ObjectVersion
-  }
+          :ID => String.t(),
+          :Version => ObjectVersion,
+          :CreatedAt => String.t(),
+          :UpdatedAt => String.t(),
+          :Name => String.t(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :Spec => TaskSpec,
+          :ServiceID => String.t(),
+          :Slot => integer(),
+          :NodeID => String.t(),
+          :AssignedGenericResources => GenericResources,
+          :Status => TaskStatus,
+          :DesiredState => TaskState,
+          :JobIteration => ObjectVersion
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.Task do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Version", :struct, DockerEngineAPI.Model.ObjectVersion, options)
-    |> deserialize(:"Spec", :struct, DockerEngineAPI.Model.TaskSpec, options)
-    |> deserialize(:"AssignedGenericResources", :struct, DockerEngineAPI.Model.GenericResources, options)
-    |> deserialize(:"Status", :struct, DockerEngineAPI.Model.TaskStatus, options)
-    |> deserialize(:"DesiredState", :struct, DockerEngineAPI.Model.TaskState, options)
-    |> deserialize(:"JobIteration", :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Version, :struct, DockerEngineAPI.Model.ObjectVersion, options)
+    |> deserialize(:Spec, :struct, DockerEngineAPI.Model.TaskSpec, options)
+    |> deserialize(
+      :AssignedGenericResources,
+      :struct,
+      DockerEngineAPI.Model.GenericResources,
+      options
+    )
+    |> deserialize(:Status, :struct, DockerEngineAPI.Model.TaskStatus, options)
+    |> deserialize(:DesiredState, :struct, DockerEngineAPI.Model.TaskState, options)
+    |> deserialize(:JobIteration, :struct, DockerEngineAPI.Model.ObjectVersion, options)
   end
 end
-

@@ -4,17 +4,13 @@
 
 defmodule DockerEngineAPI.Model.TaskState do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
-  defstruct [
-    
-  ]
+  defstruct []
 
-  @type t :: %__MODULE__{
-    
-  }
+  @type t :: %__MODULE__{}
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskState do
@@ -22,4 +18,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskState do
     value
   end
 end
-

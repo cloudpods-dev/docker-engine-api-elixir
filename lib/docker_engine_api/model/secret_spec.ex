@@ -4,33 +4,33 @@
 
 defmodule DockerEngineAPI.Model.SecretSpec do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Labels",
-    :"Data",
-    :"Driver",
-    :"Templating"
+    :Name,
+    :Labels,
+    :Data,
+    :Driver,
+    :Templating
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Labels" => %{optional(String.t) => String.t},
-    :"Data" => String.t,
-    :"Driver" => Driver,
-    :"Templating" => Driver
-  }
+          :Name => String.t(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :Data => String.t(),
+          :Driver => Driver,
+          :Templating => Driver
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SecretSpec do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Driver", :struct, DockerEngineAPI.Model.Driver, options)
-    |> deserialize(:"Templating", :struct, DockerEngineAPI.Model.Driver, options)
+    |> deserialize(:Driver, :struct, DockerEngineAPI.Model.Driver, options)
+    |> deserialize(:Templating, :struct, DockerEngineAPI.Model.Driver, options)
   end
 end
-

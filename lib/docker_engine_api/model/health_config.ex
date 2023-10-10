@@ -9,20 +9,20 @@ defmodule DockerEngineAPI.Model.HealthConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Test",
-    :"Interval",
-    :"Timeout",
-    :"Retries",
-    :"StartPeriod"
+    :Test,
+    :Interval,
+    :Timeout,
+    :Retries,
+    :StartPeriod
   ]
 
   @type t :: %__MODULE__{
-    :"Test" => [String.t],
-    :"Interval" => integer(),
-    :"Timeout" => integer(),
-    :"Retries" => integer(),
-    :"StartPeriod" => integer()
-  }
+          :Test => [String.t()],
+          :Interval => integer(),
+          :Timeout => integer(),
+          :Retries => integer(),
+          :StartPeriod => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.HealthConfig do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.HealthConfig do
     value
   end
 end
-

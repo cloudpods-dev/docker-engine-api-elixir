@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.VolumePruneResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"VolumesDeleted",
-    :"SpaceReclaimed"
+    :VolumesDeleted,
+    :SpaceReclaimed
   ]
 
   @type t :: %__MODULE__{
-    :"VolumesDeleted" => [String.t],
-    :"SpaceReclaimed" => integer()
-  }
+          :VolumesDeleted => [String.t()],
+          :SpaceReclaimed => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumePruneResponse do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.VolumePruneResponse do
     value
   end
 end
-

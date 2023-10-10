@@ -9,69 +9,69 @@ defmodule DockerEngineAPI.Model.ContainerConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Hostname",
-    :"Domainname",
-    :"User",
-    :"AttachStdin",
-    :"AttachStdout",
-    :"AttachStderr",
-    :"ExposedPorts",
-    :"Tty",
-    :"OpenStdin",
-    :"StdinOnce",
-    :"Env",
-    :"Cmd",
-    :"Healthcheck",
-    :"ArgsEscaped",
-    :"Image",
-    :"Volumes",
-    :"WorkingDir",
-    :"Entrypoint",
-    :"NetworkDisabled",
-    :"MacAddress",
-    :"OnBuild",
-    :"Labels",
-    :"StopSignal",
-    :"StopTimeout",
-    :"Shell"
+    :Hostname,
+    :Domainname,
+    :User,
+    :AttachStdin,
+    :AttachStdout,
+    :AttachStderr,
+    :ExposedPorts,
+    :Tty,
+    :OpenStdin,
+    :StdinOnce,
+    :Env,
+    :Cmd,
+    :Healthcheck,
+    :ArgsEscaped,
+    :Image,
+    :Volumes,
+    :WorkingDir,
+    :Entrypoint,
+    :NetworkDisabled,
+    :MacAddress,
+    :OnBuild,
+    :Labels,
+    :StopSignal,
+    :StopTimeout,
+    :Shell
   ]
 
   @type t :: %__MODULE__{
-    :"Hostname" => String.t,
-    :"Domainname" => String.t,
-    :"User" => String.t,
-    :"AttachStdin" => boolean(),
-    :"AttachStdout" => boolean(),
-    :"AttachStderr" => boolean(),
-    :"ExposedPorts" => %{optional(String.t) => Object},
-    :"Tty" => boolean(),
-    :"OpenStdin" => boolean(),
-    :"StdinOnce" => boolean(),
-    :"Env" => [String.t],
-    :"Cmd" => [String.t],
-    :"Healthcheck" => HealthConfig,
-    :"ArgsEscaped" => boolean(),
-    :"Image" => String.t,
-    :"Volumes" => %{optional(String.t) => Object},
-    :"WorkingDir" => String.t,
-    :"Entrypoint" => [String.t],
-    :"NetworkDisabled" => boolean(),
-    :"MacAddress" => String.t,
-    :"OnBuild" => [String.t],
-    :"Labels" => %{optional(String.t) => String.t},
-    :"StopSignal" => String.t,
-    :"StopTimeout" => integer(),
-    :"Shell" => [String.t]
-  }
+          :Hostname => String.t(),
+          :Domainname => String.t(),
+          :User => String.t(),
+          :AttachStdin => boolean(),
+          :AttachStdout => boolean(),
+          :AttachStderr => boolean(),
+          :ExposedPorts => %{optional(String.t()) => Object},
+          :Tty => boolean(),
+          :OpenStdin => boolean(),
+          :StdinOnce => boolean(),
+          :Env => [String.t()],
+          :Cmd => [String.t()],
+          :Healthcheck => HealthConfig,
+          :ArgsEscaped => boolean(),
+          :Image => String.t(),
+          :Volumes => %{optional(String.t()) => Object},
+          :WorkingDir => String.t(),
+          :Entrypoint => [String.t()],
+          :NetworkDisabled => boolean(),
+          :MacAddress => String.t(),
+          :OnBuild => [String.t()],
+          :Labels => %{optional(String.t()) => String.t()},
+          :StopSignal => String.t(),
+          :StopTimeout => integer(),
+          :Shell => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerConfig do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"ExposedPorts", :map, DockerEngineAPI.Model.Object, options)
-    |> deserialize(:"Healthcheck", :struct, DockerEngineAPI.Model.HealthConfig, options)
-    |> deserialize(:"Volumes", :map, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:ExposedPorts, :map, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:Healthcheck, :struct, DockerEngineAPI.Model.HealthConfig, options)
+    |> deserialize(:Volumes, :map, DockerEngineAPI.Model.Object, options)
   end
 end
-

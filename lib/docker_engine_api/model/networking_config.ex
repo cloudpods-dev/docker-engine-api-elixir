@@ -9,19 +9,19 @@ defmodule DockerEngineAPI.Model.NetworkingConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"EndpointsConfig"
+    :EndpointsConfig
   ]
 
   @type t :: %__MODULE__{
-    :"EndpointsConfig" => %{optional(String.t) => EndpointSettings}
-  }
+          :EndpointsConfig => %{optional(String.t()) => EndpointSettings}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkingConfig do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"EndpointsConfig", :map, DockerEngineAPI.Model.EndpointSettings, options)
+    |> deserialize(:EndpointsConfig, :map, DockerEngineAPI.Model.EndpointSettings, options)
   end
 end
-

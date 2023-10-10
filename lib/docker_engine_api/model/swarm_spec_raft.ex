@@ -9,20 +9,20 @@ defmodule DockerEngineAPI.Model.SwarmSpecRaft do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"SnapshotInterval",
-    :"KeepOldSnapshots",
-    :"LogEntriesForSlowFollowers",
-    :"ElectionTick",
-    :"HeartbeatTick"
+    :SnapshotInterval,
+    :KeepOldSnapshots,
+    :LogEntriesForSlowFollowers,
+    :ElectionTick,
+    :HeartbeatTick
   ]
 
   @type t :: %__MODULE__{
-    :"SnapshotInterval" => integer(),
-    :"KeepOldSnapshots" => integer(),
-    :"LogEntriesForSlowFollowers" => integer(),
-    :"ElectionTick" => integer(),
-    :"HeartbeatTick" => integer()
-  }
+          :SnapshotInterval => integer(),
+          :KeepOldSnapshots => integer(),
+          :LogEntriesForSlowFollowers => integer(),
+          :ElectionTick => integer(),
+          :HeartbeatTick => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecRaft do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.SwarmSpecRaft do
     value
   end
 end
-

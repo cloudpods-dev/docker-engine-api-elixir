@@ -4,25 +4,25 @@
 
 defmodule DockerEngineAPI.Model.EndpointPortConfig do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Protocol",
-    :"TargetPort",
-    :"PublishedPort",
-    :"PublishMode"
+    :Name,
+    :Protocol,
+    :TargetPort,
+    :PublishedPort,
+    :PublishMode
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Protocol" => String.t,
-    :"TargetPort" => integer(),
-    :"PublishedPort" => integer(),
-    :"PublishMode" => String.t
-  }
+          :Name => String.t(),
+          :Protocol => String.t(),
+          :TargetPort => integer(),
+          :PublishedPort => integer(),
+          :PublishMode => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.EndpointPortConfig do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.EndpointPortConfig do
     value
   end
 end
-

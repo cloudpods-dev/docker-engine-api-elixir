@@ -9,14 +9,14 @@ defmodule DockerEngineAPI.Model.ContainerCreateResponse do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Id",
-    :"Warnings"
+    :Id,
+    :Warnings
   ]
 
   @type t :: %__MODULE__{
-    :"Id" => String.t,
-    :"Warnings" => [String.t]
-  }
+          :Id => String.t(),
+          :Warnings => [String.t()]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerCreateResponse do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerCreateResponse do
     value
   end
 end
-

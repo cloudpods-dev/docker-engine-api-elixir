@@ -4,31 +4,31 @@
 
 defmodule DockerEngineAPI.Model.TaskSpecContainerSpecConfigs do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"File",
-    :"Runtime",
-    :"ConfigID",
-    :"ConfigName"
+    :File,
+    :Runtime,
+    :ConfigID,
+    :ConfigName
   ]
 
   @type t :: %__MODULE__{
-    :"File" => TaskSpecContainerSpecFile1,
-    :"Runtime" => Object,
-    :"ConfigID" => String.t,
-    :"ConfigName" => String.t
-  }
+          :File => TaskSpecContainerSpecFile1,
+          :Runtime => Object,
+          :ConfigID => String.t(),
+          :ConfigName => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecConfigs do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"File", :struct, DockerEngineAPI.Model.TaskSpecContainerSpecFile1, options)
-    |> deserialize(:"Runtime", :struct, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:File, :struct, DockerEngineAPI.Model.TaskSpecContainerSpecFile1, options)
+    |> deserialize(:Runtime, :struct, DockerEngineAPI.Model.Object, options)
   end
 end
-

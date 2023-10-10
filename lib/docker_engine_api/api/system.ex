@@ -25,8 +25,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemAuthResponse{}} on success
   {:error, info} on failure
   """
-  @spec system_auth(Tesla.Env.client(), keyword()) ::
-          {:ok, DockerEngineAPI.Model.SystemAuthResponse.t()} | {:error, Tesla.Env.t()}
   def system_auth(connection, opts \\ []) do
     optional_params = %{
       :authConfig => :body
@@ -55,8 +53,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemDataUsageResponse{}} on success
   {:error, info} on failure
   """
-  @spec system_data_usage(Tesla.Env.client(), keyword()) ::
-          {:ok, DockerEngineAPI.Model.SystemDataUsageResponse.t()} | {:error, Tesla.Env.t()}
   def system_data_usage(connection, opts \\ []) do
     optional_params = %{
       :type => :query
@@ -88,8 +84,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.EventMessage{}} on success
   {:error, info} on failure
   """
-  @spec system_events(Tesla.Env.client(), keyword()) ::
-          {:ok, DockerEngineAPI.Model.EventMessage.t()} | {:error, Tesla.Env.t()}
   def system_events(connection, opts \\ []) do
     optional_params = %{
       :since => :query,
@@ -119,8 +113,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemInfo{}} on success
   {:error, info} on failure
   """
-  @spec system_info(Tesla.Env.client(), keyword()) ::
-          {:ok, DockerEngineAPI.Model.SystemInfo.t()} | {:error, Tesla.Env.t()}
   def system_info(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -144,7 +136,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.String.t{}} on success
   {:error, info} on failure
   """
-  @spec system_ping(Tesla.Env.client(), keyword()) :: {:ok, String.t()} | {:error, Tesla.Env.t()}
   def system_ping(connection, _opts \\ []) do
     %{}
     |> method(:get)
@@ -168,8 +159,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.String.t{}} on success
   {:error, info} on failure
   """
-  @spec system_ping_head(Tesla.Env.client(), keyword()) ::
-          {:ok, String.t()} | {:error, Tesla.Env.t()}
   def system_ping_head(connection, _opts \\ []) do
     %{}
     |> method(:head)
@@ -193,8 +182,6 @@ defmodule DockerEngineAPI.Api.System do
   {:ok, %DockerEngineAPI.Model.SystemVersion{}} on success
   {:error, info} on failure
   """
-  @spec system_version(Tesla.Env.client(), keyword()) ::
-          {:ok, DockerEngineAPI.Model.SystemVersion.t()} | {:error, Tesla.Env.t()}
   def system_version(connection, _opts \\ []) do
     %{}
     |> method(:get)

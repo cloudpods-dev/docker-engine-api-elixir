@@ -10,7 +10,6 @@ defmodule DockerEngineAPI.Api.Distribution do
   alias DockerEngineAPI.Connection
   import DockerEngineAPI.RequestBuilder
 
-
   @doc """
   Get image information from the registry
   Return image digest and platform information by contacting the registry. 
@@ -26,7 +25,6 @@ defmodule DockerEngineAPI.Api.Distribution do
   {:ok, %DockerEngineAPI.Model.DistributionInspect{}} on success
   {:error, info} on failure
   """
-  @spec distribution_inspect(Tesla.Env.client, String.t, keyword()) :: {:ok, DockerEngineAPI.Model.DistributionInspect.t} | {:error, Tesla.Env.t}
   def distribution_inspect(connection, name, _opts \\ []) do
     %{}
     |> method(:get)

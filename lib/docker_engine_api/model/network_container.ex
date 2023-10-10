@@ -4,25 +4,25 @@
 
 defmodule DockerEngineAPI.Model.NetworkContainer do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"EndpointID",
-    :"MacAddress",
-    :"IPv4Address",
-    :"IPv6Address"
+    :Name,
+    :EndpointID,
+    :MacAddress,
+    :IPv4Address,
+    :IPv6Address
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"EndpointID" => String.t,
-    :"MacAddress" => String.t,
-    :"IPv4Address" => String.t,
-    :"IPv6Address" => String.t
-  }
+          :Name => String.t(),
+          :EndpointID => String.t(),
+          :MacAddress => String.t(),
+          :IPv4Address => String.t(),
+          :IPv6Address => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkContainer do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkContainer do
     value
   end
 end
-

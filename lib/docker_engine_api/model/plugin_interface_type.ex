@@ -4,21 +4,21 @@
 
 defmodule DockerEngineAPI.Model.PluginInterfaceType do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Prefix",
-    :"Capability",
-    :"Version"
+    :Prefix,
+    :Capability,
+    :Version
   ]
 
   @type t :: %__MODULE__{
-    :"Prefix" => String.t,
-    :"Capability" => String.t,
-    :"Version" => String.t
-  }
+          :Prefix => String.t(),
+          :Capability => String.t(),
+          :Version => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginInterfaceType do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginInterfaceType do
     value
   end
 end
-

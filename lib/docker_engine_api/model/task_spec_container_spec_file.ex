@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.TaskSpecContainerSpecFile do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"UID",
-    :"GID",
-    :"Mode"
+    :Name,
+    :UID,
+    :GID,
+    :Mode
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"UID" => String.t,
-    :"GID" => String.t,
-    :"Mode" => integer()
-  }
+          :Name => String.t(),
+          :UID => String.t(),
+          :GID => String.t(),
+          :Mode => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecFile do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskSpecContainerSpecFile do
     value
   end
 end
-

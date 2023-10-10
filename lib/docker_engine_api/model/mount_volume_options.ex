@@ -9,23 +9,28 @@ defmodule DockerEngineAPI.Model.MountVolumeOptions do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"NoCopy",
-    :"Labels",
-    :"DriverConfig"
+    :NoCopy,
+    :Labels,
+    :DriverConfig
   ]
 
   @type t :: %__MODULE__{
-    :"NoCopy" => boolean(),
-    :"Labels" => %{optional(String.t) => String.t},
-    :"DriverConfig" => MountVolumeOptionsDriverConfig
-  }
+          :NoCopy => boolean(),
+          :Labels => %{optional(String.t()) => String.t()},
+          :DriverConfig => MountVolumeOptionsDriverConfig
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.MountVolumeOptions do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"DriverConfig", :struct, DockerEngineAPI.Model.MountVolumeOptionsDriverConfig, options)
+    |> deserialize(
+      :DriverConfig,
+      :struct,
+      DockerEngineAPI.Model.MountVolumeOptionsDriverConfig,
+      options
+    )
   end
 end
-

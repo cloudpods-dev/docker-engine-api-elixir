@@ -9,18 +9,18 @@ defmodule DockerEngineAPI.Model.IndexInfo do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Mirrors",
-    :"Secure",
-    :"Official"
+    :Name,
+    :Mirrors,
+    :Secure,
+    :Official
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Mirrors" => [String.t],
-    :"Secure" => boolean(),
-    :"Official" => boolean()
-  }
+          :Name => String.t(),
+          :Mirrors => [String.t()],
+          :Secure => boolean(),
+          :Official => boolean()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.IndexInfo do
@@ -28,4 +28,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.IndexInfo do
     value
   end
 end
-

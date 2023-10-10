@@ -9,26 +9,26 @@ defmodule DockerEngineAPI.Model.PluginSettings do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Mounts",
-    :"Env",
-    :"Args",
-    :"Devices"
+    :Mounts,
+    :Env,
+    :Args,
+    :Devices
   ]
 
   @type t :: %__MODULE__{
-    :"Mounts" => [PluginMount],
-    :"Env" => [String.t],
-    :"Args" => [String.t],
-    :"Devices" => [PluginDevice]
-  }
+          :Mounts => [PluginMount],
+          :Env => [String.t()],
+          :Args => [String.t()],
+          :Devices => [PluginDevice]
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.PluginSettings do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Mounts", :list, DockerEngineAPI.Model.PluginMount, options)
-    |> deserialize(:"Devices", :list, DockerEngineAPI.Model.PluginDevice, options)
+    |> deserialize(:Mounts, :list, DockerEngineAPI.Model.PluginMount, options)
+    |> deserialize(:Devices, :list, DockerEngineAPI.Model.PluginDevice, options)
   end
 end
-

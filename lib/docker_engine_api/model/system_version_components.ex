@@ -4,28 +4,28 @@
 
 defmodule DockerEngineAPI.Model.SystemVersionComponents do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Name",
-    :"Version",
-    :"Details"
+    :Name,
+    :Version,
+    :Details
   ]
 
   @type t :: %__MODULE__{
-    :"Name" => String.t,
-    :"Version" => String.t,
-    :"Details" => Object
-  }
+          :Name => String.t(),
+          :Version => String.t(),
+          :Details => Object
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.SystemVersionComponents do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Details", :struct, DockerEngineAPI.Model.Object, options)
+    |> deserialize(:Details, :struct, DockerEngineAPI.Model.Object, options)
   end
 end
-

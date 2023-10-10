@@ -4,21 +4,21 @@
 
 defmodule DockerEngineAPI.Model.TaskStatusContainerStatus do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ContainerID",
-    :"PID",
-    :"ExitCode"
+    :ContainerID,
+    :PID,
+    :ExitCode
   ]
 
   @type t :: %__MODULE__{
-    :"ContainerID" => String.t,
-    :"PID" => integer(),
-    :"ExitCode" => integer()
-  }
+          :ContainerID => String.t(),
+          :PID => integer(),
+          :ExitCode => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskStatusContainerStatus do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.TaskStatusContainerStatus do
     value
   end
 end
-

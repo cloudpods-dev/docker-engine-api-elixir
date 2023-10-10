@@ -9,56 +9,56 @@ defmodule DockerEngineAPI.Model.NetworkSettings do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Bridge",
-    :"SandboxID",
-    :"HairpinMode",
-    :"LinkLocalIPv6Address",
-    :"LinkLocalIPv6PrefixLen",
-    :"Ports",
-    :"SandboxKey",
-    :"SecondaryIPAddresses",
-    :"SecondaryIPv6Addresses",
-    :"EndpointID",
-    :"Gateway",
-    :"GlobalIPv6Address",
-    :"GlobalIPv6PrefixLen",
-    :"IPAddress",
-    :"IPPrefixLen",
-    :"IPv6Gateway",
-    :"MacAddress",
-    :"Networks"
+    :Bridge,
+    :SandboxID,
+    :HairpinMode,
+    :LinkLocalIPv6Address,
+    :LinkLocalIPv6PrefixLen,
+    :Ports,
+    :SandboxKey,
+    :SecondaryIPAddresses,
+    :SecondaryIPv6Addresses,
+    :EndpointID,
+    :Gateway,
+    :GlobalIPv6Address,
+    :GlobalIPv6PrefixLen,
+    :IPAddress,
+    :IPPrefixLen,
+    :IPv6Gateway,
+    :MacAddress,
+    :Networks
   ]
 
   @type t :: %__MODULE__{
-    :"Bridge" => String.t,
-    :"SandboxID" => String.t,
-    :"HairpinMode" => boolean(),
-    :"LinkLocalIPv6Address" => String.t,
-    :"LinkLocalIPv6PrefixLen" => integer(),
-    :"Ports" => PortMap,
-    :"SandboxKey" => String.t,
-    :"SecondaryIPAddresses" => [Address],
-    :"SecondaryIPv6Addresses" => [Address],
-    :"EndpointID" => String.t,
-    :"Gateway" => String.t,
-    :"GlobalIPv6Address" => String.t,
-    :"GlobalIPv6PrefixLen" => integer(),
-    :"IPAddress" => String.t,
-    :"IPPrefixLen" => integer(),
-    :"IPv6Gateway" => String.t,
-    :"MacAddress" => String.t,
-    :"Networks" => %{optional(String.t) => EndpointSettings}
-  }
+          :Bridge => String.t(),
+          :SandboxID => String.t(),
+          :HairpinMode => boolean(),
+          :LinkLocalIPv6Address => String.t(),
+          :LinkLocalIPv6PrefixLen => integer(),
+          :Ports => PortMap,
+          :SandboxKey => String.t(),
+          :SecondaryIPAddresses => [Address],
+          :SecondaryIPv6Addresses => [Address],
+          :EndpointID => String.t(),
+          :Gateway => String.t(),
+          :GlobalIPv6Address => String.t(),
+          :GlobalIPv6PrefixLen => integer(),
+          :IPAddress => String.t(),
+          :IPPrefixLen => integer(),
+          :IPv6Gateway => String.t(),
+          :MacAddress => String.t(),
+          :Networks => %{optional(String.t()) => EndpointSettings}
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.NetworkSettings do
   import DockerEngineAPI.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Ports", :struct, DockerEngineAPI.Model.PortMap, options)
-    |> deserialize(:"SecondaryIPAddresses", :list, DockerEngineAPI.Model.Address, options)
-    |> deserialize(:"SecondaryIPv6Addresses", :list, DockerEngineAPI.Model.Address, options)
-    |> deserialize(:"Networks", :map, DockerEngineAPI.Model.EndpointSettings, options)
+    |> deserialize(:Ports, :struct, DockerEngineAPI.Model.PortMap, options)
+    |> deserialize(:SecondaryIPAddresses, :list, DockerEngineAPI.Model.Address, options)
+    |> deserialize(:SecondaryIPv6Addresses, :list, DockerEngineAPI.Model.Address, options)
+    |> deserialize(:Networks, :map, DockerEngineAPI.Model.EndpointSettings, options)
   end
 end
-

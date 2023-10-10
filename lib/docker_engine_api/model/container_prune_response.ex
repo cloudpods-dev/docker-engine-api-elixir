@@ -4,19 +4,19 @@
 
 defmodule DockerEngineAPI.Model.ContainerPruneResponse do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ContainersDeleted",
-    :"SpaceReclaimed"
+    :ContainersDeleted,
+    :SpaceReclaimed
   ]
 
   @type t :: %__MODULE__{
-    :"ContainersDeleted" => [String.t],
-    :"SpaceReclaimed" => integer()
-  }
+          :ContainersDeleted => [String.t()],
+          :SpaceReclaimed => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerPruneResponse do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ContainerPruneResponse do
     value
   end
 end
-

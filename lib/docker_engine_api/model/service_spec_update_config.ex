@@ -9,22 +9,22 @@ defmodule DockerEngineAPI.Model.ServiceSpecUpdateConfig do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Parallelism",
-    :"Delay",
-    :"FailureAction",
-    :"Monitor",
-    :"MaxFailureRatio",
-    :"Order"
+    :Parallelism,
+    :Delay,
+    :FailureAction,
+    :Monitor,
+    :MaxFailureRatio,
+    :Order
   ]
 
   @type t :: %__MODULE__{
-    :"Parallelism" => integer(),
-    :"Delay" => integer(),
-    :"FailureAction" => String.t,
-    :"Monitor" => integer(),
-    :"MaxFailureRatio" => float(),
-    :"Order" => String.t
-  }
+          :Parallelism => integer(),
+          :Delay => integer(),
+          :FailureAction => String.t(),
+          :Monitor => integer(),
+          :MaxFailureRatio => float(),
+          :Order => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecUpdateConfig do
@@ -32,4 +32,3 @@ defimpl Poison.Decoder, for: DockerEngineAPI.Model.ServiceSpecUpdateConfig do
     value
   end
 end
-
